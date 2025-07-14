@@ -1,26 +1,91 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Situs dalam Perbaikan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maintenance - Web</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f4f7fb, #e9eff5);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .card {
+      background-color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border-radius: 15px;
+      padding: 30px 25px;
+      max-width: 360px;
       text-align: center;
-      padding-top: 100px;
     }
+
     h1 {
-      font-size: 36px;
-      color: #e74c3c;
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
+
+    h2 {
+      font-size: 16px;
+      color: #444;
+      margin: 0 0 15px;
+    }
+
     p {
-      font-size: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #666;
+      margin: 0 0 20px;
+    }
+
+    .progress {
+      height: 4px;
+      width: 100%;
+      background: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 40%;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      position: absolute;
+      animation: loading 2s infinite;
+      border-radius: 5px;
+    }
+
+    @keyframes loading {
+      0% { left: -40%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    footer {
+      font-size: 12px;
+      color: #999;
     }
   </style>
 </head>
 <body>
-  <h1>🛠 Maintenance Aktif</h1>
-  <p>Situs sedang dalam perbaikan. Silakan kembali beberapa saat lagi.</p>
+  <div class="card"
+    <h2>Website Sedang Dalam Pemeliharaan</h2>
+    <p>Mohon maaf atas ketidaknyamanannya. Kami sedang melakukan perbaikan dan peningkatan sistem untuk memberikan pengalaman yang lebih baik.</p>
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+    <footer>
+      Kami akan segera kembali. Terima kasih atas pengertian Anda.
+    </footer>
+  </div>
 </body>
 </html>
