@@ -11,12 +11,12 @@
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background: #e6f2ff;
+      background: whitesmoke;
       color: #333;
       padding-bottom: 80px;
     }
     header {
-      background: #0077cc;
+      background: deepskyblue;
       color: #fff;
       padding: 30px 20px;
       text-align: center;
@@ -25,7 +25,7 @@
     header p { margin-top: 5px; }
     main { padding: 20px; max-width: 800px; margin: auto; }
     section { background: #fff; margin-bottom: 25px; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h2 { color: #0077cc; margin-top: 0; }
+    h2 { color: deepskyblue; margin-top: 0; }
     ul, ol { padding-left: 20px; }
     .btn {
       display: inline-block;
@@ -38,7 +38,7 @@
     }
     .btn:hover { background: #218838; }
     footer {
-      background: #0077cc;
+      background: deepskyblue;
       color: white;
       text-align: center;
       padding: 15px 10px;
@@ -47,7 +47,7 @@
     .harga li { margin-bottom: 8px; }
 
     .promo-banner {
-      position: fixed;
+      position: relative;
       bottom: 20px;
       left: 0;
       width: 100%;
@@ -55,17 +55,19 @@
       z-index: 9999;
       pointer-events: none;
       display: none;
+      margin-top: 10px;
+      border-bottom: 2px solid white;
     }
 
     .promo-text {
       display: inline-block;
       white-space: nowrap;
-      background: rgba(255, 0, 0, 0.9);
+      background: deepskyblue;
       color: white;
       padding: 10px 30px;
       border-radius: 10px;
       font-weight: bold;
-      box-shadow: 0 0 10px red;
+      box-shadow: 0 0 10px deepskyblue;
       animation: runningText 10s linear infinite;
     }
 
@@ -76,13 +78,21 @@
       100% { transform: translateX(-100%); opacity: 0; }
     }
 
+    @keyframes kedip {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .kedip {
+      animation: kedip 10s infinite;
+    }
+
     #promo {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: #ff5252;
+      background: deepskyblue;
       color: white;
       text-align: center;
       padding: 20px;
@@ -155,7 +165,7 @@
   <div id="promo">🔥 Promo Spesial Hari Ini! 🔥</div>
 
   <footer>
-    &copy; 2025 Top Up BUSSID | All rights reserved
+    &copy; 2025 Top Up BUSSID | Semua Aman Dan Terlindungi
   </footer>
 
   <script type="module">
@@ -199,12 +209,12 @@
       }
     };
 
-    // PROMO FIXED VERSION
+    // PROMO HANDLING
     const promoBar = document.getElementById("promo");
     const promoBanner = document.getElementById("promoBanner");
     const promoText = document.getElementById("promoText");
 
-    const rootRef = ref(db); // Ambil semua data dari root
+    const rootRef = ref(db);
 
     onValue(rootRef, (snapshot) => {
       const data = snapshot.val();
@@ -213,13 +223,15 @@
         promoBanner.style.display = "block";
         promoBar.textContent = data.promo;
         promoText.textContent = data.promo;
+
+        promoBar.classList.add("kedip");
       } else {
         promoBar.style.display = "none";
         promoBanner.style.display = "none";
+        promoBar.classList.remove("kedip");
       }
     });
 
-    // Tampilkan admin panel jika akses sebagai admin
     if (isAdmin) {
       document.getElementById("adminPanel").style.display = "block";
     }
