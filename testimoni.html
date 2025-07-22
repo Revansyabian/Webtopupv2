@@ -7,49 +7,51 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Poppins', sans-serif;
+      background-color: deepskyblue;
       padding: 20px;
     }
     h1 {
       text-align: center;
-      color: #333;
+      color: #0d6efd;
+      font-size: 28px;
+      margin-bottom: 30px;
     }
     .testimoni-container {
-      max-width: 600px;
-      margin: 30px auto;
-      display: flex;
-      flex-direction: column;
+      max-width: 800px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
     .testimoni-card {
       background-color: #fff;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       padding: 15px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .testimoni-card:hover {
+      transform: translateY(-3px);
     }
     .testimoni-card img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
+      width: 100%;
+      height: 180px;
       object-fit: cover;
-      border: 2px solid #ffcc00;
-    }
-    .testimoni-text {
-      flex: 1;
+      border-radius: 10px;
+      margin-bottom: 10px;
     }
     .testimoni-text strong {
-      display: block;
       font-size: 16px;
-      color: #222;
+      color: black;
+      display: block;
+      margin-bottom: 5px;
     }
     .testimoni-text p {
-      margin: 5px 0 0;
+      margin: 3px 0;
       font-size: 14px;
-      color: #555;
+      color: deepskyblue;
     }
     .back-btn {
       display: block;
@@ -57,7 +59,8 @@
       margin-top: 40px;
       text-decoration: none;
       font-weight: bold;
-      color: #ffcc00;
+      color: #0d6efd;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -67,30 +70,99 @@
   <div class="testimoni-container">
 
     <div class="testimoni-card">
-      <img src="https://via.placeholder.com/70" alt="User 1">
-      <div class="testimoni-text">
-        <strong>@userbussid</strong>
-        <p>Top up kilat banget, adminnya ramah dan fast respon.</p>
+      <img src="https://i.postimg.cc/ydK5myCw/Screenshot-2025-07-22-17-18-25-63-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 1">
+           <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
+        <strong>@TESTIMONI 1</strong>
+        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇: Rp50.000</p>
+        <p>𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉: 𝙌𝙍𝙄𝙎</p>
+        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: whitesmoke;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+">
+  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
+</a> <p>
+          
       </div>
     </div>
 
     <div class="testimoni-card">
-      <img src="https://via.placeholder.com/70" alt="User 2">
-      <div class="testimoni-text">
-        <strong>@anaktruk</strong>
-        <p>Baru transfer langsung masuk, langganan dah fix!</p>
+      <img src="https://i.postimg.cc/yxMsyQCh/Screenshot-2025-07-21-15-55-55-57-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 2">
+      <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
+        <strong>@TESTIMONI 2</strong>
+        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇=Rp10.000</p>
+        <p>V𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉: QRIS</p>
+        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: whitesmoke;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+">
+  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
+</a></p>
       </div>
     </div>
 
     <div class="testimoni-card">
-      <img src="https://via.placeholder.com/70" alt="User 3">
-      <div class="testimoni-text">
-        <strong>@cewekbusid</strong>
-        <p>Gak nyesel order di sini, selalu terpercaya!</p>
+      <img src="https://i.postimg.cc/8sgTMrwc/Screenshot-2025-07-22-17-12-08-97-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 3">
+            <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
+        <strong>@TESTIMONI 3</strong>
+        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇:5.000</p>
+        <p>𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉:𝙌𝙍𝙄𝙎
+        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: whitesmoke;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+">
+  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
+</a> <p>
       </div>
     </div>
-
+    
+  <div class="testimoni-card">
+      <img src="https://i.postimg.cc/rFGc0jR2/Screenshot-2025-07-22-17-31-13-07-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 3">
+            <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
+        <strong>@TESTIMONI 4</strong>
+        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇: 30.000</p>
+        <p>𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉:𝙌𝙍𝙄𝙎
+        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: whitesmoke;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+">
+  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
+</a> <p>
   </div>
+  <div>
+    
+  <div>
 
   <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
 </body>
