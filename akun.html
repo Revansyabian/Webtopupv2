@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jual Akun BUSSID</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f1f1f1; }
+    h1 { text-align: center; color: #007bff; }
+    .akun { background: #fff; padding: 15px; margin: 10px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .akun img { width: 100%; max-width: 300px; border-radius: 10px; }
+    .admin-form { margin-top: 30px; padding: 15px; background: #fff; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <h1>Jual Akun BUSSID</h1>
+  <div id="daftarAkun"></div>
+
+  <!-- Form Admin -->
+  <div id="formAdmin" class="admin-form" style="display:none">
+    <h2>Tambah Akun</h2>
+    <input id="nama" placeholder="Nama Akun"><br><br>
+    <input id="harga" placeholder="Harga"><br><br>
+    <input id="deskripsi" placeholder="Deskripsi"><br><br>
+    <input id="gambar" placeholder="URL Gambar"><br><br>
+    <button onclick="tambahAkun()">Tambah</button>
+  </div>
+
+  <script>
+    // Konfigurasi Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+      authDomain: "paneladmin-83c8a.firebaseapp.com",
+      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+      projectId: "paneladmin-83c8a",
+      storageBucket: "paneladmin-83c8a.appspot.com",
+      messagingSenderId: "343729471216",
+      appId: "1:343729471216:web:14c357375fa83083c44c35"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const isAdmin = window.location.search.includes("admin=true");
+
+    // Menampilkan daftar akun
+    function muatAkun() {
+      const container = document.getElementById("daftarAkun");
+      container.innerHTML = "";
+      db.ref("jualAkun").once("value", (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          Object.entries(data).forEach(([key, akun]) => {
+            container.innerHTML += `
+              <div class="akun" id="akun-${key}">
+                <h3>${akun.nama}</h3>
+                <p><strong>Harga:</strong> Rp${akun.harga}</p>
+                <p>${akun.deskripsi}</p>
+                <img src="${akun.gambar}" alt="Akun BUSSID" />
+                ${isAdmin ? `<button onclick="hapusAkun('${key}')">Hapus</button>` : ""}
+              </div>
+            `;
+          });
+        } else {
+          container.innerHTML = "<p>Belum ada akun dijual.</p>";
+        }
+      });
+    }
+
+    muatAkun();
+
+    if (isAdmin) {
+      document.getElementById("formAdmin").style.display = "block";
+    }
+
+    // Tambah Akun
+    function tambahAkun() {
+      const nama = document.getElementById("nama").value;
+      const harga = document.getElementById("harga").value;
+      const deskripsi = document.getElementById("deskripsi").value;
+      const gambar = document.getElementById("gambar").value;
+
+      const newAkun = { nama, harga, deskripsi, gambar };
+      const newKey = db.ref().child("jualAkun").push().key;
+      db.ref("jualAkun/" + newKey).set(newAkun, () => {
+        alert("Akun berhasil ditambahkan!");
+        location.reload();
+      });
+    }
