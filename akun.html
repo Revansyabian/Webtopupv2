@@ -27,24 +27,20 @@
       text-align: center;
     }
     .akun img {
-  width: 320px;
-  max-width: 100%;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  border: 2px solid #000; /* tambahin garis hitam */
-}
-.teks {
-  border: 1px solid #000;
-  background: #00bfff;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 10px;
-  color: #000;
-  font-weight: bold;
-}
-.info {
-  font-weight: bold;
-  margin-bottom: 10px;
+      width: 320px;
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #000;
+    }
+    .teks {
+      border: 1px solid #000;
+      background: #00bfff;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      color: #000;
+      font-weight: bold;
     }
     .admin-form {
       margin-top: 30px;
@@ -91,7 +87,6 @@
   </div>
 
   <script>
-    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
       authDomain: "paneladmin-83c8a.firebaseapp.com",
@@ -117,7 +112,7 @@
               <div class="akun" id="akun-${key}">
                 <img src="${akun.gambar}" alt="Bukti Akun">
                 <div class="teks">${akun.deskripsi}</div>
-                <div class="info">Harga: Rp${akun.harga}</div>
+                <div class="teks">Harga: Rp${akun.harga}</div>
                 ${isAdmin ? `<button onclick="hapusAkun('${key}')">Hapus</button>` : ""}
               </div>
             `;
@@ -140,18 +135,28 @@
       const deskripsi = document.getElementById("deskripsi").value;
       const gambar = document.getElementById("gambar").value;
 
-      const newAkun = { nama, harga, deskripsi, gambar };
-      const newKey = db.ref().child("jualAkun").push().key;
-      db.ref("jualAkun/" + newKey).set(newAkun, () => {
+      if (!harga || !deskripsi || !gambar) {
+        alert("Lengkapi semua kolom!");
+        return;
+      }
+
+      const akunBaru = { nama, harga, deskripsi, gambar };
+      const keyBaru = db.ref().child("jualAkun").push().key;
+      db.ref("jualAkun/" + keyBaru).set(akunBaru, () => {
         alert("Akun berhasil ditambahkan!");
-        location.reload();
+        document.getElementById("nama").value = "";
+        document.getElementById("harga").value = "";
+        document.getElementById("deskripsi").value = "";
+        document.getElementById("gambar").value = "";
+        muatAkun();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
       });
     }
 
-    function hapusAkun(kunci) {
+    function hapusAkun(key) {
       if (confirm("Hapus akun ini?")) {
-        db.ref("jualAkun/" + kunci).remove(() => {
-          document.getElementById("akun-" + kunci).remove();
+        db.ref("jualAkun/" + key).remove(() => {
+          document.getElementById("akun-" + key).remove();
         });
       }
     }
