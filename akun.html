@@ -70,36 +70,48 @@
     button:hover {
       background-color: #0284c7;
     }
-  .btn-kembali {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff; /* warna biru */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-  }
 
-  .btn-kembali:hover {
-    background-color: #0056b3;
-  }
+    .btn-kembali {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-kembali:hover {
+      background-color: #0056b3;
+    }
 
-  /* Tambahan biar tombolnya di tengah halaman */
-  .tombol-container {
-    text-align: center;
-    margin-top: 30px;
-  }
+    .tombol-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-wa {
+      display: inline-block;
+      margin-top: 12px;
+      background-color: #0ea5e9; /* Biru tema */
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn-wa:hover {
+      background-color: #0284c7;
+    }
   </style>
 </head>
 <body>
   <h1>Jual Akun BUSSID</h1>
   <div id="daftarAkun"></div>
 
-  <!-- Form Admin -->
   <div id="formAdmin" class="admin-form" style="display:none">
     <h2>Tambah Akun</h2>
     <input id="nama" placeholder="Nama Akun">
@@ -136,7 +148,12 @@
                 <img src="${akun.gambar}" alt="Bukti Akun">
                 <div class="teks">${akun.deskripsi}</div>
                 <div class="teks">Harga: Rp${akun.harga}</div>
-                ${isAdmin ? `<button onclick="hapusAkun('${key}')">Hapus</button>` : ""}
+                ${isAdmin ? `
+                  <button onclick="hapusAkun('${key}')">Hapus</button>
+                ` : `
+                  <a href="https://wa.me/6281234567890?text=Halo%20min,%20saya%20tertarik%20dengan%20akun%20ini:%20${encodeURIComponent(akun.deskripsi)}%20dengan%20harga%20Rp${akun.harga}" 
+                    target="_blank" class="btn-wa">Hubungi via WhatsApp</a>
+                `}
               </div>
             `;
           });
@@ -184,8 +201,9 @@
       }
     }
   </script>
-<div class="tombol-container">
-  <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
-</div>
+
+  <div class="tombol-container">
+    <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
+  </div>
 </body>
 </html>
