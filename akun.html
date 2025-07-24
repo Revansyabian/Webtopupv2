@@ -7,11 +7,70 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f1f1f1; }
-    h1 { text-align: center; color: #007bff; }
-    .akun { background: #fff; padding: 15px; margin: 10px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .akun img { width: 100%; max-width: 300px; border-radius: 10px; }
-    .admin-form { margin-top: 30px; padding: 15px; background: #fff; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f1f5f9;
+    }
+    h1 {
+      text-align: center;
+      color: #0ea5e9;
+    }
+    .akun {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      text-align: center;
+    }
+    .akun img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .teks {
+      border: 2px dashed #94a3b8;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      background: #f8fafc;
+    }
+    .info {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #1e293b;
+    }
+    .admin-form {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #0ea5e9;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0284c7;
+    }
   </style>
 </head>
 <body>
@@ -21,15 +80,15 @@
   <!-- Form Admin -->
   <div id="formAdmin" class="admin-form" style="display:none">
     <h2>Tambah Akun</h2>
-    <input id="nama" placeholder="Nama Akun"><br><br>
-    <input id="harga" placeholder="Harga"><br><br>
-    <input id="deskripsi" placeholder="Deskripsi"><br><br>
-    <input id="gambar" placeholder="URL Gambar"><br><br>
+    <input id="nama" placeholder="Nama Akun">
+    <input id="harga" placeholder="Harga">
+    <input id="deskripsi" placeholder="Deskripsi / Testimoni">
+    <input id="gambar" placeholder="URL Gambar Bukti">
     <button onclick="tambahAkun()">Tambah</button>
   </div>
 
   <script>
-    // Konfigurasi Firebase
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
       authDomain: "paneladmin-83c8a.firebaseapp.com",
@@ -44,7 +103,6 @@
 
     const isAdmin = window.location.search.includes("admin=true");
 
-    // Menampilkan daftar akun
     function muatAkun() {
       const container = document.getElementById("daftarAkun");
       container.innerHTML = "";
@@ -54,16 +112,15 @@
           Object.entries(data).forEach(([key, akun]) => {
             container.innerHTML += `
               <div class="akun" id="akun-${key}">
-                <h3>${akun.nama}</h3>
-                <p><strong>Harga:</strong> Rp${akun.harga}</p>
-                <p>${akun.deskripsi}</p>
-                <img src="${akun.gambar}" alt="Akun BUSSID" />
+                <img src="${akun.gambar}" alt="Bukti Akun">
+                <div class="teks">${akun.deskripsi}</div>
+                <div class="info">Harga: Rp${akun.harga}</div>
                 ${isAdmin ? `<button onclick="hapusAkun('${key}')">Hapus</button>` : ""}
               </div>
             `;
           });
         } else {
-          container.innerHTML = "<p>Belum ada akun dijual.</p>";
+          container.innerHTML = "<p style='text-align:center;'>Belum ada akun dijual.</p>";
         }
       });
     }
@@ -74,7 +131,6 @@
       document.getElementById("formAdmin").style.display = "block";
     }
 
-    // Tambah Akun
     function tambahAkun() {
       const nama = document.getElementById("nama").value;
       const harga = document.getElementById("harga").value;
@@ -88,3 +144,14 @@
         location.reload();
       });
     }
+
+    function hapusAkun(kunci) {
+      if (confirm("Hapus akun ini?")) {
+        db.ref("jualAkun/" + kunci).remove(() => {
+          document.getElementById("akun-" + kunci).remove();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
