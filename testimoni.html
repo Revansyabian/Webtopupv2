@@ -2,90 +2,67 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Halaman Testimoni</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Testimoni Pembelian Akun</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
+      background-color: #f4f8fb;
       padding: 20px;
-      background-color: #f9f9f9;
+      text-align: center;
     }
-    h1 {
-      color: #0077cc;
-      margin-bottom: 20px;
+
+    h2 {
+      color: #0d6efd;
     }
+
     .testimoni {
-      border: 1px solid deepskyblue;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      background-color: #fff;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      display: inline-block;
+      background-color: deepskyblue;
+      border: 2px solid #000;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 15px;
+      max-width: 320px;
+      text-align: left;
     }
+
     .testimoni img {
       width: 100%;
-      height: auto;
-      border-radius: 8px;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
       margin-bottom: 10px;
-      border: 1px solid #ddd;
     }
+
     .bubble {
-      border: 1px solid deepskyblue;
+      background-color: white;
       padding: 10px;
       border-radius: 10px;
-      background-color: #f0faff;
-      margin-bottom: 5px;
-      white-space: pre-wrap;
-    }
-    .admin-form {
-      margin-top: 30px;
-      border-top: 2px solid #ccc;
-      padding-top: 20px;
-    }
-    .admin-form input, .admin-form textarea {
-      display: block;
+      font-style: italic;
       margin-bottom: 10px;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
     }
-    .admin-form button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+
     .hapus-btn {
       background-color: red;
       color: white;
       border: none;
-      padding: 6px 10px;
-      border-radius: 4px;
-      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 6px;
       margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .hapus-btn:hover {
+      background-color: darkred;
     }
   </style>
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 </head>
 <body>
-  <h1>Testimoni Pelanggan</h1>
-  <div id="listTestimoni"></div>
-
-  <div id="adminPanel" class="admin-form" style="display:none;">
-    <h2>Tambah Testimoni</h2>
-    <input type="text" id="nama" placeholder="Nama Pengirim" />
-    <textarea id="pesan" placeholder="Isi testimoni"></textarea>
-    <input type="text" id="gambar" placeholder="URL Gambar Bukti" />
-    <button onclick="tambahTestimoni()">Tambah</button>
-  </div>
+  <h2>Testimoni Pembelian Akun</h2>
+  <div id="daftarTestimoni"></div>
 
   <script>
     const firebaseConfig = {
@@ -95,33 +72,41 @@
       projectId: "paneladmin-83c8a",
       storageBucket: "paneladmin-83c8a.appspot.com",
       messagingSenderId: "343729471216",
-      appId: "1:343729471216:web:14c357375fa83083c44c35",
-      measurementId: "G-E2G04E4KB5"
+      appId: "1:343729471216:web:14c357375fa83083c44c35"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
     function isAdmin() {
-      return window.location.search.includes("admin=true");
+      return window.location.search.includes('admin=true');
+    }
+
+    function hapusTestimoni(id) {
+      if (confirm("Yakin ingin menghapus testimoni ini?")) {
+        db.ref("testimoni/" + id).remove().then(() => {
+          alert("Testimoni dihapus.");
+          muatTestimoni();
+        });
+      }
     }
 
     function muatTestimoni() {
-      const container = document.getElementById("listTestimoni");
+      const container = document.getElementById("daftarTestimoni");
       container.innerHTML = "";
+
       db.ref("testimoni").once("value", (snapshot) => {
         const data = snapshot.val();
         if (data) {
           Object.entries(data).forEach(([key, item]) => {
-            const nama = item.nama ? item.nama : "Tanpa Nama";
-            const pesan = item.pesan ? item.pesan : "(tidak ada pesan)";
-            const gambar = item.gambar ? item.gambar : "";
-
             container.innerHTML += `
               <div class="testimoni">
-                ${gambar ? `<img src="${gambar}" alt="Bukti Transfer" />` : ""}
-                <div class="bubble">${pesan}</div>
-                <small>- ${nama}</small>
-                ${isAdmin() ? `<br/><button class="hapus-btn" onclick="hapusTestimoni('${key}')">Hapus</button>` : ""}
+                ${item.gambar ? `<img src="${item.gambar}" alt="Bukti Transfer" />` : ""}
+                <div class="bubble">${item.pesan || ""}</div>
+                <p><strong>Beli:</strong> ${item.nominal || "-"}<br>
+                   <strong>Pembayaran via:</strong> ${item.pembayaran || "-"}</p>
+                <small>- ${item.nama || ""}</small><br/>
+                ${isAdmin() ? `<button class="hapus-btn" onclick="hapusTestimoni('${key}')">Hapus</button>` : ""}
               </div>
             `;
           });
@@ -129,32 +114,6 @@
           container.innerHTML = "<p>Belum ada testimoni.</p>";
         }
       });
-    }
-
-    function tambahTestimoni() {
-      const nama = document.getElementById("nama").value.trim();
-      const pesan = document.getElementById("pesan").value.trim();
-      const gambar = document.getElementById("gambar").value.trim();
-      if (nama && pesan && gambar) {
-        db.ref("testimoni").push({ nama, pesan, gambar }).then(() => {
-          document.getElementById("nama").value = "";
-          document.getElementById("pesan").value = "";
-          document.getElementById("gambar").value = "";
-          muatTestimoni();
-        });
-      } else {
-        alert("Semua field harus diisi!");
-      }
-    }
-
-    function hapusTestimoni(id) {
-      if (confirm("Yakin ingin hapus testimoni ini?")) {
-        db.ref("testimoni/" + id).remove().then(muatTestimoni);
-      }
-    }
-
-    if (isAdmin()) {
-      document.getElementById("adminPanel").style.display = "block";
     }
 
     muatTestimoni();
