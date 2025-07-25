@@ -24,10 +24,11 @@
       box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
     .testimoni img {
-      max-width: 100%;
+      width: 100%;
       height: auto;
       border-radius: 8px;
       margin-bottom: 10px;
+      border: 1px solid #ddd;
     }
     .bubble {
       border: 1px solid deepskyblue;
@@ -35,6 +36,7 @@
       border-radius: 10px;
       background-color: #f0faff;
       margin-bottom: 5px;
+      white-space: pre-wrap;
     }
     .admin-form {
       margin-top: 30px;
@@ -110,19 +112,21 @@
         const data = snapshot.val();
         if (data) {
           Object.entries(data).forEach(([key, item]) => {
-            const nama = item.nama || "Tanpa Nama";
-            const pesan = item.pesan || "(tidak ada pesan)";
-            const gambar = item.gambar || "";
+            const nama = item.nama ? item.nama : "Tanpa Nama";
+            const pesan = item.pesan ? item.pesan : "(tidak ada pesan)";
+            const gambar = item.gambar ? item.gambar : "";
 
             container.innerHTML += `
               <div class="testimoni">
                 ${gambar ? `<img src="${gambar}" alt="Bukti Transfer" />` : ""}
                 <div class="bubble">${pesan}</div>
-                <small>- ${nama}</small><br/>
-                ${isAdmin() ? `<button class="hapus-btn" onclick="hapusTestimoni('${key}')">Hapus</button>` : ""}
+                <small>- ${nama}</small>
+                ${isAdmin() ? `<br/><button class="hapus-btn" onclick="hapusTestimoni('${key}')">Hapus</button>` : ""}
               </div>
             `;
           });
+        } else {
+          container.innerHTML = "<p>Belum ada testimoni.</p>";
         }
       });
     }
