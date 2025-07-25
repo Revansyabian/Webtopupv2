@@ -118,5 +118,31 @@
   <p><strong>Silakan pencet tombol di bawah untuk melihat cara pemesanan dan harga top up-nya.</strong></p>
   <a href="welcome.html" class="button">Masuk ke Halaman Utama</a>
 
+    const app = initializeApp(firebaseConfig);  
+    const db = getDatabase(app);  
+  
+    const maintenanceRef = ref(db, "maintenance");  
+    const statusText = document.getElementById("maintenanceStatus");  
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";  
+  
+    onValue(maintenanceRef, (snapshot) => {  
+      const aktif = snapshot.val();  
+      statusText.textContent = aktif ? "🔧 Maintenance: AKTIF" : "✅ Maintenance: NONAKTIF";  
+      if (aktif && !isAdmin) {  
+        window.location.href = "maintenance.html";  
+      }  
+    });  
+  
+    window.updateMaintenance = function () {  
+      const input = document.getElementById("maintenanceInput").value.trim().toLowerCase();  
+      if (input === "true" || input === "false") {  
+        set(maintenanceRef, input === "true")  
+          .then(() => alert("Maintenance berhasil diubah ke " + input.toUpperCase()))  
+          .catch(err => alert("Gagal update: " + err.message));  
+      } else {  
+        alert("Masukkan hanya: true atau false");  
+      }  
+    };  
+
 </body>
 </html>
