@@ -2,168 +2,121 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Testimoni Pelanggan</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: deepskyblue;
+      background: #f1f5f9;
+      margin: 0;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
-      color: #0d6efd;
-      font-size: 28px;
-      margin-bottom: 30px;
+      color: #0ea5e9;
     }
-    .testimoni-container {
-      max-width: 800px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .testimoni-card {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      padding: 15px;
+
+    .testimoni {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
       text-align: center;
-      transition: transform 0.2s;
     }
-    .testimoni-card:hover {
-      transform: translateY(-3px);
+
+    .testimoni img {
+      width: 250px;
+      border-radius: 12px;
+      border: 2px solid #000;
+      margin-bottom: 12px;
     }
-    .testimoni-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
+
+    .bubble {
+      border: 1px solid #0ea5e9;
+      background: #e0f2fe;
+      padding: 12px;
+      border-radius: 12px;
+      color: #000;
+      font-weight: 500;
       margin-bottom: 10px;
     }
-    .testimoni-text strong {
-      font-size: 16px;
-      color: black;
-      display: block;
-      margin-bottom: 5px;
-    }
-    .testimoni-text p {
-      margin: 3px 0;
-      font-size: 14px;
-      color: deepskyblue;
-    }
-    .back-btn {
-      display: block;
-      text-align: center;
-      margin-top: 40px;
-      text-decoration: none;
+
+    .nama {
       font-weight: bold;
-      color: #0d6efd;
-      font-size: 16px;
+      color: #0ea5e9;
+      margin-bottom: 8px;
+    }
+
+    .tombol-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-kembali {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .btn-kembali:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
+
   <h1>Testimoni Pelanggan</h1>
+  <div id="daftarTestimoni"></div>
 
-  <div class="testimoni-container">
-
-    <div class="testimoni-card">
-      <img src="https://i.postimg.cc/ydK5myCw/Screenshot-2025-07-22-17-18-25-63-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 1">
-           <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
-        <strong>@TESTIMONI 1</strong>
-        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇: Rp50.000</p>
-        <p>𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉: 𝙌𝙍𝙄𝙎</p>
-        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: whitesmoke;
-  color: black;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-">
-  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
-</a> <p>
-          
-      </div>
-    </div>
-
-    <div class="testimoni-card">
-      <img src="https://i.postimg.cc/yxMsyQCh/Screenshot-2025-07-21-15-55-55-57-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 2">
-      <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
-        <strong>@TESTIMONI 2</strong>
-        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇=Rp10.000</p>
-        <p>V𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉: QRIS</p>
-        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: whitesmoke;
-  color: black;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-">
-  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
-</a></p>
-      </div>
-    </div>
-
-    <div class="testimoni-card">
-      <img src="https://i.postimg.cc/8sgTMrwc/Screenshot-2025-07-22-17-12-08-97-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 3">
-            <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
-        <strong>@TESTIMONI 3</strong>
-        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇:5.000</p>
-        <p>𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉:𝙌𝙍𝙄𝙎
-        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: whitesmoke;
-  color: black;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-">
-  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
-</a> <p>
-      </div>
-    </div>
-    
-  <div class="testimoni-card">
-      <img src="https://i.postimg.cc/rFGc0jR2/Screenshot-2025-07-22-17-31-13-07-7352322957d4404136654ef4adb64504.jpg" alt="Testimoni 3">
-            <div style="border: 2px solid #000; padding: 15px; border-radius: 10px; background-color: deepskyblue;">
-        <strong>@TESTIMONI 4</strong>
-        <p>𝙉𝙊𝙈𝙄𝙉𝘼𝙇: 30.000</p>
-        <p>𝙋𝙀𝙈𝘽𝘼𝙔𝘼𝙍𝘼𝙉:𝙌𝙍𝙄𝙎
-        <p> <a href="https://instagram.com/username_kamu" target="_blank" style="
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: whitesmoke;
-  color: black;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-">
-  𝙇𝙞𝙝𝙖𝙩 𝙏𝙚𝙨𝙩𝙞𝙢𝙤𝙣𝙞 𝙔𝙖𝙣𝙜 𝙇𝙖𝙞𝙣
-</a> <p>
+  <div class="tombol-container">
+    <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
   </div>
-  <div>
-    
-  <div>
 
-  <a href="welcome.html" class="back-btn">← Kembali ke Beranda</a>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+      authDomain: "paneladmin-83c8a.firebaseapp.com",
+      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+      projectId: "paneladmin-83c8a",
+      storageBucket: "paneladmin-83c8a.appspot.com",
+      messagingSenderId: "343729471216",
+      appId: "1:343729471216:web:14c357375fa83083c44c35"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function muatTestimoni() {
+      const container = document.getElementById("daftarTestimoni");
+      container.innerHTML = "";
+      db.ref("testimoni").once("value", (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          Object.entries(data).reverse().forEach(([key, t]) => {
+            container.innerHTML += `
+              <div class="testimoni">
+                <img src="${t.gambar}" alt="Bukti Testimoni">
+                <div class="bubble">${t.pesan}</div>
+                <div class="nama">- ${t.nama}</div>
+              </div>
+            `;
+          });
+        } else {
+          container.innerHTML = "<p style='text-align:center;'>Belum ada testimoni.</p>";
+        }
+      });
+    }
+
+    muatTestimoni();
+  </script>
+
 </body>
 </html>
