@@ -18,34 +18,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://topupbussid.web.id/" />
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <script>
-    // Konfigurasi Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
-      authDomain: "paneladmin-83c8a.firebaseapp.com",
-      projectId: "paneladmin-83c8a",
-      storageBucket: "paneladmin-83c8a.appspot.com",
-      messagingSenderId: "343729471216",
-      appId: "1:343729471216:web:14c357375fa83083c44c35",
-      measurementId: "G-E2G04E4KB5",
-      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    // Cek status maintenance
-    db.ref("maintenance/aktif").once("value", (snap) => {
-      const aktif = snap.val();
-      const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
-      if (aktif === true && !isAdmin) {
-        window.location.href = "maintenance.html";
-      }
-    });
-  </script>
-
   <style>
     body {
       margin: 0;
@@ -111,14 +83,47 @@
 </head>
 <body>
 
-  <!-- Logo -->
+  <!-- Logo bulat pojok kiri atas -->
   <div class="logo-top">
     <img src="https://i.postimg.cc/nrfSZWmP/file-00000000d29861f895e12e2a67d02858.png" alt="Logo Top Up BUSSID">
   </div>
 
   <h1>Selamat Datang di Layanan Top Up BUSSID!</h1>
-  <p><strong>Silakan pencet tombol di bawah untuk melihat cara pemesanan dan harga top up-nya.</strong></p>
+  <p><strong>Silakan pencet tombol di bawah untuk melihat cara pemesanan dan harga Top Up-nya</strong></p>
   <a href="welcome.html" class="button">Masuk ke Halaman Utama</a>
+
+  <!-- Firebase + Maintenance Checker -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+      authDomain: "paneladmin-83c8a.firebaseapp.com",
+      projectId: "paneladmin-83c8a",
+      storageBucket: "paneladmin-83c8a.appspot.com",
+      messagingSenderId: "343729471216",
+      appId: "1:343729471216:web:14c357375fa83083c44c35",
+      measurementId: "G-E2G04E4KB5",
+      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Deteksi admin dari URL
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+
+    // Cek status maintenance
+    db.ref("status/maintenance").once("value").then((snapshot) => {
+      const aktif = snapshot.val();
+      console.log("Maintenance status:", aktif);
+      if ((aktif === true || aktif === "true") && !isAdmin) {
+        window.location.href = "maintenance.html";
+      }
+    }).catch((err) => {
+      console.error("Gagal cek status maintenance:", err);
+    });
+  </script>
 
 </body>
 </html>
