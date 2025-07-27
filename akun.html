@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jual Akun BUSSID</title>
+  <title>Stock Akun BUSSID</title>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
@@ -32,6 +32,11 @@
       border-radius: 12px;
       margin-bottom: 15px;
       border: 2px solid #000;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .akun img:hover {
+      transform: scale(1.02);
     }
     .teks {
       border: 1px solid #000;
@@ -70,7 +75,6 @@
     button:hover {
       background-color: #0284c7;
     }
-
     .btn-kembali {
       display: inline-block;
       margin-top: 20px;
@@ -87,16 +91,14 @@
     .btn-kembali:hover {
       background-color: #0056b3;
     }
-
     .tombol-container {
       text-align: center;
       margin-top: 30px;
     }
-
     .btn-wa {
       display: inline-block;
       margin-top: 12px;
-      background-color: #0ea5e9; /* Biru tema */
+      background-color: #0ea5e9;
       color: white;
       padding: 10px 16px;
       border-radius: 8px;
@@ -106,11 +108,50 @@
     .btn-wa:hover {
       background-color: #0284c7;
     }
+
+    /* Modal Gambar */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+      cursor: zoom-out;
+    }
+    .modal-content {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #000;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <h1>Jual Akun BUSSID</h1>
   <div id="daftarAkun"></div>
+
+  <!-- Modal Viewer -->
+  <div id="imgModal" class="modal" onclick="tutupModal()">
+    <span class="modal-close" onclick="event.stopPropagation(); tutupModal();">&times;</span>
+    <img class="modal-content" id="imgModalContent">
+  </div>
 
   <div id="formAdmin" class="admin-form" style="display:none">
     <h2>Tambah Akun</h2>
@@ -145,7 +186,7 @@
           Object.entries(data).forEach(([key, akun]) => {
             container.innerHTML += `
               <div class="akun" id="akun-${key}">
-                <img src="${akun.gambar}" alt="Bukti Akun">
+                <img src="${akun.gambar}" alt="Bukti Akun" onclick="bukaModal('${akun.gambar}')">
                 <div class="teks">${akun.deskripsi}</div>
                 <div class="teks">Harga: Rp${akun.harga}</div>
                 ${isAdmin ? `
@@ -158,7 +199,7 @@
             `;
           });
         } else {
-          container.innerHTML = "<p style='text-align:center;'><strong>Balum Ada Stok Akun😅<strong>.</p>";
+          container.innerHTML = "<p style='text-align:center;'><strong>Belum Ada Stok Akun 😅</strong></p>";
         }
       });
     }
@@ -199,6 +240,17 @@
           document.getElementById("akun-" + key).remove();
         });
       }
+    }
+
+    function bukaModal(src) {
+      const modal = document.getElementById("imgModal");
+      const img = document.getElementById("imgModalContent");
+      img.src = src;
+      modal.style.display = "block";
+    }
+
+    function tutupModal() {
+      document.getElementById("imgModal").style.display = "none";
     }
   </script>
 
