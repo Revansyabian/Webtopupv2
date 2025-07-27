@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/akun", "destination": "/akun.html" },
+    { "source": "/promo", "destination": "/promo.html" },
+    { "source": "/", "destination": "/index.html" }
+  ]
+}
