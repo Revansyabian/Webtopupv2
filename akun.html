@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +30,12 @@
       font-weight: bold;
       margin-bottom: 10px;
       color: #111827;
+    }
+    .akun-status {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #ef4444;
     }
     .akun img {
       width: 350px;
@@ -159,14 +163,10 @@
 </head>
 <body>
   <h1>Jual Akun BUSSID</h1>
-  <div id="daftarAkun"></div>
-
-  <div id="imgModal" class="modal" onclick="tutupModal()">
+  <div id="daftarAkun"></div>  <div id="imgModal" class="modal" onclick="tutupModal()">
     <span class="modal-close" onclick="event.stopPropagation(); tutupModal();">&times;</span>
     <img class="modal-content" id="imgModalContent">
-  </div>
-
-  <div id="formAdmin" class="admin-form" style="display:none">
+  </div>  <div id="formAdmin" class="admin-form" style="display:none">
     <h2>Tambah Akun</h2>
     <input id="nama" placeholder="Nama Akun">
     <input id="harga" placeholder="Harga">
@@ -174,9 +174,7 @@
     <input id="gambar" placeholder="URL Gambar Bukti">
     <input id="status" placeholder="Status (Tersedia / Sold)">
     <button onclick="tambahAkun()">Tambah</button>
-  </div>
-
-  <script>
+  </div>  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
       authDomain: "paneladmin-83c8a.firebaseapp.com",
@@ -200,11 +198,11 @@
           Object.entries(data).forEach(([key, akun]) => {
             container.innerHTML += `
               <div class="akun" id="akun-${key}">
+                <div class="akun-status">Status: ${akun.status || 'Tersedia'}</div>
                 <div class="akun-nama">${akun.nama || '-'}</div>
                 <img src="${akun.gambar}" alt="Bukti Akun" onclick="bukaModal('${akun.gambar}')">
                 <div class="teks">${akun.deskripsi}</div>
                 <div class="teks">Harga: Rp${akun.harga}</div>
-                <div class="teks">Status: ${akun.status || 'Tersedia'}</div>
                 ${akun.status === 'Sold' ? `
                   <div class="btn-sold">Sold Out</div>` : `
                   <a href="https://wa.me/6289520418604?text=Halo%20min,%20saya%20tertarik%20dengan%20akun%20ini:%20${encodeURIComponent(akun.nama || akun.deskripsi)}%20dengan%20harga%20Rp${akun.harga}" 
@@ -268,9 +266,7 @@
     if (isAdmin) {
       document.getElementById("formAdmin").style.display = "block";
     }
-  </script>
-
-  <div class="tombol-container">
+  </script>  <div class="tombol-container">
     <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
   </div>
 </body>
