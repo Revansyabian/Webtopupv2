@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: sans-serif;
-      background-color: #f4f4f4;
+      background-color: deepskyblue;
       padding: 20px;
       text-align: center;
     }
@@ -47,10 +47,13 @@
       margin: 10px 0;
       font-size: 18px;
     }
-    .akun-deskripsi {
-      font-size: 15px;
-      white-space: pre-wrap;
+        .akun-deskripsi {
       text-align: left;
+      font-size: 14px;
+      background: #f1f1f1;
+      border-radius: 8px;
+      padding: 10px;
+      white-space: 
     }
     .btn-wa, .btn-kembali {
       display: inline-block;
@@ -66,8 +69,8 @@
       color: white;
     }
     .btn-kembali {
-      background: #333;
-      color: white;
+      background: #fff;
+      color: deep;
       margin-top: 40px;
     }
 
@@ -95,8 +98,7 @@
   <h1>Stock Akun BUSSID</h1>
   <div id="akunContainer"></div>
 
-  <a href="index.html" class="btn-kembali">⬅️ Kembali ke Beranda</a>
-
+  <a href="welcome.html" class="back-btn">← Kembali ke Beranda</a>
   <!-- Modal Preview Gambar -->
   <div id="imageModal" class="modal" onclick="this.style.display='none'">
     <img id="modalImg" class="modal-content" />
@@ -138,7 +140,7 @@
           <div class="akun-harga">${akun.harga}</div>
           <div class="akun-deskripsi">${akun.deskripsi}</div>
           ${akun.status === "tersedia" ? `
-            <a class="btn-wa" href="https://wa.me/6281234567890?text=Saya%20mau%20beli%20${encodeURIComponent(akun.nama)}" target="_blank">Beli via WhatsApp</a>
+            <a class="btn-wa" href="https://wa.me/6289520418604?text=Saya%20mau%20beli%20${encodeURIComponent(akun.nama)}" target="_blank">Beli Sekarang</a>
           ` : ""}
         `;
         container.appendChild(card);
