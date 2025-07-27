@@ -1,193 +1,110 @@
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stock Akun BUSSID</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
+      font-family: sans-serif;
+      background-color: #f4f4f4;
       padding: 20px;
-      background-color: #f1f5f9;
-    }
-    h1 {
-      text-align: center;
-      color: #0ea5e9;
-    }
-    .akun {
-      background-color: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 500px;
       text-align: center;
     }
-    .akun img {
-      width: 350px;
-      max-width: 100%;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      border: 2px solid #000;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .akun img:hover {
-      transform: scale(1.02);
-    }
-    .akun-nama {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 10px 0;
-      color: #111827;
-    }
-    .status-label {
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-bottom: 10px;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-    .status-label.tersedia {
-      background: #bbf7d0;
-      color: #166534;
-    }
-    .status-label.sold {
-      background: #fecaca;
-      color: #b91c1c;
-    }
-    .teks {
-      background: #00bfff;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      color: #000;
-      font-weight: bold;
-    }
-    .btn-wa {
-      display: inline-block;
-      margin-top: 12px;
-      background-color: #0ea5e9;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .btn-wa:hover {
-      background-color: #0284c7;
-    }
-    .btn-sold {
-      display: inline-block;
-      margin-top: 12px;
-      background-color: #6b7280;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: not-allowed;
-    }
-    .admin-form {
-      margin-top: 30px;
-      padding: 20px;
+    .akun-card {
       background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
     }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #0ea5e9;
+    .status {
+      display: inline-block;
+      padding: 6px 15px;
+      border-radius: 20px;
       color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
-    button:hover {
-      background-color: #0284c7;
+    .tersedia { background: green; }
+    .sold { background: red; }
+    .akun-nama {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .akun-gambar {
+      max-width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .akun-harga {
+      font-weight: bold;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .akun-deskripsi {
+      font-size: 15px;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+    .btn-wa, .btn-kembali {
+      display: inline-block;
+      padding: 12px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      text-decoration: none;
+    }
+    .btn-wa {
+      background: #25d366;
+      color: white;
     }
     .btn-kembali {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #007bff;
+      background: #333;
       color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
+      margin-top: 40px;
     }
-    .btn-kembali:hover {
-      background-color: #0056b3;
-    }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
-      z-index: 9999;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.9);
-      cursor: zoom-out;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
     }
     .modal-content {
+      margin: 50px auto;
       display: block;
-      margin: auto;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #000;
+      max-width: 90%;
     }
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: white;
-      font-size: 30px;
-      font-weight: bold;
-      cursor: pointer;
+    .modal:target {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <h1>Jual Akun BUSSID</h1>
-  <div id="daftarAkun"></div>
 
-  <div id="imgModal" class="modal" onclick="tutupModal()">
-    <span class="modal-close" onclick="event.stopPropagation(); tutupModal();">&times;</span>
-    <img class="modal-content" id="imgModalContent">
+  <h1>Stock Akun BUSSID</h1>
+  <div id="akunContainer"></div>
+
+  <a href="index.html" class="btn-kembali">⬅️ Kembali ke Beranda</a>
+
+  <!-- Modal Preview Gambar -->
+  <div id="imageModal" class="modal" onclick="this.style.display='none'">
+    <img id="modalImg" class="modal-content" />
   </div>
 
-  <div id="formAdmin" class="admin-form" style="display:none">
-    <h2>Tambah Akun</h2>
-    <input id="nama" placeholder="Nama Akun">
-    <input id="harga" placeholder="Harga">
-    <input id="deskripsi" placeholder="Deskripsi / Testimoni">
-    <input id="gambar" placeholder="URL Gambar Bukti">
-    <input id="status" placeholder="Status (Tersedia / Sold)">
-    <button onclick="tambahAkun()">Tambah</button>
-  </div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -197,86 +114,49 @@
       projectId: "paneladmin-83c8a",
       storageBucket: "paneladmin-83c8a.appspot.com",
       messagingSenderId: "343729471216",
-      appId: "1:343729471216:web:14c357375fa83083c44c35"
+      appId: "1:343729471216:web:14c357375fa83083c44c35",
+      measurementId: "G-E2G04E4KB5"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-    const isAdmin = window.location.search.includes("admin=true");
 
-    function muatAkun() {
-      const container = document.getElementById("daftarAkun");
+    function tampilkanAkun(data) {
+      const container = document.getElementById("akunContainer");
       container.innerHTML = "";
-      db.ref("jualAkun").once("value", (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          Object.entries(data).forEach(([key, akun]) => {
-            const statusLower = (akun.status || "Tersedia").toLowerCase();
-            const isSold = statusLower === "sold";
-            container.innerHTML += `
-              <div class="akun" id="akun-${key}">
-                <div class="status-label ${isSold ? 'sold' : 'tersedia'}">
-                  ${isSold ? 'TERJUAL' : 'TERSEDIA'}
-                </div>
-                <img src="${akun.gambar}" alt="Bukti Akun" onclick="bukaModal('${akun.gambar}')">
-                <div class="akun-nama">${akun.nama || '-'}</div>
-                <div class="teks">${akun.deskripsi}</div>
-                <div class="teks">Harga: Rp${akun.harga}</div>
-                ${isSold ? `<div class="btn-sold">Sold Out</div>` : `
-                  <a href="https://wa.me/6289520418604?text=Halo%20min,%20saya%20tertarik%20dengan%20akun%20ini:%20${encodeURIComponent(akun.nama || akun.deskripsi)}%20dengan%20harga%20Rp${akun.harga}" 
-                    target="_blank" class="btn-wa">Hubungi via WhatsApp</a>`}
-                ${isAdmin ? `<br><br><button onclick="hapusAkun('${key}')">Hapus</button>` : ""}
-              </div>
-            `;
-          });
-        } else {
-          container.innerHTML = "<p style='text-align:center;'><strong>Belum Ada Stok Akun 😅</strong></p>";
-        }
+
+      Object.entries(data).forEach(([id, akun]) => {
+        const statusClass = akun.status === "tersedia" ? "tersedia" : "sold";
+
+        const card = document.createElement("div");
+        card.className = "akun-card";
+
+        card.innerHTML = `
+          <div class="status ${statusClass}">${akun.status}</div>
+          <div class="akun-nama">${akun.nama}</div>
+          <img class="akun-gambar" src="${akun.gambar}" alt="${akun.nama}" onclick="perbesarGambar('${akun.gambar}')" />
+          <div class="akun-harga">${akun.harga}</div>
+          <div class="akun-deskripsi">${akun.deskripsi}</div>
+          ${akun.status === "tersedia" ? `
+            <a class="btn-wa" href="https://wa.me/6281234567890?text=Saya%20mau%20beli%20${encodeURIComponent(akun.nama)}" target="_blank">Beli via WhatsApp</a>
+          ` : ""}
+        `;
+        container.appendChild(card);
       });
     }
 
-    function tambahAkun() {
-      const nama = document.getElementById("nama").value;
-      const harga = document.getElementById("harga").value;
-      const deskripsi = document.getElementById("deskripsi").value;
-      const gambar = document.getElementById("gambar").value;
-      const status = document.getElementById("status").value || "Tersedia";
+    function perbesarGambar(src) {
+      document.getElementById("modalImg").src = src;
+      document.getElementById("imageModal").style.display = "block";
+    }
 
-      if (!harga || !deskripsi || !gambar) {
-        alert("Lengkapi semua kolom!");
-        return;
+    db.ref("jualAkun").on("value", (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        tampilkanAkun(data);
       }
-
-      const akunBaru = { nama, harga, deskripsi, gambar, status };
-      const keyBaru = db.ref().child("jualAkun").push().key;
-      db.ref("jualAkun/" + keyBaru).set(akunBaru, () => {
-        alert("Akun berhasil ditambahkan!");
-        muatAkun();
-      });
-    }
-
-    function hapusAkun(key) {
-      if (confirm("Hapus akun ini?")) {
-        db.ref("jualAkun/" + key).remove(() => {
-          document.getElementById("akun-" + key).remove();
-        });
-      }
-    }
-
-    function bukaModal(src) {
-      document.getElementById("imgModalContent").src = src;
-      document.getElementById("imgModal").style.display = "block";
-    }
-
-    function tutupModal() {
-      document.getElementById("imgModal").style.display = "none";
-    }
-
-    muatAkun();
-    if (isAdmin) document.getElementById("formAdmin").style.display = "block";
+    });
   </script>
 
-  <div class="tombol-container">
-    <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
-  </div>
 </body>
 </html>
