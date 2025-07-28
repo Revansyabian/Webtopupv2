@@ -3,100 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maintenance | Hacker Style</title>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <title>Maintenance Mode</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
     body {
-      background-color: #000;
-      color: #39ff14;
-      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
+      min-height: 100vh;
       text-align: center;
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-      animation: glitch 2s infinite;
+      font-size: 2.5rem;
+      color: #222;
+      margin: 20px 0 10px;
     }
 
     p {
-      font-size: 1rem;
-      color: #99ffcc;
-      animation: blink 1.5s infinite alternate;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 40px;
     }
 
-    .anim-container {
+    lottie-player {
       width: 300px;
       height: 300px;
-      margin-bottom: 20px;
-    }
-
-    .footer {
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 20px;
-    }
-
-    @keyframes blink {
-      from { opacity: 0.5; }
-      to { opacity: 1; }
-    }
-
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(2px, -2px); }
-      60% { transform: translate(-1px, 1px); }
-      80% { transform: translate(1px, -1px); }
-      100% { transform: translate(0); }
     }
   </style>
 </head>
 <body>
-  <div class="anim-container">
-    <lottie-player id="animasi" background="transparent" speed="1" loop autoplay></lottie-player>
-  </div>
-  <h1>System Maintenance</h1>
-  <p>Access Denied. System sedang diupgrade...</p>
-  <div class="footer" id="animName"></div>
 
-  <script>
-    const animList = [
-      {
-        
-        url: "https://assets10.lottiefiles.com/packages/lf20_jytnoe1b.json"
-      },
-      {
-        
-        url: "https://assets7.lottiefiles.com/packages/lf20_iwmd6pyr.json"
-      },
-      {
-        
-        url: "https://assets2.lottiefiles.com/packages/lf20_h4th9ofg.json"
-      },
-      {
-        
-        url: "https://assets6.lottiefiles.com/packages/lf20_a2chheio.json"
-      },
-      {
-        name: "
-        url: "https://assets9.lottiefiles.com/private_files/lf30_i2eyukor.json"
-      }
-    ];
+  <!-- Animasi Kartun Orang Lagi Benerin -->
+  <lottie-player
+    src="https://assets6.lottiefiles.com/packages/lf20_YXD37q.json"
+    background="transparent"
+    speed="1"
+    loop
+    autoplay>
+  </lottie-player>
 
-    const pick = animList[Math.floor(Math.random() * animList.length)];
-    document.getElementById("animasi").setAttribute("src", pick.url);
-    document.getElementById("animName").innerText = `Animasi: ${pick.name}`;
-  </script>
+  <h1>Sedang Dalam Perbaikan</h1>
+  <p>Kami sedang memperbarui website untuk pengalaman terbaik! </p>
+
+  <!-- Load Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 </body>
 </html>
