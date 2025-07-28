@@ -3,93 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maintenance - Web</title>
+  <title>Maintenance | Hacker Style</title>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #f4f7fb, deepskyblue);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: steelblue;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-    .card {
-      background-color: white;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      border-radius: 15px;
-      padding: 30px 25px;
-      max-width: 360px;
+    body {
+      background-color: #000;
+      color: #39ff14;
+      font-family: 'Share Tech Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
       text-align: center;
     }
 
     h1 {
-      font-size: 22px;
+      font-size: 2rem;
       margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    h2 {
-      font-size: 16px;
-      color: deepskyblue;
-      margin: 0 0 15px;
+      text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+      animation: glitch 2s infinite;
     }
 
     p {
-      font-size: 14px;
-      line-height: 1.5;
-      color: black;
-      margin: 0 0 20px;
+      font-size: 1rem;
+      color: #99ffcc;
+      animation: blink 1.5s infinite alternate;
     }
 
-    .progress {
-      height: 4px;
-      width: 100%;
-      background: whitesmoke;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 20px 0;
-      position: relative;
+    .anim-container {
+      width: 300px;
+      height: 300px;
+      margin-bottom: 20px;
     }
 
-    .progress-bar {
-      height: 100%;
-      width: 40%;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      position: absolute;
-      animation: loading 2s infinite;
-      border-radius: 5px;
+    .footer {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 20px;
     }
 
-    @keyframes loading {
-      0% { left: -40%; }
-      50% { left: 100%; }
-      100% { left: 100%; }
+    @keyframes blink {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
     }
 
-    footer {
-      font-size: 12px;
-      color: #AAD8E6;
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
     }
   </style>
 </head>
 <body>
-  <div class="card"
-    <h2>Website Sedang Dalam Pemeliharaan</h2>
-    <p>Mohon maaf atas ketidaknyamanannya. Kami sedang melakukan perbaikan dan peningkatan sistem untuk memberikan pengalaman yang lebih baik.</p>
-    <div class="progress">
-      <div class="progress-bar"></div>
-    </div>
-    <footer>
-      Web akan kembali normal setelah maintenance
-    </footer>
-    
-    <div class="card"
-    <h2>Yang ingin top up langsung hubungi admin<h2>
-    <p>      <a href="https://wa.me/6289520418604?text=assalamu'alaikum min mau top up bussid dong" class="btn"> chat admin</a></p>
-    <div>
+  <div class="anim-container">
+    <lottie-player id="animasi" background="transparent" speed="1" loop autoplay></lottie-player>
+  </div>
+  <h1>System Maintenance</h1>
+  <p>Access Denied. System sedang diupgrade...</p>
+  <div class="footer" id="animName"></div>
+
+  <script>
+    const animList = [
+      {
+        name: "Cyber Skull",
+        url: "https://assets10.lottiefiles.com/packages/lf20_jytnoe1b.json"
+      },
+      {
+        name: "Green Matrix",
+        url: "https://assets7.lottiefiles.com/packages/lf20_iwmd6pyr.json"
+      },
+      {
+        name: "Cyber Lock",
+        url: "https://assets2.lottiefiles.com/packages/lf20_h4th9ofg.json"
+      },
+      {
+        name: "Futuristic Scan",
+        url: "https://assets6.lottiefiles.com/packages/lf20_a2chheio.json"
+      },
+      {
+        name: "Neon Hacker Face",
+        url: "https://assets9.lottiefiles.com/private_files/lf30_i2eyukor.json"
+      }
+    ];
+
+    const pick = animList[Math.floor(Math.random() * animList.length)];
+    document.getElementById("animasi").setAttribute("src", pick.url);
+    document.getElementById("animName").innerText = `Animasi: ${pick.name}`;
+  </script>
 </body>
 </html>
