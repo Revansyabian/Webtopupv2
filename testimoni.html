@@ -12,83 +12,157 @@
       background-color: #f4f8fb;
       padding: 20px;
       text-align: center;
+      color: #333;
     }
 
     h2 {
       color: #0d6efd;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .testimoni-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .testimoni {
-      display: inline-block;
-      background-color: deepskyblue;
-      border: 2px solid #000;
-      border-radius: 20px;
-      padding: 20px;
-      margin: 20px;
-      max-width: 320px;
+      background-color: white;
+      border-radius: 16px;
+      padding: 25px;
+      width: 320px;
       text-align: left;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimoni:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+    .testimoni::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: deepskyblue;
     }
 
     .testimoni img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      margin-bottom: 15px;
       cursor: pointer;
       transition: transform 0.3s ease;
+      border: 1px solid #eee;
     }
 
     .testimoni img:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
 
     .bubble {
-      background-color: white;
-      padding: 10px;
-      border-radius: 10px;
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 12px;
       font-style: italic;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      position: relative;
+      border-left: 4px solid deepskyblue;
+    }
+
+    .bubble::after {
+      content: '"';
+      font-size: 3rem;
+      color: deepskyblue;
+      opacity: 0.1;
+      position: absolute;
+      right: 10px;
+      bottom: -20px;
+    }
+
+    .testimoni p {
+      margin: 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .testimoni p strong {
+      color: #555;
+    }
+
+    .testimoni small {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+      color: deepskyblue;
     }
 
     .hapus-btn {
-      background-color: red;
+      background-color: #ff4444;
       color: white;
       border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin-top: 15px;
       cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
 
     .hapus-btn:hover {
-      background-color: darkred;
+      background-color: #cc0000;
+      transform: translateY(-2px);
     }
 
     .lihat-btn {
       display: inline-block;
-      margin-top: 10px;
-      padding: 8px 12px;
-      background-color: #0d6efd;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: deepskyblue;
       color: white;
-      border-radius: 6px;
+      border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
     }
 
     .lihat-btn:hover {
-      background-color: #084bb3;
+      background-color: #00b7eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,191,255,0.2);
     }
 
     .back-btn {
-      display: block;
-      text-align: center;
-      margin-top: 40px;
-      text-decoration: none;
-      font-weight: bold;
+      display: inline-block;
+      margin: 40px auto;
+      padding: 12px 25px;
+      background-color: white;
       color: #0d6efd;
-      font-size: 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #0d6efd;
+    }
+
+    .back-btn:hover {
+      background-color: #0d6efd;
+      color: white;
+      transform: translateY(-2px);
     }
 
     /* Modal Image */
@@ -109,11 +183,17 @@
     .modal-content {
       display: block;
       margin: auto;
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 90%;
+      max-height: 80vh;
       object-fit: contain;
       border-radius: 8px;
-      box-shadow: 0 0 10px #000;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      animation: zoom 0.3s;
+    }
+
+    @keyframes zoom {
+      from {transform: scale(0.9); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
     }
 
     .modal-close {
@@ -121,21 +201,31 @@
       top: 20px;
       right: 35px;
       color: white;
-      font-size: 30px;
+      font-size: 40px;
       font-weight: bold;
       cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      color: deepskyblue;
+      transform: rotate(90deg);
     }
 
     @media (max-width: 600px) {
       .testimoni {
-        max-width: 90%;
+        width: 90%;
+      }
+      
+      .modal-content {
+        max-width: 95%;
       }
     }
   </style>
 </head>
 <body>
   <h2><strong>Testimoni Pembelian UB</strong></h2>
-  <div id="daftarTestimoni"></div>
+  <div id="daftarTestimoni" class="testimoni-container"></div>
 
   <!-- Modal Viewer -->
   <div id="imgModal" class="modal" onclick="tutupModal()">
@@ -204,7 +294,7 @@
             `;
           });
         } else {
-          container.innerHTML = "<p>Belum ada testimoni.</p>";
+          container.innerHTML = "<p style='width:100%; text-align:center;'>Belum ada testimoni.</p>";
         }
       });
     }
