@@ -1,288 +1,541 @@
-<!DOCTYPE html>  <html lang="id">  
-<head>  
-  <meta name="google-site-verification" content="XTY6C2ueR1D4IJY_oTGTwOxMyfW29Z5gCwWI5TQ27D8" />  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
-  <meta name="description" content=" Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">  
-  <meta name="keywords" content=" Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">  
-  <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>  
-  <style>  
-    body {  
-      margin: 0;  
-      font-family: 'Arial', sans-serif;  
-      background: whitesmoke;  
-      color: #333;  
-      padding-bottom: 80px;  
-    }  
-    header {  
-      background: deepskyblue;  
-      color: #fff;  
-      padding: 30px 20px;  
-      text-align: center;  
-    }  
-    header h1 { margin: 0; font-size: 32px; }  
-    header p { margin-top: 5px; }  
-    main { padding: 20px; max-width: 800px; margin: auto; }  
-    section { background: #fff; margin-bottom: 25px; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }  
-    h2 { color: deepskyblue; margin-top: 0; }  
-    ul, ol { padding-left: 20px; }  
-    .btn {  
-      display: inline-block;  
-      background: #28a745;  
-      color: #fff;  
-      padding: 10px 16px;  
-      text-decoration: none;  
-      border-radius: 6px;  
-      margin-top: 15px;  
-    }  
-    .btn:hover { background: #218838; }  
-    footer {  
-      background: deepskyblue;  
-      color: white;  
-      text-align: center;  
-      padding: 15px 10px;  
-      font-size: 14px;  
-    }  
-    .harga li { margin-bottom: 8px; }  .promo-banner {  
-  position: relative;  
-  bottom: 20px;  
-  left: 0;  
-  width: 100%;  
-  overflow: hidden;  
-  z-index: 9999;  
-  pointer-events: none;  
-  display: none;  
-  margin-top: 10px;  
-  border-bottom: 2px solid white;  
-}  
-
-.promo-text {  
-  display: inline-block;  
-  white-space: nowrap;  
-  background: deepskyblue;  
-  color: white;  
-  padding: 10px 30px;  
-  border-radius: 10px;  
-  font-weight: bold;  
-  box-shadow: 0 0 10px deepskyblue;  
-  animation: runningText 10s linear infinite;  
-}  
-
-@keyframes runningText {  
-  0% { transform: translateX(100%); opacity: 0; }  
-  10% { opacity: 1; }  
-  90% { opacity: 1; }  
-  100% { transform: translateX(-100%); opacity: 0; }  
-}  
-
-@keyframes kedip {  
-  0%, 100% { opacity: 1; }  
-  50% { opacity: 0; }  
-}  
-.kedip {  
-  animation: kedip 10s infinite;  
-}  
-
-#promo {  
-  display: none;  
-  position: fixed;  
-  top: 0;  
-  left: 0;  
-  right: 0;  
-  background: deepskyblue;  
-  color: white;  
-  text-align: center;  
-  padding: 20px;  
-  font-weight: bold;  
-  z-index: 999;  
-}
-
-  </style>  
-</head>  
-<body>  
-  <header>  
-    <h1>Jasa Top Up BUSSID</h1>  
-    <p>Jasa Top Up Cepat, Murah, Aman!</p>  
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="google-site-verification" content="XTY6C2ueR1D4IJY_oTGTwOxMyfW29Z5gCwWI5TQ27D8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">
+  <meta name="keywords" content="Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">
+  <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --primary: deepskyblue;
+      --primary-light: rgba(0, 191, 255, 0.1);
+      --secondary: #00688B; /* Darker shade of deepskyblue */
+      --accent: #FF6B6B; /* Kept as contrast color */
+      --dark: #0A2E38;
+      --light: #f8fafc;
+      --success: #00C896; /* Teal accent */
+      --text: #334155;
+      --text-light: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --backdrop: blur(16px);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 2rem;
+    }
+    
+    /* Glassmorphism Header */
+    header {
+      background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
+      backdrop-filter: var(--backdrop);
+      -webkit-backdrop-filter: var(--backdrop);
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+      z-index: -1;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      position: relative;
+      letter-spacing: -0.5px;
+    }
+    
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+    
+    /* Modern Navigation */
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      backdrop-filter: var(--backdrop);
+      -webkit-backdrop-filter: var(--backdrop);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 0 0 1rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin: 0 auto;
+      max-width: 800px;
+      flex-wrap: wrap;
+    }
+    
+    .nav-btn {
+      background: rgba(0, 191, 255, 0.08);
+      color: deepskyblue;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0, 191, 255, 0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    
+    .nav-btn:hover {
+      background: rgba(0, 191, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 191, 255, 0.1);
+    }
+    
+    /* Glass Card Sections */
+    main {
+      padding: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    section {
+      background: var(--card-bg);
+      backdrop-filter: var(--backdrop);
+      -webkit-backdrop-filter: var(--backdrop);
+      margin-bottom: 1.25rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+      color: deepskyblue;
+      margin: 0 0 1rem 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    
+    ul, ol {
+      padding-left: 1.25rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+    
+    /* Modern Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, deepskyblue, #00688B);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 191, 255, 0.3);
+      background: linear-gradient(135deg, #00688B, deepskyblue);
+    }
+    
+    /* Grid Pricing */
+    .harga {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    
+    .harga li {
+      margin: 0;
+      padding: 0.75rem;
+      background: rgba(0, 191, 255, 0.05);
+      border-radius: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      border: 1px solid rgba(0, 191, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+    
+    .harga li:hover {
+      background: rgba(0, 191, 255, 0.1);
+    }
+    
+    .harga li span {
+      color: deepskyblue;
+      font-weight: 500;
+    }
+    
+    .harga li strong {
+      color: #00688B;
+      font-weight: 700;
+    }
+    
+    /* Modern Footer */
+    footer {
+      background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
+      backdrop-filter: var(--backdrop);
+      -webkit-backdrop-filter: var(--backdrop);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      border-radius: 1rem 1rem 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Floating Promo Banner */
+    .promo-banner {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2rem);
+      max-width: 800px;
+      overflow: hidden;
+      z-index: 100;
+      display: none;
+      background: linear-gradient(90deg, #FF6B6B, #FF8E53);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-5px); }
+    }
+    
+    .promo-text {
+      display: inline-block;
+      white-space: nowrap;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      animation: runningText 15s linear infinite;
+    }
+    
+    /* Top Promo Bar */
+    #promo {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(90deg, #FF6B6B, #FF8E53);
+      color: white;
+      text-align: center;
+      padding: 0.75rem;
+      font-weight: 600;
+      z-index: 1000;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Admin Panel */
+    #adminPanel {
+      background: rgba(0,0,0,0.03);
+      border: 1px dashed deepskyblue;
+    }
+    
+    #maintenanceInput {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 191, 255, 0.2);
+      width: 100%;
+      max-width: 200px;
+      margin: 0.5rem 0;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.5);
+      transition: all 0.2s ease;
+    }
+    
+    #maintenanceInput:focus {
+      outline: none;
+      border-color: deepskyblue;
+      box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 640px) {
+      .harga {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-container {
+        gap: 0.5rem;
+        padding: 0.75rem;
+      }
+      
+      section {
+        padding: 1.25rem;
+      }
+      
+      header h1 {
+        font-size: 1.5rem;
+      }
+    }
+    
+    /* Micro-interactions */
+    .btn:active, .nav-btn:active {
+      transform: scale(0.98);
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 191, 255, 0.3);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 191, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="promo">🔥 Promo Spesial Hari Ini! 🔥</div>
+  
+  <header>
+    <h1>Jasa Top Up BUSSID</h1>
+    <p>Jasa Top Up Cepat, Murah, Aman!</p>
   </header>
-  <body style="margin: 0; font-family: sans-serif;">
-  <!-- Header Putih -->
-  <header style="
-  background-color: #ffffff;
-  padding: 20px 10px 10px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-">
-  <h1 style="
-    margin: 0 0 12px;
-    font-size: 24px;
-    color: #333;
-
-  <!-- 🔸 Bar Navigasi -->
-  <div style="
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  ">
-    <a href="testimoni.html" style="
-      background-color: deepskyblue;
-      color: white;
-      padding: 10px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      width: 120px;
-      text-align: center;
-    ">Testimoni</a>
-
-    <a href="sosmed.html" style="
-      background-color: deepskyblue;
-      color: white;
-      padding: 10px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      width: 120px;
-      text-align: center;
-    ">Sosmed Admin</a>
-
-    <a href="akun.html" style="
-      background-color: deepskyblue;
-      color: white;
-      padding: 10px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      width: 120px;
-      text-align: center;
-    ">Akun Bussid</a>
+  
+  <div class="nav-container">
+    <a href="testimoni.html" class="nav-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      Testimoni
+    </a>
+    <a href="sosmed.html" class="nav-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+      Sosmed Admin
+    </a>
+    <a href="akun.html" class="nav-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      Akun Bussid
+    </a>
   </div>
-</header>
+
+  <main>
+    <section>
+      <h2>🚌 Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
+      <p>Top Up BUSSID solusinya dengan kalian top up bussid duit kalian bisa bertambah dengan instan, dan kalian juga ga perlu narik secara manual. <strong>Ayo Top up Ub Sekarang</strong>.</p>
+    </section>
+    
+    <section>
+      <h2>🚌 Apa Itu Top Up BUSSID?</h2>
+      <p>Top Up BUSSID adalah layanan pembelian uang, untuk membeli berbagai macam item di game tersebut tanpa harus ngumpulin duit secara manual di <strong>Bus Simulator Indonesia</strong>.</p>
+    </section>
+    
+    <section>
+      <h2>💰 Daftar Harga</h2>
+      <ul class="harga">
+        <li><span>💵 70JT UB</span> <strong>Rp5.000</strong></li>
+        <li><span>💵 200JT UB</span> <strong>Rp10.000</strong></li>
+        <li><span>💵 250JT UB</span> <strong>Rp20.000</strong></li>
+        <li><span>💵 300JT UB</span> <strong>Rp25.000</strong></li>
+        <li><span>💵 500JT UB</span> <strong>Rp30.000</strong></li>
+        <li><span>💵 700JT UB</span> <strong>Rp35.000</strong></li>
+        <li><span>💵 900JT UB</span> <strong>Rp40.000</strong></li>
+        <li><span>💵 1MIL UB</span> <strong>Rp45.000</strong></li>
+        <li><span>💵 2 MIL UB</span> <strong>Rp50.000</strong></li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2>📦 Cara Pemesanan</h2>
+      <ol>
+        <li>Hubungi admin via WhatsApp: <strong>6289520418604 / 6289630191806</strong>.</li>
+        <li>Pilih nominal top up sesuai daftar harga.</li>
+        <li>Lakukan pembayaran via DANA / OVO / GOPAY / Transfer Bank.</li>
+        <li>Proses dalam 1–5 menit setelah pembayaran!</li>
+      </ol>
+      <a href="https://wa.me/6289520418604" class="btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        Pesan Sekarang
+      </a>
+    </section>
+    
+    <section>
+      <h2>🌟 Testimoni Pembeli</h2>
+      <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        Lihat Testimoni Pembeli
+      </a>
+    </section>
+    
+    <!-- PANEL ADMIN MAINTENANCE -->
+    <section id="adminPanel" style="display:none;">
+      <h2>⚙️ Panel Admin - Maintenance</h2>
+      <p id="maintenanceStatus">Status maintenance akan muncul di sini...</p>
+      <input type="text" id="maintenanceInput" placeholder="Ketik true / false">
+      <button class="btn" onclick="updateMaintenance()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+          <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+        </svg>
+        Update Maintenance
+      </button>
+    </section>
+  </main>
+  
+  <div class="promo-banner" id="promoBanner">
+    <div class="promo-text" id="promoText">🎉 Promo Spesial! Diskon 20% untuk Pembelian Pertama 🎉</div>
+  </div>
+  
+  <footer>
+    &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
+  </footer>
+
+  <!-- Original Firebase script remains unchanged -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+      authDomain: "paneladmin-83c8a.firebaseapp.com",
+      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+      projectId: "paneladmin-83c8a",
+      storageBucket: "paneladmin-83c8a.appspot.com",
+      messagingSenderId: "343729471216",
+      appId: "1:343729471216:web:14c357375fa83083c44c35",
+      measurementId: "G-E2G04E4KB5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const maintenanceRef = ref(db, "maintenance");
+    const statusText = document.getElementById("maintenanceStatus");
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+
+    onValue(maintenanceRef, (snapshot) => {
+      const aktif = snapshot.val();
+      statusText.textContent = aktif ? "🔧 Maintenance: AKTIF" : "✅ Maintenance: NONAKTIF";
+      if (aktif && !isAdmin) {
+        window.location.href = "maintenance.html";
+      }
+    });
+
+    window.updateMaintenance = function () {
+      const input = document.getElementById("maintenanceInput").value.trim().toLowerCase();
+      if (input === "true" || input === "false") {
+        set(maintenanceRef, input === "true")
+          .then(() => alert("Maintenance berhasil diubah ke " + input.toUpperCase()))
+          .catch(err => alert("Gagal update: " + err.message));
+      } else {
+        alert("Masukkan hanya: true atau false");
+      }
+    };
+
+    // PROMO HANDLING
+    const promoBar = document.getElementById("promo");
+    const promoBanner = document.getElementById("promoBanner");
+    const promoText = document.getElementById("promoText");
+
+    const rootRef = ref(db);
+
+    onValue(rootRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data.promoAktif && data.promo) {
+        promoBar.style.display = "block";
+        promoBanner.style.display = "block";
+        promoBar.textContent = data.promo;
+        promoText.textContent = data.promo;
+
+        promoBar.classList.add("kedip");
+      } else {
+        promoBar.style.display = "none";
+        promoBanner.style.display = "none";
+        promoBar.classList.remove("kedip");
+      }
+    });
+
+    if (isAdmin) {
+      document.getElementById("adminPanel").style.display = "block";
+    }
+  </script>
 </body>
-
- 
-</body>
-  <main>  
-    <section>  
-      <h2>Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>  
-      <p>Top Up BUSSID solusinya dengan kalian top up bussid duit kalian bisa bertambah dengan instan, dan kalian juga ga perlu narik secara manual. <strong>Ayo Top up Ub Sekarang</strong>.</p>  
-    </section>  <section>  
-  <h2>🚌 Apa Itu Top Up BUSSID?</h2>  
-  <p>Top Up BUSSID adalah layanan pembelian uang, untuk membeli berbagai macam item di game tersebut tanpa harus ngumpulin duit secara manual di <strong>Bus Simulator Indonesia</strong>.</p>  
-</section>  
-
-<section>  
-  <h2>💸 Daftar Harga</h2>  
-  <ul class="harga">  
-    <li><span>💵 70JT UB</span> – <strong>Rp5.000</strong></li>  
-    <li><span>💵 200JT UB</span> – <strong>Rp10.000</strong></li>  
-    <li><span>💵 250JT UB</span> – <strong>Rp20.000</strong></li>  
-    <li><span>💵 300JT UB</span> – <strong>Rp25.000</strong></li>  
-    <li><span>💵 500JT UB</span> – <strong>Rp30.000</strong></li>  
-    <li><span>💵 700JT UB</span> – <strong>Rp35.000</strong></li>  
-    <li><span>💵 900JT UB</span> – <strong>Rp40.000</strong></li>  
-    <li><span>💵 1MIL UB</span> – <strong>Rp45.000</strong></li>  
-    <li><span>💵 2 MIL UB</span> – <strong>Rp50.000</strong></li>  
-  </ul>  
-</section>  
-
-<section>  
-  <h2>📦 Cara Pemesanan</h2>  
-  <ol>  
-    <li>Hubungi admin via WhatsApp: <strong>6289520418604 / 6289630191806</strong>.</li>  
-    <li>Pilih nominal top up sesuai daftar harga.</li>  
-    <li>Lakukan pembayaran via DANA / OVO / GOPAY / Transfer Bank.</li>  
-    <li>Proses dalam 1–5 menit setelah pembayaran!</li>  
-  </ol>  
-  <a href="https://wa.me/6289520418604" class="btn">Pesan Sekarang</a>  
-</section>  
-
-<section>  
-  <h2>🌟 Testimoni Pembeli</h2>  
-  <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">Lihat Testimoni Pembeli</a>  
-</section>  
-
-<!-- PANEL ADMIN MAINTENANCE -->  
-<section id="adminPanel" style="display:none;">  
-  <h2>⚙️ Panel Admin - Maintenance</h2>  
-  <p id="maintenanceStatus">Status maintenance akan muncul di sini...</p>  
-  <input type="text" id="maintenanceInput" placeholder="Ketik true / false">  
-  <button class="btn" onclick="updateMaintenance()">Update Maintenance</button>  
-</section>
-
-  </main>    <div class="promo-banner" id="promoBanner">  
-    <div class="promo-text" id="promoText">🎉 Promo Spesial! 🎉</div>  
-  </div>    <div id="promo">🔥 Promo Spesial Hari Ini! 🔥</div>    <footer>  
-    &copy; Top Up Bussid aman dan terpercaya |2025  </footer>    <script type="module">  
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";  
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";  
-  
-    const firebaseConfig = {  
-      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",  
-      authDomain: "paneladmin-83c8a.firebaseapp.com",  
-      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",  
-      projectId: "paneladmin-83c8a",  
-      storageBucket: "paneladmin-83c8a.appspot.com",  
-      messagingSenderId: "343729471216",  
-      appId: "1:343729471216:web:14c357375fa83083c44c35",  
-      measurementId: "G-E2G04E4KB5"  
-    };  
-  
-    const app = initializeApp(firebaseConfig);  
-    const db = getDatabase(app);  
-  
-    const maintenanceRef = ref(db, "maintenance");  
-    const statusText = document.getElementById("maintenanceStatus");  
-    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";  
-  
-    onValue(maintenanceRef, (snapshot) => {  
-      const aktif = snapshot.val();  
-      statusText.textContent = aktif ? "🔧 Maintenance: AKTIF" : "✅ Maintenance: NONAKTIF";  
-      if (aktif && !isAdmin) {  
-        window.location.href = "maintenance.html";  
-      }  
-    });  
-  
-    window.updateMaintenance = function () {  
-      const input = document.getElementById("maintenanceInput").value.trim().toLowerCase();  
-      if (input === "true" || input === "false") {  
-        set(maintenanceRef, input === "true")  
-          .then(() => alert("Maintenance berhasil diubah ke " + input.toUpperCase()))  
-          .catch(err => alert("Gagal update: " + err.message));  
-      } else {  
-        alert("Masukkan hanya: true atau false");  
-      }  
-    };  
-  
-    // PROMO HANDLING  
-    const promoBar = document.getElementById("promo");  
-    const promoBanner = document.getElementById("promoBanner");  
-    const promoText = document.getElementById("promoText");  
-  
-    const rootRef = ref(db);  
-  
-    onValue(rootRef, (snapshot) => {  
-      const data = snapshot.val();  
-      if (data.promoAktif && data.promo) {  
-        promoBar.style.display = "block";  
-        promoBanner.style.display = "block";  
-        promoBar.textContent = data.promo;  
-        promoText.textContent = data.promo;  
-  
-        promoBar.classList.add("kedip");  
-      } else {  
-        promoBar.style.display = "none";  
-        promoBanner.style.display = "none";  
-        promoBar.classList.remove("kedip");  
-      }  
-    });  
-  
-    if (isAdmin) {  
-      document.getElementById("adminPanel").style.display = "block";  
-    }  
-  </script>  </body>  
 </html>
