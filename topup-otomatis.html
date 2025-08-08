@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6c5ce7;
-            --primary-dark: #5649c0;
-            --secondary: #a29bfe;
-            --accent: #fd79a8;
-            --success: #00b894;
-            --danger: #d63031;
-            --warning: #fdcb6e;
-            --info: #0984e3;
+            --primary: #00BFFF; /* deepskyblue */
+            --primary-dark: #009ACD;
+            --secondary: #87CEFA;
+            --accent: #FFA500; /* orange for accent */
+            --success: #32CD32; /* limegreen */
+            --danger: #FF4500; /* orangered */
+            --warning: #FFD700; /* gold */
+            --info: #1E90FF; /* dodgerblue */
             --dark: #2d3436;
             --light: #f8f9fa;
             --card-bg: #ffffff;
@@ -44,7 +44,7 @@
 
         .game-card.selected {
             border: 3px solid var(--primary);
-            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.2);
+            box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.2);
         }
 
         .game-img {
@@ -74,7 +74,7 @@
 
         .package-card.selected {
             border: 2px solid var(--primary);
-            background-color: rgba(108, 92, 231, 0.05);
+            background-color: rgba(0, 191, 255, 0.05);
         }
 
         .package-card.selected::after {
@@ -128,7 +128,7 @@
             color: white;
             border-radius: 0 0 20px 20px;
             padding: 20px 0;
-            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
         }
 
         .step-indicator {
@@ -209,7 +209,7 @@
 
         .upload-area:hover {
             border-color: var(--primary);
-            background-color: rgba(108, 92, 231, 0.05);
+            background-color: rgba(0, 191, 255, 0.05);
         }
 
         .preview-image {
@@ -269,7 +269,7 @@
 
         .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(0, 191, 255, 0.25);
         }
 
         .input-group-text {
@@ -1051,6 +1051,27 @@
             }
         }
 
+        // Fungsi untuk redirect ke WhatsApp dengan pesan otomatis
+        function redirectToWhatsApp(transactionId) {
+            const phoneNumber = '6289520418604'; // Nomor WhatsApp admin
+            const gameName = gamePackages[transactionData.game]?.name || 'Game tidak diketahui';
+            const packageName = transactionData.item_name || 'Paket tidak diketahui';
+            const amount = transactionData.amount || 0;
+            
+            const message = `Assalamu'alaikum min tolong proses pesanan saya\n\n` +
+                            `ID: ${transactionId}\n` +
+                            `Game: ${gameName}\n` +
+                            `Paket: ${packageName}\n` +
+                            `Harga: Rp ${amount.toLocaleString('id-ID')}\n` +
+                            `No. WhatsApp: ${transactionData.user_data.phone || '-'}`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Buka tab baru untuk WhatsApp
+            window.open(whatsappUrl, '_blank');
+        }
+
         // Form submission handler
         $('#accountForm').submit(async function(e) {
             e.preventDefault();
@@ -1114,10 +1135,11 @@
                 $('#loadingOverlay').hide();
                 $('#successMessage').show();
                 
-                // Pindah ke step 5 setelah beberapa detik
+                // Redirect ke WhatsApp setelah 3 detik
                 setTimeout(() => {
                     $('#successMessage').hide();
                     changeStep(4, 5);
+                    redirectToWhatsApp(transactionId);
                 }, 3000);
                 
             } catch (error) {
