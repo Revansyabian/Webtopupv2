@@ -2,6 +2,6 @@
   "rewrites": [
     { "source": "/akun", "destination": "/akun.html" },
     { "source": "/promo", "destination": "/promo.html" },
-    { "source": "topup-otomatis", "destination": "/topup-otomatis.html" }
+    { "source": "/topup-otomatis", "destination": "/topup-otomatis.html" }
 ]
 }
