@@ -109,16 +109,22 @@
       color: deepskyblue;
     }
 
+    .button-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
     .hapus-btn {
       background-color: #ff4444;
       color: white;
       border: none;
       padding: 8px 16px;
       border-radius: 8px;
-      margin-top: 15px;
       cursor: pointer;
       font-weight: 600;
       transition: all 0.3s ease;
+      flex: 1;
     }
 
     .hapus-btn:hover {
@@ -128,7 +134,6 @@
 
     .lihat-btn {
       display: inline-block;
-      margin-top: 15px;
       padding: 10px 20px;
       background-color: deepskyblue;
       color: white;
@@ -136,7 +141,7 @@
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s ease;
-      width: 100%;
+      flex: 1;
       text-align: center;
     }
 
@@ -217,6 +222,10 @@
         width: 90%;
       }
       
+      .button-container {
+        flex-direction: column;
+      }
+      
       .modal-content {
         max-width: 95%;
       }
@@ -280,18 +289,25 @@
       db.ref("testimoni").once("value", (snapshot) => {
         const data = snapshot.val();
         if (data) {
-          Object.entries(data).forEach(([key, item]) => {
+          const testimonials = Object.entries(data);
+          let counter = 1;
+          
+          testimonials.forEach(([key, item]) => {
             container.innerHTML += `
               <div class="testimoni">
+                <div style="position:absolute; top:10px; right:10px; background:deepskyblue; color:white; width:25px; height:25px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600;">${counter}</div>
                 ${item.gambar ? `<img src="${item.gambar}" alt="Bukti Transfer" onclick="bukaModal('${item.gambar}')" />` : ""}
                 <div class="bubble">${item.pesan || ""}</div>
                 <p><strong>Nominal:</strong> ${item.nominal || "-"}<br>
                    <strong>Pembayaran via:</strong> ${item.pembayaran || "-"}</p>
-                <small>- ${item.nama || ""}</small><br/>
-                ${isAdmin() ? `<button class="hapus-btn" onclick="hapusTestimoni('${key}')">Hapus</button><br/>` : ""}
-                <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" target="_blank" class="lihat-btn">Lihat Testimoni Lain</a>
+                <small>- ${item.nama || ""}</small>
+                <div class="button-container">
+                  ${isAdmin() ? `<button class="hapus-btn" onclick="hapusTestimoni('${key}')">Hapus</button>` : ""}
+                  <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" target="_blank" class="lihat-btn">Lihat Testimoni Lain</a>
+                </div>
               </div>
             `;
+            counter++;
           });
         } else {
           container.innerHTML = "<p style='width:100%; text-align:center;'>Belum ada testimoni.</p>";
