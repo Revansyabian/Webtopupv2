@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
  <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
@@ -22,6 +22,7 @@
       --text-light: #64748b;
       --card-bg: rgba(255, 255, 255, 0.8);
       --backdrop: blur(16px);
+      --header-gradient: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
     }
     
     * {
@@ -41,7 +42,7 @@
     
     /* Glassmorphism Header */
     header {
-      background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
+      background: var(--header-gradient);
       backdrop-filter: var(--backdrop);
       -webkit-backdrop-filter: var(--backdrop);
       color: white;
@@ -51,6 +52,7 @@
       overflow: hidden;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.5s ease;
     }
     
     header::before {
@@ -356,6 +358,38 @@
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(0, 191, 255, 0.5);
     }
+    
+    /* COLOR PICKER STYLES */
+    .color-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      border: 2px solid transparent;
+    }
+    
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+    
+    .color-option.active {
+      border-color: #fff;
+      box-shadow: 0 0 0 2px #000;
+    }
+    
+    .color-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -463,6 +497,30 @@
         </svg>
         Update Maintenance
       </button>
+      
+      <!-- COLOR PICKER SECTION -->
+      <div class="color-section">
+        <h3>🎨 Kustomisasi Warna Header</h3>
+        <p>Pilih warna header yang diinginkan:</p>
+        <div class="color-picker">
+          <div class="color-option active" style="background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);" data-color="default" onclick="changeHeaderColor('linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%)')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%);" data-color="red" onclick="changeHeaderColor('linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%)')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #00C896 0%, #007A5E 100%);" data-color="green" onclick="changeHeaderColor('linear-gradient(135deg, #00C896 0%, #007A5E 100%)')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #F368E0 0%, #8E44AD 100%);" data-color="purple" onclick="changeHeaderColor('linear-gradient(135deg, #F368E0 0%, #8E44AD 100%)')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #FF9F43 0%, #E67E22 100%);" data-color="orange" onclick="changeHeaderColor('linear-gradient(135deg, #FF9F43 0%, #E67E22 100%)')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #341F97 0%, #192A56 100%);" data-color="dark-blue" onclick="changeHeaderColor('linear-gradient(135deg, #341F97 0%, #192A56 100%)')"></div>
+        </div>
+        <p>Atau pilih warna kustom:</p>
+        <input type="color" id="customColorPicker" onchange="changeCustomColor(this.value)" value="#00bfff">
+        <button class="btn" onclick="saveHeaderColor()" style="margin-top: 10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          Simpan Warna Header
+        </button>
+      </div>
     </section>
   </main>
   
@@ -494,8 +552,18 @@
     const db = getDatabase(app);
 
     const maintenanceRef = ref(db, "maintenance");
+    const headerColorRef = ref(db, "headerColor");
     const statusText = document.getElementById("maintenanceStatus");
     const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+
+    // Load saved header color
+    onValue(headerColorRef, (snapshot) => {
+      const color = snapshot.val();
+      if (color) {
+        document.documentElement.style.setProperty('--header-gradient', color);
+        document.querySelector('header').style.background = color;
+      }
+    });
 
     onValue(maintenanceRef, (snapshot) => {
       const aktif = snapshot.val();
@@ -515,6 +583,44 @@
         alert("Masukkan hanya: true atau false");
       }
     };
+
+    // Function to change header color
+    window.changeHeaderColor = function(color) {
+      document.querySelector('header').style.background = color;
+      document.documentElement.style.setProperty('--header-gradient', color);
+      
+      // Update active class on color options
+      document.querySelectorAll('.color-option').forEach(option => {
+        option.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    };
+
+    // Function to change custom color
+    window.changeCustomColor = function(color) {
+      const gradient = `linear-gradient(135deg, ${color} 0%, ${darkenColor(color, 30)} 100%)`;
+      document.querySelector('header').style.background = gradient;
+      document.documentElement.style.setProperty('--header-gradient', gradient);
+    };
+
+    // Function to save header color to Firebase
+    window.saveHeaderColor = function() {
+      const currentColor = document.querySelector('header').style.background;
+      set(headerColorRef, currentColor)
+        .then(() => alert("Warna header berhasil disimpan!"))
+        .catch(err => alert("Gagal menyimpan warna: " + err.message));
+    };
+
+    // Helper function to darken a color
+    function darkenColor(color, percent) {
+      const num = parseInt(color.replace("#", ""), 16),
+        amt = Math.round(2.55 * percent),
+        R = (num >> 16) - amt,
+        G = (num >> 8 & 0x00FF) - amt,
+        B = (num & 0x0000FF) - amt;
+      
+      return "#" + (0x1000000 + (R < 0 ? 0 : R) * 0x10000 + (G < 0 ? 0 : G) * 0x100 + (B < 0 ? 0 : B)).toString(16).slice(1);
+    }
 
     // PROMO HANDLING
     const promoBar = document.getElementById("promo");
