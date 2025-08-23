@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="id">
 <head>
- <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
+  <meta name="google-site-verification" content="XTY6C2ueR1D4IJY_oTGTwOxMyfW29Z5gCwWI5TQ27D8" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">
-  <meta name="keywords" content="top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">
+  <meta name="keywords" content="Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">
   <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
@@ -22,7 +22,6 @@
       --text-light: #64748b;
       --card-bg: rgba(255, 255, 255, 0.8);
       --backdrop: blur(16px);
-      --header-gradient: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
     }
     
     * {
@@ -42,7 +41,7 @@
     
     /* Glassmorphism Header */
     header {
-      background: var(--header-gradient);
+      background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
       backdrop-filter: var(--backdrop);
       -webkit-backdrop-filter: var(--backdrop);
       color: white;
@@ -52,7 +51,6 @@
       overflow: hidden;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      transition: background 0.5s ease;
     }
     
     header::before {
@@ -229,6 +227,34 @@
       font-weight: 700;
     }
     
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-btn i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+    
     /* Modern Footer */
     footer {
       background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
@@ -358,38 +384,6 @@
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(0, 191, 255, 0.5);
     }
-    
-    /* COLOR PICKER STYLES */
-    .color-picker {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    
-    .color-option {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      border: 2px solid transparent;
-    }
-    
-    .color-option:hover {
-      transform: scale(1.1);
-    }
-    
-    .color-option.active {
-      border-color: #fff;
-      box-shadow: 0 0 0 2px #000;
-    }
-    
-    .color-section {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px dashed rgba(0, 0, 0, 0.1);
-    }
   </style>
 </head>
 <body>
@@ -399,8 +393,7 @@
     <h1>Jasa Top Up BUSSID</h1>
     <p>Jasa Top Up Cepat, Murah, Aman!</p>
   </header>
-  
- <div class="nav-container">
+   <div class="nav-container">
     <a href="testimoni.html" class="nav-btn">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -474,7 +467,7 @@
     
     <section>
       <h2>🌟 Testimoni Pembeli</h2>
-      <a href="testimoni.html" class="btn" target="_blank">
+      <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
           <circle cx="9" cy="7" r="4"></circle>
@@ -497,31 +490,252 @@
         </svg>
         Update Maintenance
       </button>
-      
-      <!-- COLOR PICKER SECTION -->
-      <div class="color-section">
-        <h3>🎨 Kustomisasi Warna Header</h3>
-        <p>Pilih warna header yang diinginkan:</p>
-        <div class="color-picker">
-          <div class="color-option active" style="background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);" data-color="default" onclick="changeHeaderColor('linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%)')"></div>
-          <div class="color-option" style="background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%);" data-color="red" onclick="changeHeaderColor('linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%)')"></div>
-          <div class="color-option" style="background: linear-gradient(135deg, #00C896 0%, #007A5E 100%);" data-color="green" onclick="changeHeaderColor('linear-gradient(135deg, #00C896 0%, #007A5E 100%)')"></div>
-          <div class="color-option" style="background: linear-gradient(135deg, #F368E0 0%, #8E44AD 100%);" data-color="purple" onclick="changeHeaderColor('linear-gradient(135deg, #F368E0 0%, #8E44AD 100%)')"></div>
-          <div class="color-option" style="background: linear-gradient(135deg, #FF9F43 0%, #E67E22 100%);" data-color="orange" onclick="changeHeaderColor('linear-gradient(135deg, #FF9F43 0%, #E67E22 100%)')"></div>
-          <div class="color-option" style="background: linear-gradient(135deg, #341F97 0%, #192A56 100%);" data-color="dark-blue" onclick="changeHeaderColor('linear-gradient(135deg, #341F97 0%, #192A56 100%)')"></div>
-        </div>
-        <p>Atau pilih warna kustom:</p>
-        <input type="color" id="customColorPicker" onchange="changeCustomColor(this.value)" value="#00bfff">
-        <button class="btn" onclick="saveHeaderColor()" style="margin-top: 10px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-            <polyline points="7 3 7 8 15 8"></polyline>
-          </svg>
-          Simpan Warna Header
-        </button>
-      </div>
     </section>
+    <!-- Tambahkan setelah section Testimoni Pembeli -->
+<section>
+  <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-button">1. Berapa lama proses top up setelah pembayaran?</button>
+      <div class="accordion-content">
+        <p>Proses top up biasanya memakan waktu 1-5 menit setelah pembayaran dikonfirmasi. Jika lebih dari 10 menit belum masuk, silakan hubungi admin dengan menyertakan bukti transfer.</p>
+      </div>
+    </div>
+    
+    <div class="accordion-item">
+      <button class="accordion-button">2. Bagaimana jika UB tidak masuk ke akun saya?</button>
+      <div class="accordion-content">
+        <ol>
+          <li>Pastikan Anda sudah login dengan akun yang benar</li>
+          <li>Restart game BUSSID Anda</li>
+          <li>Cek kembali setelah 5 menit</li>
+          <li>Jika masih belum masuk, hubungi admin WA dengan menyertakan:
+            <ul>
+              <li>Bukti transfer</li>
+              <li>Data akun</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+    
+    <div class="accordion-item">
+      <button class="accordion-button">3. Apakah ada garansi jika akun saya bermasalah?</button>
+      <div class="accordion-content">
+        <p>Kami memberikan garansi 3x24 jam untuk semua transaksi. Jika UB berkurang/hilang tanpa alasan dalam waktu tersebut, kami akan top up ulang dengan bukti yang valid.</p>
+      </div>
+    </div>
+  
+  <div class="accordion-item">
+      <button class="accordion-button">3. Kenapa admin slow respon?</button>
+      <div class="accordion-content">
+        <p>Maaf jika kami telat membalas chat,anda karena admin juga ada kegiatan sekolah,sholat dll.kami akan berusaha untuk membalas chat anda dengan cepat dan memeberikan pelayanan yang baik🤩</p>
+      </div>
+    </div>
+   
+    <div class="accordion-item">
+      <button class="accordion-button">4. Bisa pakai metode pembayaran apa saja?</button>
+      <div class="accordion-content">
+        <p>Kami menerima:
+          <br>- QRIS (Semua e-wallet )
+          <br>- Dana
+          <br>- OVO
+          <br>- Gopay
+          <h2>Untuk mobile banking belum tersedia</h2>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <h2><i class="fas fa-graduation-cap"></i> Tutorial Top Up Melalui Web</h2>
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-button">1.<strong>STEP 1</strong></button>
+      <div class="accordion-content">
+        <p>Pilih game yang ada:</p>
+        <ul>
+          <li>Bussid</li>
+          <li>Truksid</li>
+        </ul>
+        <p>Setelah pilih game silakan pilih nominal top up sesuai keinginan</p>
+        <img src="https://i.postimg.cc/L83DD7Jw/Screenshot-2025-08-10-05-47-55-11-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Pilih nominal" loading="lazy">
+      </div>
+    </div>
+    
+    <div class="accordion-item">
+      <button class="accordion-button">2.<strong>STEP 2</strong></button>
+      <div class="accordion-content">
+        <p>Setelah memilih game dan paket lalu kalian di arahkan untuk bayar melalui QRIS</p>
+        <p><strong>Penting untuk Meng-screenshot bukti transfer kalian!</strong></p>
+        <img src="https://i.postimg.cc/gJX3CB0Y/Screenshot-2025-08-10-05-50-08-88-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Kirim data" loading="lazy">
+      </div>
+    </div>
+    
+    <div class="accordion-item">
+      <button class="accordion-button">3. <strong>STEP 3</strong></button>
+      <div class="accordion-content">
+        <p>Setelah kalian bayar kalian akan di arahkan ke halaman lain, silakan di isi dengan data akun yang ingin di top up:</p>
+        <ul>
+          <li>Email akun fb yang terhubung ke bussid</li>
+          <li>Password akun bussid</li>
+          <li>Nomor aktif agar bisa di hubungi</li>
+          <li>Lalu silakan masukan bukti transfer kalian</li>
+        </ul>
+        <img src="https://i.postimg.cc/8zPW64Jx/Screenshot-2025-08-18-16-00-50-30-f9a7afa717ced9e1fc9be9833291031a.jpg" alt="Kirim data" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
+  <div class="warning-box">
+    <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
+    <ul>
+      <li>Hanya gunakan nomor WhatsApp resmi admin: 6289630191806
+        6289520418604</li>
+      <li>Jangan berikan data akun ke siapapun kecuali admin! </li>
+      <li>Transaksi hanya melalui website ini atau WhatsApp admin</li>
+      <li>Kami tidak bertanggung jawab jika transaksi dilakukan di luar store kami</li>
+    </ul>
+  </div>
+</section>
+<!-- Tambahkan CSS untuk komponen baru ini -->
+<style>
+  /* Accordion Styles */
+  .accordion {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  
+  .accordion-item {
+    border-bottom: 1px solid rgba(0,191,255,0.1);
+  }
+  
+  .accordion-button {
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    background: rgba(0,191,255,0.05);
+    border: none;
+    font-weight: 600;
+    color: var(--dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .accordion-button:hover {
+    background: rgba(0,191,255,0.1);
+  }
+  
+  .accordion-button::after {
+    content: '+';
+    margin-left: auto;
+    font-size: 1.2rem;
+  }
+  
+  .accordion-button.active::after {
+    content: '-';
+  }
+  
+  .accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: white;
+  }
+  
+  .accordion-content p, 
+  .accordion-content ol, 
+  .accordion-content ul {
+    padding: 0 16px 16px;
+    margin: 0;
+  }
+  
+  /* Tambahkan ini di bagian CSS yang sudah ada */
+  .accordion-content img {
+    width: 100%;
+    max-width: 500px; /* Ubah nilai ini sesuai kebutuhan */
+    height: auto;
+    border-radius: 8px;
+    margin: 10px 0;
+    border: 1px solid #deepskyblue;
+    display: block;
+  }
+
+
+  /* Tutorial Steps */
+  .tutorial-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .step-number {
+    background: deepskyblue;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  
+  .step-content {
+    flex: 1;
+  }
+  
+  .step-content img {
+    width: 50%;
+    max-width: 50px;
+    border-radius: 8px;
+    margin-top: 8px;
+    border: 1px solid #eee;
+  }
+  
+  /* Warning Box */
+  .warning-box {
+    background: rgba(255,107,107,0.1);
+    border-left: 4px solid #FF6B6B;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .warning-box ul {
+    padding-left: 20px;
+  }
+  
+  .warning-box li {
+    color: var(--text);
+  }
+</style>
+
+<script>
+  // Accordion functionality
+  document.querySelectorAll('.accordion-button').forEach(button => {
+    button.addEventListener('click', () => {
+      button.classList.toggle('active');
+      const content = button.nextElementSibling;
+      content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+    });
+  });
+</script>
   </main>
   
   <div class="promo-banner" id="promoBanner">
@@ -552,18 +766,8 @@
     const db = getDatabase(app);
 
     const maintenanceRef = ref(db, "maintenance");
-    const headerColorRef = ref(db, "headerColor");
     const statusText = document.getElementById("maintenanceStatus");
     const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
-
-    // Load saved header color
-    onValue(headerColorRef, (snapshot) => {
-      const color = snapshot.val();
-      if (color) {
-        document.documentElement.style.setProperty('--header-gradient', color);
-        document.querySelector('header').style.background = color;
-      }
-    });
 
     onValue(maintenanceRef, (snapshot) => {
       const aktif = snapshot.val();
@@ -583,44 +787,6 @@
         alert("Masukkan hanya: true atau false");
       }
     };
-
-    // Function to change header color
-    window.changeHeaderColor = function(color) {
-      document.querySelector('header').style.background = color;
-      document.documentElement.style.setProperty('--header-gradient', color);
-      
-      // Update active class on color options
-      document.querySelectorAll('.color-option').forEach(option => {
-        option.classList.remove('active');
-      });
-      event.target.classList.add('active');
-    };
-
-    // Function to change custom color
-    window.changeCustomColor = function(color) {
-      const gradient = `linear-gradient(135deg, ${color} 0%, ${darkenColor(color, 30)} 100%)`;
-      document.querySelector('header').style.background = gradient;
-      document.documentElement.style.setProperty('--header-gradient', gradient);
-    };
-
-    // Function to save header color to Firebase
-    window.saveHeaderColor = function() {
-      const currentColor = document.querySelector('header').style.background;
-      set(headerColorRef, currentColor)
-        .then(() => alert("Warna header berhasil disimpan!"))
-        .catch(err => alert("Gagal menyimpan warna: " + err.message));
-    };
-
-    // Helper function to darken a color
-    function darkenColor(color, percent) {
-      const num = parseInt(color.replace("#", ""), 16),
-        amt = Math.round(2.55 * percent),
-        R = (num >> 16) - amt,
-        G = (num >> 8 & 0x00FF) - amt,
-        B = (num & 0x0000FF) - amt;
-      
-      return "#" + (0x1000000 + (R < 0 ? 0 : R) * 0x10000 + (G < 0 ? 0 : G) * 0x100 + (B < 0 ? 0 : B)).toString(16).slice(1);
-    }
 
     // PROMO HANDLING
     const promoBar = document.getElementById("promo");
