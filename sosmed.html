@@ -282,27 +282,7 @@
       </div>
     </div>
     
-    <!-- Kotak Pesan untuk Kemajuan Web -->
-    <div class="feedback-box">
-      <h2><i class="fas fa-envelope"></i> Beri Masukan untuk Kemajuan Web</h2>
-      <form id="feedbackForm">
-        <div class="form-group">
-          <label for="name">Nama Anda</label>
-          <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="message">Pesan Anda</label>
-          <textarea id="message" class="form-control" placeholder="Tulis masukan Anda di sini..." required></textarea>
-        </div>
-        
-        <button type="submit" class="btn-submit">
-          <i class="fas fa-paper-plane"></i> Kirim Masukan
-        </button>
-      </form>
-      
-      <div id="statusMessage" class="status-message"></div>
-    </div>
+   
     
     <div class="follow-text">
       <strong>Jangan lupa follow 😘</strong>
@@ -317,50 +297,7 @@
   </div>
 
   <script>
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Token bot Telegram Anda
-      const botToken = '8114502494:AAGEpfA_KRvJ8ku_sG5Fhn17VTbfZd7nw-I';
-      // Chat ID Anda
-      const chatId = '6977522417';
-      
-      const name = document.getElementById('name').value;
-      const message = document.getElementById('message').value;
-      
-      const text = `📩 Masukan Baru untuk Web:\n\n👤 Nama: ${name}\n📝 Pesan:\n${message}`;
-      
-      // Tampilkan status pengiriman
-      const statusElement = document.getElementById('statusMessage');
-      statusElement.textContent = 'Mengirim masukan...';
-      statusElement.className = 'status-message';
-      statusElement.style.display = 'block';
-      
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.ok) {
-            statusElement.textContent = 'Terima kasih! Masukan Anda telah berhasil dikirim.';
-            statusElement.className = 'status-message success';
-            document.getElementById('feedbackForm').reset();
-          } else {
-            statusElement.textContent = 'Maaf, masukan gagal terkirim. Silakan coba lagi.';
-            statusElement.className = 'status-message error';
-          }
-          statusElement.style.display = 'block';
-          
-          // Sembunyikan pesan status setelah 5 detik
-          setTimeout(() => {
-            statusElement.style.display = 'none';
-          }, 5000);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          statusElement.textContent = 'Terjadi kesalahan. Silakan coba lagi nanti.';
-          statusElement.className = 'status-message error';
-          statusElement.style.display = 'block';
-        });
-    });
+    
   </script>
 </body>
 </html>
