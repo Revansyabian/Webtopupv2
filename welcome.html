@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta name="google-site-verification" content="XTY6C2ueR1D4IJY_oTGTwOxMyfW29Z5gCwWI5TQ27D8" />
@@ -9,15 +9,16 @@
   <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
     
     :root {
       --primary: deepskyblue;
       --primary-light: rgba(0, 191, 255, 0.1);
-      --secondary: #00688B; /* Darker shade of deepskyblue */
-      --accent: #FF6B6B; /* Kept as contrast color */
+      --secondary: #00688B;
+      --accent: #FF6B6B;
       --dark: #0A2E38;
       --light: #f8fafc;
-      --success: #00C896; /* Teal accent */
+      --success: #00C896;
       --text: #334155;
       --text-light: #64748b;
       --card-bg: rgba(255, 255, 255, 0.8);
@@ -51,6 +52,13 @@
       overflow: hidden;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header-content {
+      flex: 1;
     }
     
     header::before {
@@ -80,43 +88,100 @@
       font-weight: 400;
     }
     
-    /* Modern Navigation */
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Modern Navigation - Hidden by default, shown when menu is toggled */
     .nav-container {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 1rem;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
       background: var(--card-bg);
       backdrop-filter: var(--backdrop);
       -webkit-backdrop-filter: var(--backdrop);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      border-radius: 0 0 1rem 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      margin: 0 auto;
-      max-width: 800px;
-      flex-wrap: wrap;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      padding: 4rem 1rem 1rem;
+      z-index: 100;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow-y: auto;
+    }
+    
+    .nav-container.active {
+      right: 0;
     }
     
     .nav-btn {
       background: rgba(0, 191, 255, 0.08);
       color: deepskyblue;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
       border-radius: 0.5rem;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       border: 1px solid rgba(0, 191, 255, 0.15);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.5rem;
     }
     
     .nav-btn:hover {
       background: rgba(0, 191, 255, 0.15);
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 191, 255, 0.1);
+    }
+    
+    .close-menu {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+    
+    /* Overlay when menu is open */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+      z-index: 99;
+      display: none;
+    }
+    
+    .overlay.active {
+      display: block;
     }
     
     /* Glass Card Sections */
@@ -227,34 +292,33 @@
       font-weight: 700;
     }
     
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50px;
-            padding: 12px 20px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
 
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-        }
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
 
-        .whatsapp-btn i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
+    .whatsapp-btn i {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
 
-    
     /* Modern Footer */
     footer {
       background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
@@ -342,6 +406,124 @@
       box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
     }
     
+    /* Accordion Styles */
+    .accordion {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .accordion-item {
+      border-bottom: 1px solid rgba(0,191,255,0.1);
+    }
+    
+    .accordion-button {
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      background: rgba(0,191,255,0.05);
+      border: none;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .accordion-button:hover {
+      background: rgba(0,191,255,0.1);
+    }
+    
+    .accordion-button::after {
+      content: '+';
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+    
+    .accordion-button.active::after {
+      content: '-';
+    }
+    
+    .accordion-content {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: white;
+    }
+    
+    .accordion-content p, 
+    .accordion-content ol, 
+    .accordion-content ul {
+      padding: 0 16px 16px;
+      margin: 0;
+    }
+    
+    .accordion-content img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 8px;
+      margin: 10px 0;
+      border: 1px solid deepskyblue;
+      display: block;
+    }
+
+    /* Tutorial Steps */
+    .tutorial-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    
+    .step-number {
+      background: deepskyblue;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .step-content {
+      flex: 1;
+    }
+    
+    .step-content img {
+      width: 50%;
+      max-width: 50px;
+      border-radius: 8px;
+      margin-top: 8px;
+      border: 1px solid #eee;
+    }
+    
+    /* Warning Box */
+    .warning-box {
+      background: rgba(255,107,107,0.1);
+      border-left: 4px solid #FF6B6B;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .warning-box ul {
+      padding-left: 20px;
+    }
+    
+    .warning-box li {
+      color: var(--text);
+    }
+    
     /* Responsive Adjustments */
     @media (max-width: 640px) {
       .harga {
@@ -359,6 +541,10 @@
       
       header h1 {
         font-size: 1.5rem;
+      }
+      
+      .menu-toggle {
+        display: flex;
       }
     }
     
@@ -390,52 +576,65 @@
   <div id="promo">🔥 Promo Spesial Hari Ini! 🔥</div>
   
   <header>
-    <h1>Jasa Top Up BUSSID</h1>
-    <p>Jasa Top Up Cepat, Murah, Aman!</p>
+    <div class="header-content">
+      <h1>Jasa Top Up BUSSID</h1>
+      <p>Jasa Top Up Cepat, Murah, Aman!</p>
+    </div>
+    <button class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
-   <div class="nav-container">
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <div class="nav-container" id="navContainer">
+    <button class="close-menu" id="closeMenu">&times;</button>
     <a href="testimoni.html" class="nav-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-      </svg>
+      <i class="fas fa-comments"></i>
       Testimoni
     </a>
     <a href="sosmed.html" class="nav-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-      </svg>
+      <i class="fas fa-hashtag"></i>
       Sosmed Admin
     </a>
     <a href="akun.html" class="nav-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
+      <i class="fas fa-user"></i>
       Akun Bussid
     </a>
     <a href="topup-otomatis.html" class="nav-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 1v22M17 5l-5-5-5 5M17 19l-5 5-5-5"></path>
-      </svg>
+      <i class="fas fa-bolt"></i>
       Top Up Otomatis
     </a>
-</div>
+    <!-- Menu baru yang diminta -->
+    <a href="kontak.html" class="nav-btn">
+      <i class="fas fa-phone"></i>
+      Kontak
+    </a>
+    <a href="informasi.html" class="nav-btn">
+      <i class="fas fa-info-circle"></i>
+      Informasi
+    </a>
+    <a href="tentang-kami.html" class="nav-btn">
+      <i class="fas fa-users"></i>
+      Tentang Kami
+    </a>
+  </div>
 
   <main>
     <section>
-      <h2>🚌 Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
+      <h2><i class="fas fa-bus"></i> Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
       <p>Top Up BUSSID solusinya dengan kalian top up bussid duit kalian bisa bertambah dengan instan, dan kalian juga ga perlu narik secara manual. <strong>Ayo Top up Ub Sekarang</strong>.</p>
     </section>
     
     <section>
-      <h2>🚌 Apa Itu Top Up BUSSID?</h2>
+      <h2><i class="fas fa-bus"></i> Apa Itu Top Up BUSSID?</h2>
       <p>Top Up BUSSID adalah layanan pembelian uang, untuk membeli berbagai macam item di game tersebut tanpa harus ngumpulin duit secara manual di <strong>Bus Simulator Indonesia</strong>.</p>
     </section>
     
     <section>
-      <h2>💰 Daftar Harga</h2>
+      <h2><i class="fas fa-money-bill-wave"></i> Daftar Harga</h2>
       <ul class="harga">
         <li><span>💵 70JT UB</span> <strong>Rp5.000</strong></li>
         <li><span>💵 200JT UB</span> <strong>Rp10.000</strong></li>
@@ -450,7 +649,7 @@
     </section>
     
     <section>
-      <h2>📦 Cara Pemesanan</h2>
+      <h2><i class="fas fa-shopping-cart"></i> Cara Pemesanan</h2>
       <ol>
         <li>Hubungi admin via WhatsApp: <strong>6289520418604 / 6289630191806</strong>.</li>
         <li>Pilih nominal top up sesuai daftar harga.</li>
@@ -458,284 +657,139 @@
         <li>Proses dalam 1–5 menit setelah pembayaran!</li>
       </ol>
       <a href="https://wa.me/6289520418604" class="btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-        </svg>
+        <i class="fab fa-whatsapp"></i>
         Pesan Sekarang
       </a>
     </section>
     
     <section>
-      <h2>🌟 Testimoni Pembeli</h2>
+      <h2><i class="fas fa-star"></i> Testimoni Pembeli</h2>
       <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
+        <i class="fas fa-users"></i>
         Lihat Testimoni Pembeli
       </a>
     </section>
     
+    <section>
+      <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-button">1. Berapa lama proses top up setelah pembayaran?</button>
+          <div class="accordion-content">
+            <p>Proses top up biasanya memakan waktu 1-5 menit setelah pembayaran dikonfirmasi. Jika lebih dari 10 menit belum masuk, silakan hubungi admin dengan menyertakan bukti transfer.</p>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-button">2. Bagaimana jika UB tidak masuk ke akun saya?</button>
+          <div class="accordion-content">
+            <ol>
+              <li>Pastikan Anda sudah login dengan akun yang benar</li>
+              <li>Restart game BUSSID Anda</li>
+              <li>Cek kembali setelah 5 menit</li>
+              <li>Jika masih belum masuk, hubungi admin WA dengan menyertakan:
+                <ul>
+                  <li>Bukti transfer</li>
+                  <li>Data akun</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-button">3. Apakah ada garansi jika akun saya bermasalah?</button>
+          <div class="accordion-content">
+            <p>Kami memberikan garansi 3x24 jam untuk semua transaksi. Jika UB berkurang/hilang tanpa alasan dalam waktu tersebut, kami akan top up ulang dengan bukti yang valid.</p>
+          </div>
+        </div>
+      
+        <div class="accordion-item">
+          <button class="accordion-button">4. Kenapa admin slow respon?</button>
+          <div class="accordion-content">
+            <p>Maaf jika kami telat membalas chat,anda karena admin juga ada kegiatan sekolah,sholat dll.kami akan berusaha untuk membalas chat anda dengan cepat dan memeberikan pelayanan yang baik🤩</p>
+          </div>
+        </div>
+       
+        <div class="accordion-item">
+          <button class="accordion-button">5. Bisa pakai metode pembayaran apa saja?</button>
+          <div class="accordion-content">
+            <p>Kami menerima:
+              <br>- QRIS (Semua e-wallet )
+              <br>- Dana
+              <br>- OVO
+              <br>- Gopay
+              <h3>Untuk mobile banking belum tersedia</h3>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-graduation-cap"></i> Tutorial Top Up Melalui Web</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-button">1. <strong>STEP 1</strong></button>
+          <div class="accordion-content">
+            <p>Pilih game yang ada:</p>
+            <ul>
+              <li>Bussid</li>
+              <li>Truksid</li>
+            </ul>
+            <p>Setelah pilih game silakan pilih nominal top up sesuai keinginan</p>
+            <img src="https://i.postimg.cc/L83DD7Jw/Screenshot-2025-08-10-05-47-55-11-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Pilih nominal" loading="lazy">
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-button">2. <strong>STEP 2</strong></button>
+          <div class="accordion-content">
+            <p>Setelah memilih game dan paket lalu kalian di arahkan untuk bayar melalui QRIS</p>
+            <p><strong>Penting untuk Meng-screenshot bukti transfer kalian!</strong></p>
+            <img src="https://i.postimg.cc/gJX3CB0Y/Screenshot-2025-08-10-05-50-08-88-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Kirim data" loading="lazy">
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-button">3. <strong>STEP 3</strong></button>
+          <div class="accordion-content">
+            <p>Setelah kalian bayar kalian akan di arahkan ke halaman lain, silakan di isi dengan data akun yang ingin di top up:</p>
+            <ul>
+              <li>Email akun fb yang terhubung ke bussid</li>
+              <li>Password akun bussid</li>
+              <li>Nomor aktif agar bisa di hubungi</li>
+              <li>Lalu silakan masukan bukti transfer kalian</li>
+            </ul>
+            <img src="https://i.postimg.cc/8zPW64Jx/Screenshot-2025-08-18-16-00-50-30-f9a7afa717ced9e1fc9be9833291031a.jpg" alt="Kirim data" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
+      <div class="warning-box">
+        <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
+        <ul>
+          <li>Hanya gunakan nomor WhatsApp resmi admin: 6289630191806 atau 6289520418604</li>
+          <li>Jangan berikan data akun ke siapapun kecuali admin! </li>
+          <li>Transaksi hanya melalui website ini atau WhatsApp admin</li>
+          <li>Kami tidak bertanggung jawab jika transaksi dilakukan di luar store kami</li>
+        </ul>
+      </div>
+    </section>
+    
     <!-- PANEL ADMIN MAINTENANCE -->
     <section id="adminPanel" style="display:none;">
-      <h2>⚙️ Panel Admin - Maintenance</h2>
+      <h2><i class="fas fa-cog"></i> Panel Admin - Maintenance</h2>
       <p id="maintenanceStatus">Status maintenance akan muncul di sini...</p>
       <input type="text" id="maintenanceInput" placeholder="Ketik true / false">
       <button class="btn" onclick="updateMaintenance()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-          <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-        </svg>
+        <i class="fas fa-sync-alt"></i>
         Update Maintenance
       </button>
     </section>
-    <!-- Tambahkan setelah section Testimoni Pembeli -->
-<section>
-  <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
-  <div class="accordion">
-    <div class="accordion-item">
-      <button class="accordion-button">1. Berapa lama proses top up setelah pembayaran?</button>
-      <div class="accordion-content">
-        <p>Proses top up biasanya memakan waktu 1-5 menit setelah pembayaran dikonfirmasi. Jika lebih dari 10 menit belum masuk, silakan hubungi admin dengan menyertakan bukti transfer.</p>
-      </div>
-    </div>
-    
-    <div class="accordion-item">
-      <button class="accordion-button">2. Bagaimana jika UB tidak masuk ke akun saya?</button>
-      <div class="accordion-content">
-        <ol>
-          <li>Pastikan Anda sudah login dengan akun yang benar</li>
-          <li>Restart game BUSSID Anda</li>
-          <li>Cek kembali setelah 5 menit</li>
-          <li>Jika masih belum masuk, hubungi admin WA dengan menyertakan:
-            <ul>
-              <li>Bukti transfer</li>
-              <li>Data akun</li>
-            </ul>
-          </li>
-        </ol>
-      </div>
-    </div>
-    
-    <div class="accordion-item">
-      <button class="accordion-button">3. Apakah ada garansi jika akun saya bermasalah?</button>
-      <div class="accordion-content">
-        <p>Kami memberikan garansi 3x24 jam untuk semua transaksi. Jika UB berkurang/hilang tanpa alasan dalam waktu tersebut, kami akan top up ulang dengan bukti yang valid.</p>
-      </div>
-    </div>
-  
-  <div class="accordion-item">
-      <button class="accordion-button">3. Kenapa admin slow respon?</button>
-      <div class="accordion-content">
-        <p>Maaf jika kami telat membalas chat,anda karena admin juga ada kegiatan sekolah,sholat dll.kami akan berusaha untuk membalas chat anda dengan cepat dan memeberikan pelayanan yang baik🤩</p>
-      </div>
-    </div>
-   
-    <div class="accordion-item">
-      <button class="accordion-button">4. Bisa pakai metode pembayaran apa saja?</button>
-      <div class="accordion-content">
-        <p>Kami menerima:
-          <br>- QRIS (Semua e-wallet )
-          <br>- Dana
-          <br>- OVO
-          <br>- Gopay
-          <h2>Untuk mobile banking belum tersedia</h2>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section>
-  <h2><i class="fas fa-graduation-cap"></i> Tutorial Top Up Melalui Web</h2>
-  <div class="accordion">
-    <div class="accordion-item">
-      <button class="accordion-button">1.<strong>STEP 1</strong></button>
-      <div class="accordion-content">
-        <p>Pilih game yang ada:</p>
-        <ul>
-          <li>Bussid</li>
-          <li>Truksid</li>
-        </ul>
-        <p>Setelah pilih game silakan pilih nominal top up sesuai keinginan</p>
-        <img src="https://i.postimg.cc/L83DD7Jw/Screenshot-2025-08-10-05-47-55-11-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Pilih nominal" loading="lazy">
-      </div>
-    </div>
-    
-    <div class="accordion-item">
-      <button class="accordion-button">2.<strong>STEP 2</strong></button>
-      <div class="accordion-content">
-        <p>Setelah memilih game dan paket lalu kalian di arahkan untuk bayar melalui QRIS</p>
-        <p><strong>Penting untuk Meng-screenshot bukti transfer kalian!</strong></p>
-        <img src="https://i.postimg.cc/gJX3CB0Y/Screenshot-2025-08-10-05-50-08-88-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Kirim data" loading="lazy">
-      </div>
-    </div>
-    
-    <div class="accordion-item">
-      <button class="accordion-button">3. <strong>STEP 3</strong></button>
-      <div class="accordion-content">
-        <p>Setelah kalian bayar kalian akan di arahkan ke halaman lain, silakan di isi dengan data akun yang ingin di top up:</p>
-        <ul>
-          <li>Email akun fb yang terhubung ke bussid</li>
-          <li>Password akun bussid</li>
-          <li>Nomor aktif agar bisa di hubungi</li>
-          <li>Lalu silakan masukan bukti transfer kalian</li>
-        </ul>
-        <img src="https://i.postimg.cc/8zPW64Jx/Screenshot-2025-08-18-16-00-50-30-f9a7afa717ced9e1fc9be9833291031a.jpg" alt="Kirim data" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
-  <div class="warning-box">
-    <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
-    <ul>
-      <li>Hanya gunakan nomor WhatsApp resmi admin: 6289630191806
-        6289520418604</li>
-      <li>Jangan berikan data akun ke siapapun kecuali admin! </li>
-      <li>Transaksi hanya melalui website ini atau WhatsApp admin</li>
-      <li>Kami tidak bertanggung jawab jika transaksi dilakukan di luar store kami</li>
-    </ul>
-  </div>
-</section>
-<!-- Tambahkan CSS untuk komponen baru ini -->
-<style>
-  /* Accordion Styles */
-  .accordion {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
-  
-  .accordion-item {
-    border-bottom: 1px solid rgba(0,191,255,0.1);
-  }
-  
-  .accordion-button {
-    width: 100%;
-    text-align: left;
-    padding: 12px 16px;
-    background: rgba(0,191,255,0.05);
-    border: none;
-    font-weight: 600;
-    color: var(--dark);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-  }
-  
-  .accordion-button:hover {
-    background: rgba(0,191,255,0.1);
-  }
-  
-  .accordion-button::after {
-    content: '+';
-    margin-left: auto;
-    font-size: 1.2rem;
-  }
-  
-  .accordion-button.active::after {
-    content: '-';
-  }
-  
-  .accordion-content {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: white;
-  }
-  
-  .accordion-content p, 
-  .accordion-content ol, 
-  .accordion-content ul {
-    padding: 0 16px 16px;
-    margin: 0;
-  }
-  
-  /* Tambahkan ini di bagian CSS yang sudah ada */
-  .accordion-content img {
-    width: 100%;
-    max-width: 500px; /* Ubah nilai ini sesuai kebutuhan */
-    height: auto;
-    border-radius: 8px;
-    margin: 10px 0;
-    border: 1px solid #deepskyblue;
-    display: block;
-  }
-
-
-  /* Tutorial Steps */
-  .tutorial-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .step {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-  
-  .step-number {
-    background: deepskyblue;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    flex-shrink: 0;
-  }
-  
-  .step-content {
-    flex: 1;
-  }
-  
-  .step-content img {
-    width: 50%;
-    max-width: 50px;
-    border-radius: 8px;
-    margin-top: 8px;
-    border: 1px solid #eee;
-  }
-  
-  /* Warning Box */
-  .warning-box {
-    background: rgba(255,107,107,0.1);
-    border-left: 4px solid #FF6B6B;
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0;
-  }
-  
-  .warning-box ul {
-    padding-left: 20px;
-  }
-  
-  .warning-box li {
-    color: var(--text);
-  }
-</style>
-
-<script>
-  // Accordion functionality
-  document.querySelectorAll('.accordion-button').forEach(button => {
-    button.addEventListener('click', () => {
-      button.classList.toggle('active');
-      const content = button.nextElementSibling;
-      content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
-    });
-  });
-</script>
   </main>
   
   <div class="promo-banner" id="promoBanner">
@@ -745,6 +799,33 @@
   <footer>
     &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
   </footer>
+
+  <script>
+    // Menu toggle functionality
+    const menuToggle = document.getElementById('menuToggle');
+    const navContainer = document.getElementById('navContainer');
+    const overlay = document.getElementById('overlay');
+    const closeMenu = document.getElementById('closeMenu');
+    
+    function toggleMenu() {
+      navContainer.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = navContainer.classList.contains('active') ? 'hidden' : '';
+    }
+    
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    closeMenu.addEventListener('click', toggleMenu);
+    
+    // Accordion functionality
+    document.querySelectorAll('.accordion-button').forEach(button => {
+      button.addEventListener('click', () => {
+        button.classList.toggle('active');
+        const content = button.nextElementSibling;
+        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+      });
+    });
+  </script>
 
   <!-- Original Firebase script remains unchanged -->
   <script type="module">
