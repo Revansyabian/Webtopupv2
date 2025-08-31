@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
-  <title>Top Up BUSSID Murah & Aman</title>
+  <title>Top Up BUSSID Murah & Aman | Selamat Datang!</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Top Up BUSSID murah, cepat dan terpercaya. Selamat datang di layanan top up game Bussid terbaik.">
@@ -14,7 +14,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Top Up BUSSID Murah & Aman" />
   <meta property="og:description" content="Layanan top up BUSSID cepat, murah dan terpercaya." />
-  <meta property="og:image" content="https://i.postimg.cc/y831rgVY/file-0000000058f0623090c10960594cd3e1.png" />
+  <meta property="og:image" content="https://i.postimg.cc/hGHq9ywN/PNG-20250827-180825.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://topupbussid.web.id/" />
 
@@ -145,6 +145,42 @@
       transform: translateY(0);
     }
 
+    /* Gallery Styles */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .gallery-item {
+      width: 180px;
+      height: 180px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid rgba(255,255,255,0.3);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
     /* Animations */
     @keyframes fadeInUp {
       from {
@@ -170,6 +206,26 @@
       .button {
         padding: 14px 35px;
       }
+      
+      .gallery {
+        gap: 15px;
+      }
+      
+      .gallery-item {
+        width: 140px;
+        height: 140px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        gap: 10px;
+      }
+      
+      .gallery-item {
+        width: 110px;
+        height: 110px;
+      }
     }
   </style>
 </head>
@@ -182,6 +238,23 @@
 
   <h1>Selamat Datang di Layanan Top Up BUSSID!</h1>
   <p><strong>Silakan pencet tombol di bawah untuk melihat cara pemesanan dan harga Top Up-nya</strong></p>
+  
+  <!-- Gallery Section -->
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="https://i.postimg.cc/y831rgVY/file-0000000058f0623090c10960594cd3e1.png" alt="Layanan Top Up BUSSID">
+      <div class="gallery-caption">Top Up BUSSID</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://i.postimg.cc/3RkZ4s1C/file-00000000a7d1b2d3d0e12e2a67d02858.png" alt="Proses Top Up">
+      <div class="gallery-caption">Proses Cepat</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://i.postimg.cc/XYv7J0Q3/file-00000000b4c5d6e7f0e12e2a67d02858.png" alt="Harga Terjangkau">
+      <div class="gallery-caption">Harga Terjangkau</div>
+    </div>
+  </div>
+  
   <a href="welcome.html" class="button">Masuk ke Halaman Utama</a>
 
   <!-- Firebase + Maintenance Checker -->
