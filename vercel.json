@@ -11,8 +11,8 @@
      "destination": "/welcome.html"}
     {"source": "/testimoni",
      "destination": "/testimoni.html"}
-    {"source": "/tentang-kami",
-     "destination": "/tentang-kami.html"}
+    {"source": "/tentang-kami.html",
+     "destination": "/tentang-kami"}
     {"source": "/kontak",
      "destination": "/kontak.html"}
 ]
