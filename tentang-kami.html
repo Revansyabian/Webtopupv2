@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revan Store- Top Up BUSSID & TRUKSID</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #00BFFF; /* Deepskyblue yang lebih cerah */
+            --primary-light: rgba(0, 191, 255, 0.15);
+            --primary-dark: #0099CC;
+            --secondary: #FFFFFF; /* Putih sebagai warna sekunder */
+            --accent: #F0F8FF; /* AliceBlue untuk aksen */
+            --text: #2C3E50; /* Warna teks lebih gelap untuk kontras */
+            --text-light: #7F8C8D;
+            --shadow: 0 5px 15px rgba(0, 191, 255, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+         logo-font{
+         display: flex;
+         grid-gap: 10px;
+         justify-content: center;
+         }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary);
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover:after {
+            width: 80%;
+            left: 10%;
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active:after {
+            width: 80%;
+            left: 10%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(255, 255, 255, 0.7) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(0, 191, 255, 0.1);
+            top: -150px;
+            right: -150px;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(0, 191, 255, 0.1);
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--secondary);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary);
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 191, 255, 0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+            background-color: var(--accent);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--secondary);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--primary);
+        }
+
+        .product-card:before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            top: -50px;
+            right: -50px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 191, 255, 0.2);
+        }
+
+        .product-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card p {
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card ul {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card li {
+            margin-bottom: 10px;
+            color: var(--text);
+            position: relative;
+        }
+
+        .product-card li:before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--secondary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: var(--text);
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 100%;
+            min-height: 350px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .map-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 191, 255, 0.2);
+        }
+
+        .map-container i {
+            margin-bottom: 15px;
+            font-size: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--secondary);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--secondary);
+        }
+
+        .social-icon:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.9;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid, .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content"</div>
+                    <div class="logo-text">Revan Store</div>
+                </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Revan Store</h1>
+            <p> adalah penyedia layanan top up BUSSID dan TRUKSID terpercaya,aman, dan cepat.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">Mengapa Memilih Harus Kami?</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2> Revan Store Layanan Top Up Terbaik untuk Player Bussid / Truksid Indonesia</h2>
+                    <p><strong>Revan Store</strong> hadir untuk memudahkan pemain BUSSID dan TRUKSID dalam melakukan Top up di dalam game kami tahu bahwa bermain lama untuk mengumpulkan uang sangat melelahkan dan membuang-buang waktu.</p>
+                    <p>Dengan ada nya top up bussid dan truksid kalian bisa menghemat waktu untuk mendapatkan uang di game dengan duduk manis kalian duit kalian bisa bertambah dengan instan dan bisa membeli semua item di game.</p>
+                    <p>Kami berkomitmen untuk memberikan pelayanan terbaik dan respon tercepat.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://i.postimg.cc/6p889vh5/20250809-165211.jpg" alt="About TopUpBussid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Produk & Layanan Kami</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3>Top Up BUSSID</h3>
+                    <p>Layanan top up untuk game Bus Simulator  Indonesia (BUSSID) dengan proses cepat dan aman.</p>
+                    <ul>
+                        <li>Isi saldo UB dengan mudah</li>
+                        <li>Proses instan hanya 1-5 menit</li>
+                        <li>Harga terjangkau</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Top Up TRUKSID</h3>
+                    <p>Kami juga menyediakan layanan top up untuk game Truck Simulator Indonesia (TRUKSID).</p>
+                    <ul>
+                       
+                        <li>Berbagai pilihan paket</li>
+                        
+                        
+                        <li>Proses cepat dan aman</li>
+                        <li>Bantuan customer service</li>
+                        <li>Garansi uang kembali</li>
+                    </ul>
+                </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Alamat</h3>
+                            <p>Banjarnegara Jawa Tengah, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Telepon</h3>
+                            <p>+62 895-2041-8604</p>
+                            <p>+62 896-3019-1806</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Jam Operasional</h3>
+                            <p>Hari biasa:02.00-22.00</p>
+                  <p>Hari libur:06.00-22.00</p>
+                            <p>Termasuk hari libur nasional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Revan Store</div>
+                    <p>Layanan top up BUSSID dan TRUKSID terpercaya dengan proses cepat dan aman. Melayani seluruh Indonesia.</p>
+                   
+                  <h2>Note:</h2> 
+                 <p> Kami tidak melarang anda untuk top up selain di kami!, Dan pastikan store itu aman sebelum melakukan top up. <strong>bee smart buyer</strong></p>
+
+            <div class="copyright">
+                <p>&copy; 2025 RevanStore - Layanan Top Up BUSSID & TRUKSID Terpercaya</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
