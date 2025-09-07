@@ -1,12 +1,23 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/akun", "destination": "/akun.html" },
     { "source": "/topup-otomatis", "destination": "/topup-otomatis.html" },
     { "source": "/sosmed", "destination": "/sosmed.html" },
     { "source": "/maintenance", "destination": "/maintenance.html" },
-    { "source": "/welcome", "destination": "/welcome.html" },
+    {
+      "source": "/welcome",
+      "destination": "/welcome.html"
+    },
     { "source": "/testimoni", "destination": "/testimoni.html" },
-    { "source": "/kontak", "destination": "/kontak.html" },
-    { "source": "/tentang-kami", "destination": "/tentang-kami.html" }
+    { "source": "/tentang-kami", "destination": "/tentang-kami.html" },
+    { "source": "/kontak", "destination": "/kontak.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*.html",
+      "destination": "/:path*",
+      "permanent": true
+    }
   ]
 }
