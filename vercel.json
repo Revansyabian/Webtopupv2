@@ -1,7 +1,7 @@
 {
   "rewrites": [
     { "source": "/akun", "destination": "/akun.html" },
-    { "source": "/index", "destination": "/index.html" },
+    { "source": "/index.html", "destination": "/index" },
     { "source": "/topup-otomatis", "destination": "/topup-otomatis.html" }
     {"source": "/sosmed",
      "destination": "/sosmed.html"}
