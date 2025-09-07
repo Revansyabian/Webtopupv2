@@ -1,19 +1,12 @@
 {
   "rewrites": [
     { "source": "/akun", "destination": "/akun.html" },
-    { "source": "/index.html", "destination": "/index" },
-    { "source": "/topup-otomatis", "destination": "/topup-otomatis.html" }
-    {"source": "/sosmed",
-     "destination": "/sosmed.html"}
-    {"source": "/maintenance",
-     "destination": "/maintenance.html"}
-    {"source": "/welcome",
-     "destination": "/welcome.html"}
-    {"source": "/testimoni",
-     "destination": "/testimoni.html"}
-    {"source": "/tentang-kami.html",
-     "destination": "/tentang-kami"}
-    {"source": "/kontak",
-     "destination": "/kontak.html"}
-]
+    { "source": "/topup-otomatis", "destination": "/topup-otomatis.html" },
+    { "source": "/sosmed", "destination": "/sosmed.html" },
+    { "source": "/maintenance", "destination": "/maintenance.html" },
+    { "source": "/welcome", "destination": "/welcome.html" },
+    { "source": "/testimoni", "destination": "/testimoni.html" },
+    { "source": "/kontak", "destination": "/kontak.html" },
+    { "source": "/tentang-kami", "destination": "/tentang-kami.html" }
+  ]
 }
