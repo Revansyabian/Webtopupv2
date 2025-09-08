@@ -1,11 +1,24 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stock Akun BUSSID</title>
   <style>
-h2 {
+    body {
+      font-family: sans-serif;
+      background-color: deepskyblue;
+      padding: 20px;
+      text-align: center;
+      margin: 0;
+    }
+    
+    h1 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
       color: deepskyblue;
       margin: 0 0 1rem 0;
       font-size: 1.25rem;
@@ -13,13 +26,8 @@ h2 {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      
-      body {
-      font-family: sans-serif;
-      background-color: deepskyblue;
-      padding: 20px;
-      text-align: center;
     }
+    
     .akun-card {
       background: #fff;
       padding: 20px;
@@ -30,6 +38,7 @@ h2 {
       margin-left: auto;
       margin-right: auto;
     }
+    
     .status {
       display: inline-block;
       padding: 6px 15px;
@@ -38,32 +47,43 @@ h2 {
       font-weight: bold;
       margin-bottom: 10px;
     }
-    .tersedia { background: green; }
-    .sold { background: red; }
+    
+    .tersedia { 
+      background: green; 
+    }
+    
+    .sold { 
+      background: red; 
+    }
+    
     .akun-nama {
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 10px;
     }
+    
     .akun-gambar {
       max-width: 100%;
       border-radius: 10px;
       cursor: pointer;
       margin-bottom: 10px;
     }
+    
     .akun-harga {
       font-weight: bold;
       margin: 10px 0;
       font-size: 18px;
     }
-        .akun-deskripsi {
+    
+    .akun-deskripsi {
       text-align: left;
       font-size: 14px;
       background: #f1f1f1;
       border-radius: 8px;
       padding: 10px;
-      white-space: 
+      white-space: pre-wrap;
     }
+    
     .btn-wa, .btn-kembali {
       display: inline-block;
       padding: 12px 20px;
@@ -72,33 +92,46 @@ h2 {
       border-radius: 10px;
       font-size: 16px;
       text-decoration: none;
+      cursor: pointer;
     }
+    
     .btn-wa {
-      background: #25d366;
+      background: deepskyblue;
       color: white;
     }
+    
     .btn-kembali {
       background: #fff;
-      color: deep;
+      color: deepskyblue;
       margin-top: 40px;
+      border: 1px solid deepskyblue;
     }
-
+    
     /* Modal */
     .modal {
       display: none;
       position: fixed;
       z-index: 10;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0; 
+      top: 0;
+      width: 100%; 
+      height: 100%;
       background-color: rgba(0,0,0,0.8);
     }
+    
     .modal-content {
       margin: 50px auto;
       display: block;
       max-width: 90%;
+      max-height: 80%;
     }
+    
     .modal:target {
       display: block;
+    }
+    
+    #akunContainer {
+      margin-bottom: 30px;
     }
   </style>
 </head>
@@ -107,7 +140,8 @@ h2 {
   <h1>Stock Akun BUSSID</h1>
   <div id="akunContainer"></div>
 
-  <a href="welcome.html" class="back-btn">← Kembali ke Beranda</a>
+  <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
+  
   <!-- Modal Preview Gambar -->
   <div id="imageModal" class="modal" onclick="this.style.display='none'">
     <img id="modalImg" class="modal-content" />
@@ -168,6 +202,5 @@ h2 {
       }
     });
   </script>
-  </body>
-   </style>
+</body>
 </html>
