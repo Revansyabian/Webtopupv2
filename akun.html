@@ -13,9 +13,161 @@ h2 {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      
+      body {
+      font-family: sans-serif;
+      background-color: deepskyblue;
+      padding: 20px;
+      text-align: center;
+    }
+    .akun-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .status {
+      display: inline-block;
+      padding: 6px 15px;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .tersedia { background: green; }
+    .sold { background: red; }
+    .akun-nama {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .akun-gambar {
+      max-width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .akun-harga {
+      font-weight: bold;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+        .akun-deskripsi {
+      text-align: left;
+      font-size: 14px;
+      background: #f1f1f1;
+      border-radius: 8px;
+      padding: 10px;
+      white-space: 
+    }
+    .btn-wa, .btn-kembali {
+      display: inline-block;
+      padding: 12px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      text-decoration: none;
+    }
+    .btn-wa {
+      background: #25d366;
+      color: white;
+    }
+    .btn-kembali {
+      background: #fff;
+      color: deep;
+      margin-top: 40px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+      margin: 50px auto;
+      display: block;
+      max-width: 90%;
+    }
+    .modal:target {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stock Akun BUSSID</h1>
+  <div id="akunContainer"></div>
+
+  <a href="welcome.html" class="back-btn">← Kembali ke Beranda</a>
+  <!-- Modal Preview Gambar -->
+  <div id="imageModal" class="modal" onclick="this.style.display='none'">
+    <img id="modalImg" class="modal-content" />
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+      authDomain: "paneladmin-83c8a.firebaseapp.com",
+      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+      projectId: "paneladmin-83c8a",
+      storageBucket: "paneladmin-83c8a.appspot.com",
+      messagingSenderId: "343729471216",
+      appId: "1:343729471216:web:14c357375fa83083c44c35",
+      measurementId: "G-E2G04E4KB5"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function tampilkanAkun(data) {
+      const container = document.getElementById("akunContainer");
+      container.innerHTML = "";
+
+      Object.entries(data).forEach(([id, akun]) => {
+        const statusClass = akun.status === "tersedia" ? "tersedia" : "sold";
+
+        const card = document.createElement("div");
+        card.className = "akun-card";
+
+        card.innerHTML = `
+          <div class="status ${statusClass}">${akun.status}</div>
+          <div class="akun-nama">${akun.nama}</div>
+          <img class="akun-gambar" src="${akun.gambar}" alt="${akun.nama}" onclick="perbesarGambar('${akun.gambar}')" />
+          <div class="akun-harga">${akun.harga}</div>
+          <div class="akun-deskripsi">${akun.deskripsi}</div>
+          ${akun.status === "tersedia" ? `
+            <a class="btn-wa" href="https://wa.me/6289520418604?text=Saya%20mau%20beli%20${encodeURIComponent(akun.nama)}" target="_blank">Beli Sekarang</a>
+          ` : ""}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function perbesarGambar(src) {
+      document.getElementById("modalImg").src = src;
+      document.getElementById("imageModal").style.display = "block";
+    }
+
+    db.ref("jualAkun").on("value", (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        tampilkanAkun(data);
+      }
+    });
+  </script>
     }
    </style>
-<body>
-<h2>maaf halaman ini tidak tersedia</h2>
-</body>
 </html>
