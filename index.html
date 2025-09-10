@@ -21,17 +21,16 @@
   <meta property="og:image" content="https://i.postimg.cc/hGHq9ywN/PNG-20250827-180825.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
- <meta property="og:type" content="website" />
-
+  <meta property="og:type" content="website" />
   <meta property="og:url" content="https://topupbussid.web.id/" />
   <meta property="og:site_name" content="Top Up BUSSID" />
   <meta property="og:locale" content="id_ID" />
+
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@topupbussid">
   <meta name="twitter:creator" content="@topupbussid">
   <meta name="twitter:title" content="Top Up BUSSID Murah & Aman - Proses Cepat 5 Menit">
-
   <meta name="twitter:description" content="Layanan top up BUSSID cepat, murah dan terpercaya. Proses hanya 5 menit, harga termurah se-Indonesia.">
   <meta name="twitter:image" content="https://i.postimg.cc/hGHq9ywN/PNG-20250827-180825.jpg">
   <meta name="twitter:image:alt" content="Top Up BUSSID - Proses Cepat dan Aman">
@@ -53,6 +52,10 @@
   }
   </script>
 
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.postimg.cc/hGHq9ywN/PNG-20250827-180825.jpg" type="image/png" />
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/hGHq9ywN/PNG-20250827-180825.jpg" />
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     
@@ -72,7 +75,6 @@
       overflow-x: hidden;
     }
 
-    /* Animated Background Elements */
     body::before, body::after {
       content: '';
       position: absolute;
@@ -180,7 +182,6 @@
       transform: translateY(0);
     }
 
-    /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -192,7 +193,6 @@
       }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       h1 {
         font-size: 2rem;
@@ -210,7 +210,6 @@
 </head>
 <body>
 
-  <!-- Logo bulat pojok kiri atas -->
   <div class="logo-top">
     <img src="https://i.postimg.cc/nrfSZWmP/file-00000000d29861f895e12e2a67d02858.png" alt="Logo Top Up BUSSID">
   </div>
@@ -219,7 +218,6 @@
   <p><strong>Silakan pencet tombol di bawah untuk melihat cara pemesanan dan harga Top Up-nya</strong></p>
   <a href="welcome.html" class="button">Masuk ke Halaman Utama</a>
 
-  <!-- Firebase + Maintenance Checker -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <script>
@@ -237,10 +235,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Deteksi admin dari URL
     const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
 
-    // Cek status maintenance
     db.ref("status/maintenance").once("value").then((snapshot) => {
       const aktif = snapshot.val();
       console.log("Maintenance status:", aktif);
