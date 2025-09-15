@@ -333,55 +333,6 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    /* Floating Promo Banner */
-    .promo-banner {
-      position: fixed;
-      bottom: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 2rem);
-      max-width: 800px;
-      overflow: hidden;
-      z-index: 100;
-      display: none;
-      background: linear-gradient(90deg, #FF6B6B, #FF8E53);
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-5px); }
-    }
-    
-    .promo-text {
-      display: inline-block;
-      white-space: nowrap;
-      color: white;
-      font-weight: 600;
-      font-size: 0.9rem;
-      animation: runningText 15s linear infinite;
-    }
-    
-    /* Top Promo Bar */
-    #promo {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(90deg, #FF6B6B, #FF8E53);
-      color: white;
-      text-align: center;
-      padding: 0.75rem;
-      font-weight: 600;
-      z-index: 1000;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
     /* Admin Panel */
     #adminPanel {
       background: rgba(0,0,0,0.03);
@@ -570,10 +521,88 @@
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(0, 191, 255, 0.5);
     }
+    
+    /* Modal Promo Gambar */
+    .promo-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .promo-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .promo-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .promo-content img {
+      display: block;
+      max-width: 100%;
+      max-height: 70vh;
+      margin: 0 auto;
+    }
+    
+    .close-promo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      border: none;
+      z-index: 10;
+    }
+    
+    .promo-controls {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .promo-url-input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
-  <div id="promo">🔥 Promo Spesial Hari Ini! 🔥</div>
+  <!-- Modal Promo Gambar -->
+  <div class="promo-modal" id="promoModal">
+    <div class="promo-content">
+      <button class="close-promo" id="closePromo">&times;</button>
+      <img id="promoImage" src="" alt="Promo Image">
+    </div>
+  </div>
   
   <header>
     <div class="header-content">
@@ -588,7 +617,7 @@
   </header>
   
   <div class="overlay" id="overlay"></div>
-  
+
   <div class="nav-container" id="navContainer">
     <button class="close-menu" id="closeMenu">&times;</button>
     <a href="testimoni.html" class="nav-btn">
@@ -603,8 +632,8 @@
       <i class="fas fa-user"></i>
       Akun Bussid
     </a>
-  
-   
+
+
   <div class="nav-divider"></div>
 
     <a href="kontak.html" class="nav-btn">
@@ -615,12 +644,17 @@
       <i class="fas fa-info-circle"></i>
       Informasi
     </a>
+    
+    <a href="https://t.me/topupbussidrevanstore" class="nav-btn">
+       <i class="fas fa-paper-plane"></i>
+      Grub top up
+    </a>
+    
     <a href="tentang-kami.html" class="nav-btn">
       <i class="fas fa-users"></i>
       Tentang Kami
     </a>
   </div>
-
   <main>
     <section>
       <h2><i class="fas fa-bus"></i> Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
@@ -670,12 +704,12 @@
     </section>
     
     <section>
-      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-button">1. Berapa lama proses top up setelah pembayaran?</button>
           <div class="accordion-content">
-            <p>Proses top up biasanya memakan waktu 1-5 menit setelah pembayaran dikonfirmasi. Jika lebih dari 10 menit belum masuk, silakan hubungi admin dengan menyertakan bukti transfer.</p>
+            <p>Proses top up biasanya memakan waktu 1-5 menít setelah pembayaran dikonfirmasi. Jika lebih dari 10 menit belum masuk, silakan hubungi admin dengan menyertakan bukti transfer.</p>
           </div>
         </div>
         
@@ -726,6 +760,47 @@
     </section>
 
     <section>
+      <h2><i class="fas fa-graduation-cap"></i> Tutorial Top Up Melalui Web</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-button">1. <strong>STEP 1</strong></button>
+          <div class="accordion-content">
+            <p>Pilih game yang ada:</p>
+            <ul>
+              <li>Bussid</li>
+              <li>Truksid</li>
+            </ul>
+            <p>Setelah pilih game silakan pilih nominal top up sesuai keinginan</p>
+            <img src="https://i.postimg.cc/L83DD7Jw/Screenshot-2025-08-10-05-47-55-11-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Pilih nominal" loading="lazy">
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-button">2. <strong>STEP 2</strong></button>
+          <div class="accordion-content">
+            <p>Setelah memilih game dan paket lalu kalian di arahkan untuk bayar melalui QRIS</p>
+            <p><strong>Penting untuk Meng-screenshot bukti transfer kalian!</strong></p>
+            <img src="https://i.postimg.cc/gJX3CB0Y/Screenshot-2025-08-10-05-50-08-88-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Kirim data" loading="lazy">
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-button">3. <strong>STEP 3</strong></button>
+          <div class="accordion-content">
+            <p>Setelah kalian bayar kalian akan di arahkan ke halaman lain, silakan di isi dengan data akun yang ingin di top up:</p>
+            <ul>
+              <li>Email akun fb yang terhubung ke bussid</li>
+              <li>Password akun bussid</li>
+              <li>Nomor aktif agar bisa di hubungi</li>
+              <li>Laju silakan masukan bukti transfer kalian</li>
+            </ul>
+            <img src="https://i.postimg.cc/8zPW64Jx/Screenshot-2025-08-18-16-00-50-30-f9a7afa717ced9e1fc9be9833291031a.jpg" alt="Kirim data" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
       <div class="warning-box">
         <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
@@ -747,12 +822,18 @@
         <i class="fas fa-sync-alt"></i>
         Update Maintenance
       </button>
+      
+      <h3 style="margin-top: 20px;">Kontrol Promo Gambar</h3>
+      <div class="promo-controls">
+        <input type="text" id="promoImageUrl" class="promo-url-input" placeholder="URL Gambar Promo">
+        <input type="text" id="promoStatusInput" class="promo-url-input" placeholder="Status (true/false)">
+        <button class="btn" onclick="updatePromo()">
+          <i class="fas fa-image"></i>
+          Update Promo
+        </button>
+      </div>
     </section>
   </main>
-  
-  <div class="promo-banner" id="promoBanner">
-    <div class="promo-text" id="promoText">🎉 Promo Spesial! Diskon 20% untuk Pembelian Pertama 🎉</div>
-  </div>
   
   <footer>
     &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
@@ -783,9 +864,20 @@
         content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
       });
     });
+    
+    // Promo Modal functionality
+    const promoModal = document.getElementById('promoModal');
+    const closePromo = document.getElementById('closePromo');
+    const promoImage = document.getElementById('promoImage');
+    
+    closePromo.addEventListener('click', () => {
+      promoModal.classList.remove('active');
+      // Simpan status bahwa user sudah menutup promo untuk SESSION INI saja
+      sessionStorage.setItem('promoClosed', 'true');
+    });
   </script>
 
-  <!-- Original Firebase script remains unchanged -->
+  <!-- Firebase script dengan fitur promo gambar -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -808,6 +900,10 @@
     const statusText = document.getElementById("maintenanceStatus");
     const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
 
+    // Referensi untuk data promo gambar
+    const promoAktifRef = ref(db, "promoAktif");
+    const promoImageRef = ref(db, "promoImage");
+
     onValue(maintenanceRef, (snapshot) => {
       const aktif = snapshot.val();
       statusText.textContent = aktif ? "🔧 Maintenance: AKTIF" : "✅ Maintenance: NONAKTIF";
@@ -816,6 +912,7 @@
       }
     });
 
+    // Fungsi untuk mengupdate status maintenance
     window.updateMaintenance = function () {
       const input = document.getElementById("maintenanceInput").value.trim().toLowerCase();
       if (input === "true" || input === "false") {
@@ -827,31 +924,66 @@
       }
     };
 
-    // PROMO HANDLING
-    const promoBar = document.getElementById("promo");
-    const promoBanner = document.getElementById("promoBanner");
-    const promoText = document.getElementById("promoText");
-
-    const rootRef = ref(db);
-
-    onValue(rootRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data.promoAktif && data.promo) {
-        promoBar.style.display = "block";
-        promoBanner.style.display = "block";
-        promoBar.textContent = data.promo;
-        promoText.textContent = data.promo;
-
-        promoBar.classList.add("kedip");
+    // Fungsi untuk mengupdate promo gambar
+    window.updatePromo = function () {
+      const imageUrl = document.getElementById("promoImageUrl").value.trim();
+      const status = document.getElementById("promoStatusInput").value.trim().toLowerCase();
+      
+      if (status === "true" || status === "false") {
+        // Update status promo
+        set(promoAktifRef, status === "true")
+          .then(() => {
+            // Update gambar promo jika URL disediakan
+            if (imageUrl) {
+              return set(promoImageRef, imageUrl);
+            }
+          })
+          .then(() => alert("Promo berhasil diupdate!"))
+          .catch(err => alert("Gagal update promo: " + err.message));
       } else {
-        promoBar.style.display = "none";
-        promoBanner.style.display = "none";
-        promoBar.classList.remove("kedip");
+        alert("Masukkan status promo: true atau false");
       }
+    };
+
+    // Handle promo gambar
+    const promoModal = document.getElementById("promoModal");
+    const promoImage = document.getElementById("promoImage");
+
+    // Pantau perubahan pada data promo
+    onValue(promoAktifRef, (snapshot) => {
+      const promoAktif = snapshot.val();
+      
+      onValue(promoImageRef, (imageSnapshot) => {
+        const imageUrl = imageSnapshot.val();
+        
+        // Cek apakah user sudah menutup promo untuk SESSION INI
+        const promoClosed = sessionStorage.getItem('promoClosed');
+        
+        // Tampilkan promo gambar jika status aktif, ada URL gambar, dan user belum menutupnya di session ini
+        if (promoAktif && imageUrl && promoClosed !== 'true') {
+          promoImage.src = imageUrl;
+          promoModal.classList.add('active');
+        } else {
+          promoModal.classList.remove('active');
+        }
+      });
     });
 
     if (isAdmin) {
       document.getElementById("adminPanel").style.display = "block";
+      
+      // Muat data yang sudah ada ke form admin
+      onValue(promoAktifRef, (snapshot) => {
+        const promoAktif = snapshot.val();
+        document.getElementById("promoStatusInput").value = promoAktif ? "true" : "false";
+      });
+      
+      onValue(promoImageRef, (snapshot) => {
+        const imageUrl = snapshot.val();
+        if (imageUrl) {
+          document.getElementById("promoImageUrl").value = imageUrl;
+        }
+      });
     }
   </script>
 </body>
