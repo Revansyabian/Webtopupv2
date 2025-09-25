@@ -1,149 +1,282 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stock Akun BUSSID</title>
   <style>
-    body {
-      font-family: sans-serif;
-      background-color: deepskyblue;
-      padding: 20px;
-      text-align: center;
+    :root {
+      --primary: #00BFFF; /* deepskyblue */
+      --primary-dark: #0099CC;
+      --light: #FFFFFF;
+      --dark: #333333;
+      --gray: #F5F5F5;
+      --gray-dark: #E0E0E0;
+      --success: #4CAF50;
+      --danger: #F44336;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+    }
+    
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--primary) 0%, #1E90FF 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--light);
     }
     
     h1 {
-      color: white;
-      margin-bottom: 20px;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
-    h2 {
-      color: deepskyblue;
-      margin: 0 0 1rem 0;
-      font-size: 1.25rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .akun-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
     }
     
     .akun-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      background: var(--light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
     
-    .status {
-      display: inline-block;
-      padding: 6px 15px;
-      border-radius: 20px;
-      color: white;
-      font-weight: bold;
-      margin-bottom: 10px;
+    .akun-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
     
-    .tersedia { 
-      background: green; 
-    }
-    
-    .sold { 
-      background: red; 
-    }
-    
-    .akun-nama {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
+    .akun-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
     }
     
     .akun-gambar {
-      max-width: 100%;
-      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
       cursor: pointer;
+    }
+    
+    .akun-card:hover .akun-gambar {
+      transform: scale(1.05);
+    }
+    
+    .status-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: var(--light);
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .tersedia { 
+      background: var(--success); 
+    }
+    
+    .sold { 
+      background: var(--danger); 
+    }
+    
+    .akun-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .akun-nama {
+      font-size: 1.3rem;
+      font-weight: 700;
       margin-bottom: 10px;
+      color: var(--dark);
     }
     
     .akun-harga {
-      font-weight: bold;
-      margin: 10px 0;
-      font-size: 18px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 15px;
     }
     
     .akun-deskripsi {
-      text-align: left;
-      font-size: 14px;
-      background: #f1f1f1;
+      font-size: 0.9rem;
+      color: #666;
+      background: var(--gray);
       border-radius: 8px;
-      padding: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+      flex-grow: 1;
       white-space: pre-wrap;
-    }
-    
-    .btn-wa, .btn-kembali {
-      display: inline-block;
-      padding: 12px 20px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      text-decoration: none;
-      cursor: pointer;
+      line-height: 1.5;
     }
     
     .btn-wa {
-      background: deepskyblue;
-      color: white;
+      display: block;
+      background: var(--primary);
+      color: var(--light);
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      margin-top: auto;
+    }
+    
+    .btn-wa:hover {
+      background: var(--primary-dark);
     }
     
     .btn-kembali {
-      background: #fff;
-      color: deepskyblue;
-      margin-top: 40px;
-      border: 1px solid deepskyblue;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--light);
+      color: var(--primary);
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      margin: 20px auto;
+    }
+    
+    .btn-kembali:hover {
+      background: var(--gray);
+      transform: translateY(-2px);
     }
     
     /* Modal */
     .modal {
       display: none;
       position: fixed;
-      z-index: 10;
+      z-index: 100;
       left: 0; 
       top: 0;
       width: 100%; 
       height: 100%;
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0,0,0,0.9);
+      animation: fadeIn 0.3s ease;
     }
     
     .modal-content {
-      margin: 50px auto;
-      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       max-width: 90%;
-      max-height: 80%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
     }
     
-    .modal:target {
-      display: block;
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--light);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 101;
     }
     
-    #akunContainer {
-      margin-bottom: 30px;
+    .close:hover {
+      color: var(--primary);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Loading state */
+    .loading {
+      text-align: center;
+      color: var(--light);
+      font-size: 1.2rem;
+      margin: 40px 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .akun-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-
-  <h1>Stock Akun BUSSID</h1>
-  <div id="akunContainer"></div>
-
-  <a href="welcome.html" class="btn-kembali">← Kembali ke Beranda</a>
+  <div class="container">
+    <header>
+      <h1>Stock Akun BUSSID</h1>
+      <p class="subtitle">Temukan berbagai akun BUSSID berkualitas dengan harga terbaik</p>
+    </header>
+    
+    <div id="akunContainer">
+      <div class="loading">Memuat data akun...</div>
+    </div>
+    
+    <div style="text-align: center;">
+      <a href="welcome.html" class="btn-kembali">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Kembali ke Beranda
+      </a>
+    </div>
+  </div>
   
   <!-- Modal Preview Gambar -->
-  <div id="imageModal" class="modal" onclick="this.style.display='none'">
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
     <img id="modalImg" class="modal-content" />
   </div>
 
@@ -169,31 +302,59 @@
     function tampilkanAkun(data) {
       const container = document.getElementById("akunContainer");
       container.innerHTML = "";
-
+      
+      // Jika tidak ada data
+      if (!data || Object.keys(data).length === 0) {
+        container.innerHTML = '<div class="loading">Tidak ada akun tersedia saat ini.</div>';
+        return;
+      }
+      
+      // Buat grid container
+      const grid = document.createElement("div");
+      grid.className = "akun-grid";
+      
       Object.entries(data).forEach(([id, akun]) => {
         const statusClass = akun.status === "tersedia" ? "tersedia" : "sold";
+        const statusText = akun.status === "tersedia" ? "Tersedia" : "Terjual";
 
         const card = document.createElement("div");
         card.className = "akun-card";
 
         card.innerHTML = `
-          <div class="status ${statusClass}">${akun.status}</div>
-          <div class="akun-nama">${akun.nama}</div>
-          <img class="akun-gambar" src="${akun.gambar}" alt="${akun.nama}" onclick="perbesarGambar('${akun.gambar}')" />
-          <div class="akun-harga">${akun.harga}</div>
-          <div class="akun-deskripsi">${akun.deskripsi}</div>
-          ${akun.status === "tersedia" ? `
-            <a class="btn-wa" href="https://wa.me/6289520418604?text=Saya%20mau%20beli%20${encodeURIComponent(akun.nama)}" target="_blank">Beli Sekarang</a>
-          ` : ""}
+          <div class="akun-image-container">
+            <img class="akun-gambar" src="${akun.gambar}" alt="${akun.nama}" onclick="perbesarGambar('${akun.gambar}')" />
+            <div class="status-badge ${statusClass}">${statusText}</div>
+          </div>
+          <div class="akun-content">
+            <div class="akun-nama">${akun.nama}</div>
+            <div class="akun-harga">${akun.harga}</div>
+            <div class="akun-deskripsi">${akun.deskripsi}</div>
+            ${akun.status === "tersedia" ? `
+              <a class="btn-wa" href="https://wa.me/6289520418604?text=Saya%20mau%20beli%20${encodeURIComponent(akun.nama)}" target="_blank">Beli Sekarang</a>
+            ` : '<div class="btn-wa" style="background: #ccc; cursor: not-allowed;">Terjual</div>'}
+          </div>
         `;
-        container.appendChild(card);
+        grid.appendChild(card);
       });
+      
+      container.appendChild(grid);
     }
 
     function perbesarGambar(src) {
       document.getElementById("modalImg").src = src;
       document.getElementById("imageModal").style.display = "block";
     }
+
+    // Tutup modal ketika mengklik close atau di luar gambar
+    document.querySelector('.close').addEventListener('click', function() {
+      document.getElementById('imageModal').style.display = 'none';
+    });
+    
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
 
     db.ref("jualAkun").on("value", (snapshot) => {
       const data = snapshot.val();
