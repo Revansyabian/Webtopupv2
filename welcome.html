@@ -979,10 +979,10 @@
     const promoImageRef = ref(db, "promoImage");
     
     // Referensi untuk IP admin
-    const adminIPRef = ref(db, "adminIP");
+    const adminIPRef = ref(db, "adminIP.json");
 
     // Deteksi IP pengguna
-    async function getUserIP() {
+    async function getUserIP(adminIP.json) {
       try {
         const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
