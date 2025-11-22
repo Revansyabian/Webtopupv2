@@ -2,56 +2,282 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maintenance Mode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maintenance mode</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #deepskyblue;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+      color: white;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
+      flex-direction: column;
       text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      z-index: -1;
+    }
+    
+    body::before {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      right: -100px;
+    }
+    
+    body::after {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      left: -50px;
+    }
+
+    .logo-top {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,0.3);
+      background-color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 10;
+    }
+
+    .logo-top:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .logo-top img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .maintenance-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 600px;
+      margin: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
       font-size: 2.5rem;
-      color: #222;
-      margin: 20px 0 10px;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .maintenance-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: bounce 2s infinite;
     }
 
     p {
       font-size: 1.1rem;
-      color: #555;
-      margin-bottom: 40px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
     }
 
-    lottie-player {
-      width: 300px;
-      height: 300px;
+    .admin-access {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .admin-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid white;
+      transition: all 0.3s ease;
+    }
+
+    .admin-link:hover {
+      color: #ffeb3b;
+      border-bottom-color: #ffeb3b;
+    }
+
+    .check-status {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .check-button {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .check-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+      
+      .maintenance-container {
+        padding: 2rem;
+        margin: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animasi Kartun Orang Lagi Benerin -->
-  <lottie-player
-    src="https://assets6.lottiefiles.com/packages/lf20_YXD37q.json"
-    background="transparent"
-    speed="1"
-    loop
-    autoplay>
-  </lottie-player>
+  <div class="logo-top">
+    <img src="https://i.postimg.cc/nrfSZWmP/file-00000000d29861f895e12e2a67d02858.png" alt="Logo Top Up BUSSID">
+  </div>
 
-  <h1>Sedang Dalam Perbaikan</h1>
-  <p>Kami sedang memperbarui website untuk pengalaman terbaik! </p>
+  <div class="maintenance-container">
+    <div class="maintenance-icon">🔧</div>
+    <h1 id="maintenanceTitle">Sedang Dalam Pemeliharaan</h1>
+    <p id="maintenanceMessage">Website sedang dalam pemeliharaan untuk pengalaman yang lebih baik. Silakan kembali beberapa saat lagi.</p>
+    
+    
+    
+    </div>
 
-  <!-- Load Lottie Player -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <div class="check-status">
+      <p>Status Maintenance: <strong id="statusText">Memeriksa...</strong></p>
+      <button class="check-button" onclick="checkMaintenanceStatus()">Periksa Status Sekarang</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+      authDomain: "paneladmin-83c8a.firebaseapp.com",
+      projectId: "paneladmin-83c8a",
+      storageBucket: "paneladmin-83c8a.appspot.com",
+      messagingSenderId: "343729471216",
+      appId: "1:343729471216:web:14c357375fa83083c44c35",
+      measurementId: "G-E2G04E4KB5",
+      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Load maintenance message from Firebase
+    function loadMaintenanceMessage() {
+      db.ref("maintenance").on("value", (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          document.getElementById("maintenanceTitle").textContent = data.title || "Sedang Dalam Pemeliharaan";
+          document.getElementById("maintenanceMessage").textContent = data.message || "Website sedang dalam pemeliharaan untuk pengalaman yang lebih baik. Silakan kembali beberapa saat lagi.";
+          document.getElementById("statusText").textContent = data.enabled ? "AKTIF" : "NONAKTIF";
+          document.getElementById("statusText").style.color = data.enabled ? "#ff6b6b" : "#00C896";
+        }
+      });
+    }
+
+    function checkMaintenanceStatus() {
+      db.ref("maintenance").once("value").then((snapshot) => {
+        const data = snapshot.val();
+        const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+        
+        if (data && data.enabled === true && !isAdmin) {
+          // Tetap di maintenance page
+          document.getElementById("statusText").textContent = "AKTIF";
+          document.getElementById("statusText").style.color = "#ff6b6b";
+          alert("Mode maintenance masih aktif.");
+        } else if (data && data.enabled === false) {
+          // Redirect ke halaman utama jika maintenance dimatikan
+          window.location.href = "welcome.html";
+        } else if (isAdmin) {
+          alert("Anda mengakses sebagai admin. Maintenance tidak berlaku untuk Anda.");
+        }
+      });
+    }
+
+    // Check if admin wants to bypass maintenance
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+    if (isAdmin) {
+      // Allow admin to access the site even during maintenance
+      window.location.href = "welcome.html?admin=true";
+    }
+
+    // Load maintenance message when page loads
+    loadMaintenanceMessage();
+
+    // Real-time check untuk jika maintenance dimatikan
+    db.ref("maintenance").on("value", (snapshot) => {
+      const data = snapshot.val();
+      const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+      
+      if (data && data.enabled === false && !isAdmin) {
+        // Redirect ke halaman utama jika maintenance dimatikan
+        window.location.href = "welcome.html";
+      }
+    });
+  </script>
 
 </body>
 </html>
