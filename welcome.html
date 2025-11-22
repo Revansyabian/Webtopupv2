@@ -2,13 +2,13 @@
 <html lang="id">
 <head>
     <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">
-  <meta name="keywords" content="Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">
-  <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">
+    <meta name="keywords" content="Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">
+    <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
     
     :root {
@@ -38,6 +38,204 @@
       line-height: 1.6;
       min-height: 100vh;
       padding-bottom: 2rem;
+    }
+
+    /* Maintenance Page Styles */
+    .maintenance-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 9999;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .maintenance-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 3rem;
+      border-radius: 2rem;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .maintenance-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .maintenance-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .maintenance-message {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    
+    /* Running Text Styles - POSISI DI ATAS HEADER */
+    .running-text-container {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #ff6b6b);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      padding: 8px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .running-text {
+      white-space: nowrap;
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 25s linear infinite;
+      font-weight: 600;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    /* Promo Banner Styles - FULL SCREEN */
+    .promo-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .promo-banner.active {
+      display: flex;
+    }
+    
+    .promo-banner-content {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .promo-banner-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .promo-banner-close:hover {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--dark);
+    }
+    
+    .promo-banner h3 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .promo-banner p {
+      margin: 0 0 1.5rem 0;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .promo-banner-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+    
+    .promo-banner-image.active {
+      display: block;
+    }
+
+    .promo-banner-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-promo {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-promo-primary {
+      background: linear-gradient(135deg, deepskyblue, #00688B);
+      color: white;
+    }
+
+    .btn-promo-secondary {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--text);
     }
     
     /* Glassmorphism Header */
@@ -258,6 +456,29 @@
       background: linear-gradient(135deg, #00688B, deepskyblue);
     }
     
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+    
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #128C7E, #25D366);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+    }
+    
+    .btn-disabled {
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+      box-shadow: 0 4px 12px rgba(149, 165, 166, 0.3);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: 0 4px 12px rgba(149, 165, 166, 0.3);
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    }
+    
     /* Grid Pricing */
     .harga {
       display: grid;
@@ -292,33 +513,132 @@
       font-weight: 700;
     }
     
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      border-radius: 50px;
-      padding: 12px 20px;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-      z-index: 1000;
+    /* PERBAIKAN BAGIAN PRODUK GAMBAR YANG LEBIH BAIK */
+    .produk-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .produk-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(0, 191, 255, 0.1);
       display: flex;
-      align-items: center;
-      transition: all 0.3s ease;
+      flex-direction: column;
+      position: relative;
     }
-
-    .whatsapp-btn:hover {
-      background-color: #128C7E;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    
+    .produk-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
-
-    .whatsapp-btn i {
-      margin-right: 8px;
-      font-size: 1.2rem;
+    
+    .produk-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.3s ease;
     }
-
+    
+    .produk-card:hover .produk-image {
+      transform: scale(1.05);
+    }
+    
+    .produk-info {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .produk-title {
+      font-weight: 700;
+      color: var(--dark);
+      font-size: 1.1rem;
+      line-height: 1.3;
+      margin: 0;
+    }
+    
+    .produk-price {
+      color: deepskyblue;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 0;
+    }
+    
+    .produk-description {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      margin: 0;
+    }
+    
+    .produk-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    
+    .produk-feature {
+      background: rgba(0, 191, 255, 0.1);
+      color: deepskyblue;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .produk-status {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: auto;
+      text-align: center;
+    }
+    
+    .status-tersedia {
+      background: rgba(0, 200, 150, 0.15);
+      color: #00C896;
+      border: 1px solid rgba(0, 200, 150, 0.3);
+    }
+    
+    .status-tidak-tersedia {
+      background: rgba(255, 107, 107, 0.15);
+      color: #FF6B6B;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+    
+    .produk-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    }
+    
     /* Modern Footer */
     footer {
       background: linear-gradient(135deg, rgba(0, 191, 255, 0.9) 0%, rgba(0, 104, 139, 0.9) 100%);
@@ -331,35 +651,6 @@
       margin-top: 2rem;
       border-radius: 1rem 1rem 0 0;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Admin Panel */
-    #adminPanel {
-      background: rgba(0,0,0,0.03);
-      border: 1px dashed deepskyblue;
-    }
-    
-    .admin-input {
-      padding: 0.75rem;
-      border-radius: 0.5rem;
-      border: 1px solid rgba(0, 191, 255, 0.2);
-      width: 100%;
-      max-width: 300px;
-      margin: 0.5rem 0;
-      font-family: inherit;
-      background: rgba(255, 255, 255, 0.5);
-      transition: all 0.2s ease;
-    }
-    
-    .admin-input:focus {
-      outline: none;
-      border-color: deepskyblue;
-      box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
-    }
-    
-    .admin-textarea {
-      min-height: 100px;
-      resize: vertical;
     }
     
     /* Accordion Styles */
@@ -416,54 +707,6 @@
       margin: 0;
     }
     
-    .accordion-content img {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
-      border-radius: 8px;
-      margin: 10px 0;
-      border: 1px solid deepskyblue;
-      display: block;
-    }
-
-    /* Tutorial Steps */
-    .tutorial-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .step {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    
-    .step-number {
-      background: deepskyblue;
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-    
-    .step-content {
-      flex: 1;
-    }
-    
-    .step-content img {
-      width: 50%;
-      max-width: 50px;
-      border-radius: 8px;
-      margin-top: 8px;
-      border: 1px solid #eee;
-    }
-    
     /* Warning Box */
     .warning-box {
       background: rgba(255,107,107,0.1);
@@ -480,42 +723,13 @@
       color: var(--text);
     }
     
-    /* Promo Banner */
-    .promo-banner {
-      background: linear-gradient(135deg, deepskyblue, #4dc3ff);
-      color: white;
-      padding: 15px;
-      text-align: center;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
-      display: none;
-    }
-    
-    .promo-banner.active {
-      display: block;
-    }
-    
-    .promo-banner img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin: 10px 0;
-    }
-    
-    .promo-banner h3 {
-      margin: 0 0 10px 0;
-      font-size: 1.3rem;
-    }
-    
-    .promo-banner p {
-      margin: 0;
-      color: white;
-      opacity: 0.9;
-    }
-    
     /* Responsive Adjustments */
     @media (max-width: 640px) {
       .harga {
+        grid-template-columns: 1fr;
+      }
+      
+      .produk-container {
         grid-template-columns: 1fr;
       }
       
@@ -534,6 +748,48 @@
       
       .menu-toggle {
         display: flex;
+      }
+      
+      .running-text {
+        font-size: 0.8rem;
+        padding: 6px 0;
+      }
+      
+      .running-text-container {
+        padding: 6px 0;
+      }
+      
+      .promo-banner {
+        padding: 1rem;
+      }
+      
+      .promo-banner-content {
+        padding: 1.5rem;
+      }
+      
+      .promo-banner h3 {
+        font-size: 1.2rem;
+      }
+      
+      .produk-description {
+        -webkit-line-clamp: 2;
+      }
+      
+      .produk-info {
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+
+      .maintenance-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .maintenance-title {
+        font-size: 2rem;
+      }
+
+      .maintenance-message {
+        font-size: 1rem;
       }
     }
     
@@ -559,578 +815,529 @@
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(0, 191, 255, 0.5);
     }
-    
-    /* Modal Promo Gambar */
-    .promo-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .promo-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .promo-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    .promo-content img {
-      display: block;
-      max-width: 100%;
-      max-height: 70vh;
-      margin: 0 auto;
-    }
-    
-    .close-promo {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 18px;
-      border: none;
-      z-index: 10;
-    }
-    
-    .promo-controls {
-      margin-top: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .promo-url-input {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      width: 100%;
-    }
-    
-    .admin-section {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px dashed deepskyblue;
-    }
   </style>
 </head>
 <body>
-  <!-- Promo Banner -->
-  <div class="promo-banner" id="promoBanner">
-    <h3 id="promoTitle">PROMO SPESIAL!</h3>
-    <p id="promoText">Dapatkan diskon khusus untuk pembelian pertama Anda!</p>
-    <img id="promoBannerImage" src="" alt="Promo Banner">
-  </div>
-  
-  <!-- Modal Promo Gambar -->
-  <div class="promo-modal" id="promoModal">
-    <div class="promo-content">
-      <button class="close-promo" id="closePromo">&times;</button>
-      <img id="promoImage" src="" alt="Promo Image">
-    </div>
-  </div>
-  
-  <header>
-    <div class="header-content">
-      <h1>Jasa Top Up BUSSID</h1>
-      <p>Jasa Top Up Cepat, Murah, Aman!</p>
-    </div>
-    <button class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
-  
-  <div class="overlay" id="overlay"></div>
+    <!-- Maintenance Redirect Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  <div class="nav-container" id="navContainer">
-    <button class="close-menu" id="closeMenu">&times;</button>
-    <a href="testimoni.html" class="nav-btn">
-      <i class="fas fa-comments"></i>
-      Testimoni
-    </a>
-  </a>
-    <a href="sc/sctopup.html" class="nav-btn">
-      <i class="fas fa-coins"></i>
-      SC Top Up BUSSID
-    </a>
-    <a href="sosmed.html" class="nav-btn">
-      <i class="fas fa-hashtag"></i>
-      Sosmed Admin
-    </a>
-    <a href="akun.html" class="nav-btn">
-      <i class="fas fa-user"></i>
-      Akun Bussid
-    </a>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+            authDomain: "paneladmin-83c8a.firebaseapp.com",
+            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+            projectId: "paneladmin-83c8a",
+            storageBucket: "paneladmin-83c8a.appspot.com",
+            messagingSenderId: "343729471216",
+            appId: "1:343729471216:web:14c357375fa83083c44c35",
+            measurementId: "G-E2G04E4KB5"
+        };
 
-    <div class="nav-divider"></div>
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const maintenanceRef = ref(db, "maintenance");
 
-    <a href="kontak.html" class="nav-btn">
-      <i class="fas fa-phone"></i>
-      Kontak
-    </a>
-    <a href="https://revanStore-web.vercel.app" class="nav-btn">
-      <i class="fas fa-info-circle"></i>
-      Promo dan Informasi
-    </a>
-    
-    <a href="https://t.me/topupbussidrevanstore" class="nav-btn">
-       <i class="fas fa-paper-plane"></i>
-      Grub top up
-    </a>
-    
-    <a href="tentang-kami.html" class="nav-btn">
-      <i class="fas fa-users"></i>
-      Tentang Kami
-    </a>
-  </div>
-  
-  <main>
-    <section>
-      <h2><i class="fas fa-bus"></i> Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
-      <p>Top Up BUSSID solusinya dengan kalian top up bussid duit kalian bisa bertambah dengan instan, dan kalian juga ga perlu narik secara manual. <strong>Ayo Top up Ub Sekarang</strong>.</p>
-    </section>
-    
-    <section>
-      <h2><i class="fas fa-bus"></i> Apa Itu Top Up BUSSID?</h2>
-      <p>Top Up BUSSID adalah layanan pembelian uang, untuk membeli berbagai macam item di game tersebut tanpa harus ngumpulin duit secara manual di <strong>Bus Simulator Indonesia</strong>.</p>
-    </section>
-    
-    <section>
-      <h2><i class="fas fa-money-bill-wave"></i> Daftar Harga</h2>
-      <ul class="harga">
-        <li><span>💵 70JT UB</span> <strong>Rp5.000</strong></li>
-        <li><span>💵 200JT UB</span> <strong>Rp10.000</strong></li>
-        <li><span>💵 250JT UB</span> <strong>Rp20.000</strong></li>
-        <li><span>💵 300JT UB</span> <strong>Rp25.000</strong></li>
-        <li><span>💵 500JT UB</span> <strong>Rp30.000</strong></li>
-        <li><span>💵 700JT UB</span> <strong>Rp35.000</strong></li>
-        <li><span>💵 900JT UB</span> <strong>Rp40.000</strong></li>
-        <li><span>💵 1MIL UB</span> <strong>Rp45.000</strong></li>
-        <li><span>💵 2 MIL UB</span> <strong>Rp50.000</strong></li>
-      </ul>
-    </section>
-    
-    <section>
-      <h2><i class="fas fa-shopping-cart"></i> Cara Pemesanan</h2>
-      <ol>
-        <li>Hubungi admin via WhatsApp: <strong>6289520418604 / 6285199120995</strong>.</li>
-        <li>Pilih nominal top up sesuai daftar harga.</li>
-        <li>Lakukan pembayaran via DANA / OVO / GOPAY .</li>
-        <li>Proses dalam 1–5 menit setelah pembayaran!</li>
-      </ol>
-      <a href="https://wa.me/6289520418604?text=Assalamu'alaikum+saya+mau+top+up+bussid" class="btn">
-        <i class="fab fa-whatsapp"></i>
-        Pesan Sekarang
-      </a>
-    </section>
-    
-    <section>
-      <h2><i class="fas fa-star"></i> Testimoni Pembeli</h2>
-      <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">
-        <i class="fas fa-users"></i>
-        Lihat Testimoni Pembeli
-      </a>
-    </section>
-    
-    <section>
-      <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
-      <div class="accordion">
-        <div class="accordion-item">
-          <button class="accordion-button">1. Berapa lama proses top up setelah pembayaran?</button>
-          <div class="accordion-content">
-            <p>Proses top up biasanya Untuk Proses biasa nya memakan waktu 1-10menit jika tidak ada kendala.</p>
-          </div>
-        </div>
-        
-        <div class="accordion-item">
-          <button class="accordion-button">2. Bagaimana jika UB tidak masuk ke akun saya?</button>
-          <div class="accordion-content">
-            <ol>
-              <li>Pastikan Anda sudah login dengan akun yang benar</li>
-              <li>bilang kalau UB tidak masuk saat admin menyatakan pesanan done agar di isi ulang oleh admin.</li>
-              <li>Cek kembali setelah di isi ulang oleh admin</li>
-              <li>Jika masih belum masuk,Kirim data akun bussid baru berupa:
-                <ul>
-                  <li>Email/no</li>
-                  <li>Password</li>
-                </ul>
-              </li>
-            </ol>
-          </div>
-        </div>
-        
-        <div class="accordion-item">
-          <button class="accordion-button">3. Apakah ada garansi jika akun saya bermasalah?</button>
-          <div class="accordion-content">
-            <p>  kami akan memberikan garansi mengisi uang UB kembali ketika akun bermasalah.</p>
-          </div>
-        </div>
-      
-        <div class="accordion-item">
-          <button class="accordion-button">4. Kenapa admin slow respon?</button>
-          <div class="accordion-content">
-            <p>Maaf jika kami telat membalas chat anda,karena admin juga ada kegiatan sekolah,sholat dll.kami akan berusaha untuk membalas chat anda dengan cepat dan memeberikan pelayanan yang baik🤩</p>
-          </div>
-        </div>
-       
-        <div class="accordion-item">
-          <button class="accordion-button">5. Bisa pakai metode pembayaran apa saja?</button>
-          <div class="accordion-content">
-            <p>Kami menerima:
-              <br>- QRIS (Semua e-wallet )
-              <br>- Dana
-              <br>- OVO
-              <br>- Gopay
-              <h3>Untuk mobile banking belum tersedia</h3>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  
-    <section>
-      <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
-      <div class="warning-box">
-        <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
-        <ul>
-          <li>Hanya gunakan nomor WhatsApp resmi admin: 6289630191806 atau 6285199120995</li>
-          <li>Jangan berikan data akun ke siapapun kecuali admin! </li>
-          <li>Transaksi hanya melalui  WhatsApp admin</li>
-          <li>Kami tidak bertanggung jawab jika transaksi dilakukan di luar store kami</li>
-        </ul>
-      </div>
-    </section>
-    
-    <!-- PANEL ADMIN MAINTENANCE -->
-    <section id="adminPanel" style="display:none;">
-      <h2><i class="fas fa-cog"></i> Panel Admin - Konten & Promo</h2>
-      <p id="adminStatus">Status: <span id="adminStatusText">Tidak terdeteksi sebagai admin</span></p>
-      
-      <div class="admin-section">
-        <h3>Kontrol Promo Banner</h3>
-        <p>Status Promo Banner: <span id="promoBannerStatus">Tidak aktif</span></p>
-        <input type="text" id="promoBannerTitle" class="admin-input" placeholder="Judul Promo Banner">
-        <textarea id="promoBannerText" class="admin-input admin-textarea" placeholder="Teks Promo Banner"></textarea>
-        <input type="text" id="promoBannerImageUrl" class="admin-input" placeholder="URL Gambar Promo Banner (opsional)">
-        <select id="promoBannerStatusInput" class="admin-input">
-          <option value="false">Nonaktifkan Promo Banner</option>
-          <option value="true">Aktifkan Promo Banner</option>
-        </select>
-        <button class="btn" onclick="updatePromoBanner()">
-          <i class="fas fa-sync-alt"></i>
-          Update Promo Banner
-        </button>
-      </div>
-      
-      <div class="admin-section">
-        <h3>Kontrol Konten Website</h3>
-        <p>Edit teks yang muncul di halaman utama:</p>
-        
-        <label for="mainTitle">Judul Utama:</label>
-        <input type="text" id="mainTitle" class="admin-input" placeholder="Judul Utama Website">
-        
-        <label for="mainSubtitle">Subjudul:</label>
-        <input type="text" id="mainSubtitle" class="admin-input" placeholder="Subjudul Website">
-        
-        <label for="introText">Teks Pengenalan:</label>
-        <textarea id="introText" class="admin-input admin-textarea" placeholder="Teks pengenalan di bagian atas"></textarea>
-        
-        <label for="whatsappNumber">Nomor WhatsApp:</label>
-        <input type="text" id="whatsappNumber" class="admin-input" placeholder="Nomor WhatsApp untuk pemesanan">
-        
-        <button class="btn" onclick="updateWebsiteContent()">
-          <i class="fas fa-save"></i>
-          Simpan Perubahan Konten
-        </button>
-      </div>
-    </section>
-  </main>
-  
-  <footer>
-    &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
-  </footer>
-
-  <script>
-    // Menu toggle functionality
-    const menuToggle = document.getElementById('menuToggle');
-    const navContainer = document.getElementById('navContainer');
-    const overlay = document.getElementById('overlay');
-    const closeMenu = document.getElementById('closeMenu');
-    
-    function toggleMenu() {
-      navContainer.classList.toggle('active');
-      overlay.classList.toggle('active');
-      document.body.style.overflow = navContainer.classList.contains('active') ? 'hidden' : '';
-    }
-    
-    menuToggle.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
-    closeMenu.addEventListener('click', toggleMenu);
-    
-    // Accordion functionality
-    document.querySelectorAll('.accordion-button').forEach(button => {
-      button.addEventListener('click', () => {
-        button.classList.toggle('active');
-        const content = button.nextElementSibling;
-        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
-      });
-    });
-    
-    // Promo Modal functionality
-    const promoModal = document.getElementById('promoModal');
-    const closePromo = document.getElementById('closePromo');
-    const promoImage = document.getElementById('promoImage');
-    
-    closePromo.addEventListener('click', () => {
-      promoModal.classList.remove('active');
-      // Simpan status bahwa user sudah menutup promo untuk SESSION INI saja
-      sessionStorage.setItem('promoClosed', 'true');
-    });
-  </script>
-
-  <!-- Firebase script dengan fitur promo gambar -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
-      authDomain: "paneladmin-83c8a.firebaseapp.com",
-      databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
-      projectId: "paneladmin-83c8a",
-      storageBucket: "paneladmin-83c8a.appspot.com",
-      messagingSenderId: "343729471216",
-      appId: "1:343729471216:web:14c357375fa83083c44c35",
-      measurementId: "G-E2G04E4KB5"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // Referensi untuk data konten website
-    const websiteContentRef = ref(db, "websiteContent");
-    const promoBannerRef = ref(db, "promoBanner");
-    
-    // Referensi untuk data promo gambar
-    const promoAktifRef = ref(db, "promoAktif");
-    const promoImageRef = ref(db, "promoImage");
-    
-    // Referensi untuk IP admin
-    const adminIPRef = ref(db, "adminIP.json");
-
-    // Deteksi IP pengguna
-    async function getUserIP(adminIP.json) {
-      try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        return data.ip;
-      } catch (error) {
-        console.error('Error getting IP:', error);
-        return null;
-      }
-    }
-
-    // Cek apakah pengguna adalah admin
-    async function checkAdminStatus() {
-      const userIP = await getUserIP();
-      const urlParams = new URLSearchParams(window.location.search);
-      const isAdminParam = urlParams.get('admin') === 'true';
-      
-      // Mendapatkan IP admin dari Firebase
-      onValue(adminIPRef, (snapshot) => {
-        const adminIP = snapshot.val();
-        const isAdmin = isAdminParam && userIP === adminIP;
-        
-        if (isAdmin) {
-          document.getElementById("adminPanel").style.display = "block";
-          document.getElementById("adminStatusText").textContent = "Anda adalah admin";
-          document.getElementById("adminStatusText").style.color = "green";
-          
-          // Muat data yang sudah ada ke form admin
-          loadAdminData();
-        } else {
-          document.getElementById("adminPanel").style.display = "none";
-          document.getElementById("adminStatusText").textContent = "Tidak terdeteksi sebagai admin";
-          document.getElementById("adminStatusText").style.color = "red";
-        }
-      }, { once: true });
-    }
-
-    // Muat data untuk panel admin
-    function loadAdminData() {
-      // Muat data konten website
-      onValue(websiteContentRef, (snapshot) => {
-        const content = snapshot.val() || {};
-        document.getElementById("mainTitle").value = content.mainTitle || "";
-        document.getElementById("mainSubtitle").value = content.mainSubtitle || "";
-        document.getElementById("introText").value = content.introText || "";
-        document.getElementById("whatsappNumber").value = content.whatsappNumber || "";
-      });
-      
-      // Muat data promo banner
-      onValue(promoBannerRef, (snapshot) => {
-        const promoBanner = snapshot.val() || {};
-        document.getElementById("promoBannerTitle").value = promoBanner.title || "";
-        document.getElementById("promoBannerText").value = promoBanner.text || "";
-        document.getElementById("promoBannerImageUrl").value = promoBanner.imageUrl || "";
-        document.getElementById("promoBannerStatusInput").value = promoBanner.active ? "true" : "false";
-      });
-      
-      // Muat data promo gambar
-      onValue(promoAktifRef, (snapshot) => {
-        const promoAktif = snapshot.val();
-        document.getElementById("promoStatusInput").value = promoAktif ? "true" : "false";
-      });
-      
-      onValue(promoImageRef, (snapshot) => {
-        const imageUrl = snapshot.val();
-        if (imageUrl) {
-          document.getElementById("promoImageUrl").value = imageUrl;
-        }
-      });
-    }
-
-    // Fungsi untuk mengupdate konten website
-    window.updateWebsiteContent = function () {
-      const content = {
-        mainTitle: document.getElementById("mainTitle").value,
-        mainSubtitle: document.getElementById("mainSubtitle").value,
-        introText: document.getElementById("introText").value,
-        whatsappNumber: document.getElementById("whatsappNumber").value
-      };
-      
-      set(websiteContentRef, content)
-        .then(() => alert("Konten website berhasil diperbarui!"))
-        .catch(err => alert("Gagal update konten: " + err.message));
-    };
-
-    // Fungsi untuk mengupdate promo banner
-    window.updatePromoBanner = function () {
-      const promoBanner = {
-        title: document.getElementById("promoBannerTitle").value,
-        text: document.getElementById("promoBannerText").value,
-        imageUrl: document.getElementById("promoBannerImageUrl").value,
-        active: document.getElementById("promoBannerStatusInput").value === "true"
-      };
-      
-      set(promoBannerRef, promoBanner)
-        .then(() => alert("Promo banner berhasil diperbarui!"))
-        .catch(err => alert("Gagal update promo banner: " + err.message));
-    };
-
-    // Handle promo banner
-    const promoBanner = document.getElementById("promoBanner");
-    const promoTitle = document.getElementById("promoTitle");
-    const promoText = document.getElementById("promoText");
-    const promoBannerImage = document.getElementById("promoBannerImage");
-
-    // Pantau perubahan pada data promo banner
-    onValue(promoBannerRef, (snapshot) => {
-      const promoBannerData = snapshot.val();
-      
-      if (promoBannerData && promoBannerData.active) {
-        promoTitle.textContent = promoBannerData.title || "PROMO SPESIAL!";
-        promoText.textContent = promoBannerData.text || "Dapatkan penawaran menarik untuk pembelian Anda!";
-        
-        if (promoBannerData.imageUrl) {
-          promoBannerImage.src = promoBannerData.imageUrl;
-          promoBannerImage.style.display = "block";
-        } else {
-          promoBannerImage.style.display = "none";
-        }
-        
-        promoBanner.classList.add('active');
-      } else {
-        promoBanner.classList.remove('active');
-      }
-    });
-
-    // Handle promo gambar
-    const promoModal = document.getElementById("promoModal");
-    const promoImage = document.getElementById("promoImage");
-
-    // Pantau perubahan pada data promo
-    onValue(promoAktifRef, (snapshot) => {
-      const promoAktif = snapshot.val();
-      
-      onValue(promoImageRef, (imageSnapshot) => {
-        const imageUrl = imageSnapshot.val();
-        
-        // Cek apakah user sudah menutup promo untuk SESSION INI
-        const promoClosed = sessionStorage.getItem('promoClosed');
-        
-        // Tampilkan promo gambar jika status aktif, ada URL gambar, dan user belum menutupnya di session ini
-        if (promoAktif && imageUrl && promoClosed !== 'true') {
-          promoImage.src = imageUrl;
-          promoModal.classList.add('active');
-        } else {
-          promoModal.classList.remove('active');
-        }
-      });
-    });
-
-    // Muat konten website saat halaman dimuat
-    onValue(websiteContentRef, (snapshot) => {
-      const content = snapshot.val();
-      if (content) {
-        // Update konten website jika ada data
-        if (content.mainTitle) {
-          document.querySelector('header h1').textContent = content.mainTitle;
-        }
-        if (content.mainSubtitle) {
-          document.querySelector('header p').textContent = content.mainSubtitle;
-        }
-        if (content.introText) {
-          document.querySelector('section p').innerHTML = content.introText;
-        }
-        if (content.whatsappNumber) {
-          // Update nomor WhatsApp di bagian cara pemesanan
-          const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me/"]');
-          whatsappLinks.forEach(link => {
-            link.href = `https://wa.me/${content.whatsappNumber}`;
-          });
-          
-          // Update teks nomor WhatsApp
-          const whatsappTexts = document.querySelectorAll('ol li strong');
-          whatsappTexts.forEach(text => {
-            if (text.textContent.includes('628')) {
-              text.textContent = content.whatsappNumber;
+        // Cek maintenance mode
+        onValue(maintenanceRef, (snapshot) => {
+            const maintenanceData = snapshot.val();
+            if (maintenanceData && maintenanceData.enabled) {
+                // Redirect ke halaman maintenance
+                window.location.href = "maintenance.html";
             }
-          });
-        }
-      }
-    });
+        });
+    </script>
 
-    // Cek status admin saat halaman dimuat
-    checkAdminStatus();
-  </script>
+    <!-- Konten website normal -->
+    <div class="running-text-container" id="runningTextContainer" style="display: none;">
+        <div class="running-text" id="runningText"></div>
+    </div>
+
+    <!-- Promo Banner - FULL SCREEN -->
+    <div class="promo-banner" id="promoBanner">
+        <div class="promo-banner-content">
+            <button class="promo-banner-close" id="promoBannerClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 id="promoBannerTitle">Judul Promo</h3>
+            <p id="promoBannerText">Teks promo akan muncul di sini</p>
+            <img id="promoBannerImage" class="promo-banner-image" alt="Promo Banner">
+            <div class="promo-banner-actions">
+                <button class="btn-promo btn-promo-primary" id="promoBannerAction">
+                    <i class="fab fa-whatsapp"></i>
+                    Pesan Sekarang
+                </button>
+                <button class="btn-promo btn-promo-secondary" id="promoBannerCloseBtn">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <h1 id="mainTitle">Jasa Top Up BUSSID</h1>
+            <p id="mainSubtitle">Jasa Top Up Cepat, Murah, Aman!</p>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="nav-container" id="navContainer">
+        <button class="close-menu" id="closeMenu">&times;</button>
+        <a href="testimoni.html" class="nav-btn">
+            <i class="fas fa-comments"></i>
+            Testimoni
+        </a>
+        <a href="sc/sctopup.html" class="nav-btn">
+            <i class="fas fa-coins"></i>
+            SC Top Up BUSSID
+        </a>
+        <a href="sosmed.html" class="nav-btn">
+            <i class="fas fa-hashtag"></i>
+            Sosmed Admin
+        </a>
+        <a href="akun.html" class="nav-btn">
+            <i class="fas fa-user"></i>
+            Akun Bussid
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="kontak.html" class="nav-btn">
+            <i class="fas fa-phone"></i>
+            Kontak
+        </a>
+        <a href="https://revanStore-web.vercel.app" class="nav-btn">
+            <i class="fas fa-info-circle"></i>
+            Promo dan Informasi
+        </a>
+        
+        <a href="https://t.me/topupbussidrevanstore" class="nav-btn">
+            <i class="fas fa-paper-plane"></i>
+            Grub top up
+        </a>
+        
+        <a href="tentang-kami.html" class="nav-btn">
+            <i class="fas fa-users"></i>
+            Tentang Kami
+        </a>
+    </div>
+
+    <main>
+        <section>
+            <h2><i class="fas fa-bus"></i> Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
+            <p id="introText">Top Up BUSSID solusinya dengan kalian top up bussid duit kalian bisa bertambah dengan instan, dan kalian juga ga perlu narik secara manual. <strong>Ayo Top up Ub Sekarang</strong>.</p>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-bus"></i> Apa Itu Top Up BUSSID?</h2>
+            <p>Top Up BUSSID adalah layanan pembelian uang, untuk membeli berbagai macam item di game tersebut tanpa harus ngumpulin duit secara manual di <strong>Bus Simulator Indonesia</strong>.</p>
+        </section>
+        
+        <!-- Section Produk Gambar - YANG SUDAH DIPERBAIKI -->
+        <section id="produkGambarSection">
+            <h2><i class="fas fa-images"></i> Produk Kami</h2>
+            <p>Lihat berbagai pilihan paket top up BUSSID yang tersedia:</p>
+            <div class="produk-container" id="produkContainer">
+                <!-- Produk akan dimuat secara dinamis dari Firebase -->
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-money-bill-wave"></i> Daftar Harga</h2>
+            <ul class="harga" id="priceList">
+                <!-- Harga akan dimuat secara dinamis dari Firebase -->
+            </ul>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-shopping-cart"></i> Cara Pemesanan</h2>
+            <ol>
+                <li>Hubungi admin via WhatsApp: <strong id="whatsappNumber">6289520418604 / 6289630191806</strong>.</li>
+                <li>Pilih nominal top up sesuai daftar harga.</li>
+                <li>Lakukan pembayaran via DANA / OVO / GOPAY / Transfer Bank.</li>
+                <li>Proses dalam 1–5 menit setelah pembayaran!</li>
+            </ol>
+            <a href="#" id="whatsappLink" class="btn">
+                <i class="fab fa-whatsapp"></i>
+                Pesan Sekarang
+            </a>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-star"></i> Testimoni Pembeli</h2>
+            <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">
+                <i class="fas fa-users"></i>
+                Lihat Testimoni Pembeli
+            </a>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
+            <div class="accordion" id="faqContainer">
+                <!-- FAQ akan dimuat secara dinamis dari Firebase -->
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
+            <div class="warning-box">
+                <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
+                <ul>
+                    <li>Hanya gunakan nomor WhatsApp resmi admin: <span id="adminWhatsapp1">6289630191806</span> atau <span id="adminWhatsapp2">6289520418604</span></li>
+                    <li>Jangan berikan data akun ke siapapun kecuali admin! </li>
+                    <li>Transaksi hanya melalui WhatsApp admin</li>
+                    <li>Kami tidak bertanggung jawab jika transaksi dilakukan di luar store kami</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
+    </footer>
+
+    <script>
+        // Menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navContainer = document.getElementById('navContainer');
+        const overlay = document.getElementById('overlay');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        function toggleMenu() {
+            navContainer.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navContainer.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        menuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        closeMenu.addEventListener('click', toggleMenu);
+        
+        // Accordion functionality
+        function initAccordion() {
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+                });
+            });
+        }
+        
+        // Initialize accordion on page load
+        document.addEventListener('DOMContentLoaded', initAccordion);
+
+        // Promo banner close functionality
+        const promoBanner = document.getElementById('promoBanner');
+        const promoBannerClose = document.getElementById('promoBannerClose');
+        const promoBannerCloseBtn = document.getElementById('promoBannerCloseBtn');
+
+        function closePromoBanner() {
+            promoBanner.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        promoBannerClose.addEventListener('click', closePromoBanner);
+        promoBannerCloseBtn.addEventListener('click', closePromoBanner);
+
+        // Close promo banner when clicking outside
+        promoBanner.addEventListener('click', (e) => {
+            if (e.target === promoBanner) {
+                closePromoBanner();
+            }
+        });
+    </script>
+
+    <!-- Firebase script dengan perbaikan untuk produk dan promo banner -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+            authDomain: "paneladmin-83c8a.firebaseapp.com",
+            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+            projectId: "paneladmin-83c8a",
+            storageBucket: "paneladmin-83c8a.appspot.com",
+            messagingSenderId: "343729471216",
+            appId: "1:343729471216:web:14c357375fa83083c44c35",
+            measurementId: "G-E2G04E4KB5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Referensi untuk data konten website
+        const websiteContentRef = ref(db, "websiteContent");
+        const promoBannerRef = ref(db, "promoBanner");
+        const runningTextRef = ref(db, "runningText");
+        const produkRef = ref(db, "produk");
+        const hargaRef = ref(db, "harga");
+        const faqRef = ref(db, "faq");
+
+        // Handle running text
+        const runningTextContainer = document.getElementById("runningTextContainer");
+        const runningTextElement = document.getElementById("runningText");
+
+        // Handle promo banner
+        const promoBanner = document.getElementById("promoBanner");
+        const promoBannerTitle = document.getElementById("promoBannerTitle");
+        const promoBannerText = document.getElementById("promoBannerText");
+        const promoBannerImage = document.getElementById("promoBannerImage");
+        const promoBannerAction = document.getElementById("promoBannerAction");
+
+        // Pantau perubahan pada data running text
+        onValue(runningTextRef, (snapshot) => {
+            const runningTextData = snapshot.val();
+            
+            if (runningTextData && runningTextData.enabled && runningTextData.content) {
+                runningTextElement.textContent = runningTextData.content;
+                runningTextContainer.style.display = "block";
+                
+                // Atur kecepatan running text
+                if (runningTextData.speed) {
+                    const speedMap = { slow: '30s', normal: '25s', fast: '20s' };
+                    runningTextElement.style.animationDuration = speedMap[runningTextData.speed] || '25s';
+                }
+                
+                // Atur warna background jika ada
+                if (runningTextData.bgColor) {
+                    runningTextContainer.style.background = runningTextData.bgColor;
+                }
+                
+                // Atur warna teks jika ada
+                if (runningTextData.color) {
+                    runningTextElement.style.color = runningTextData.color;
+                }
+            } else {
+                runningTextContainer.style.display = "none";
+            }
+        });
+
+        // Pantau perubahan pada data promo banner
+        onValue(promoBannerRef, (snapshot) => {
+            const promoBannerData = snapshot.val();
+            
+            if (promoBannerData && promoBannerData.enabled) {
+                // Update konten promo banner
+                promoBannerTitle.textContent = promoBannerData.title || "Judul Promo";
+                promoBannerText.textContent = promoBannerData.text || "Teks promo akan muncul di sini";
+                
+                if (promoBannerData.image) {
+                    promoBannerImage.src = promoBannerData.image;
+                    promoBannerImage.classList.add("active");
+                    // Handle error gambar
+                    promoBannerImage.onerror = function() {
+                        this.style.display = 'none';
+                    };
+                } else {
+                    promoBannerImage.classList.remove("active");
+                }
+
+                // Set WhatsApp action
+                const whatsappNumber = document.getElementById("whatsappNumber").textContent.split(" / ")[0];
+                const message = "Halo, saya tertarik dengan promo yang sedang berlangsung";
+                promoBannerAction.onclick = () => {
+                    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                };
+
+                // Tampilkan promo banner
+                setTimeout(() => {
+                    promoBanner.classList.add("active");
+                    document.body.style.overflow = 'hidden';
+                }, 1000);
+            } else {
+                promoBanner.classList.remove("active");
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Handle produk gambar - PERBAIKAN BESAR
+        const produkContainer = document.getElementById("produkContainer");
+
+        // Pantau perubahan pada data produk
+        onValue(produkRef, (snapshot) => {
+            const produkData = snapshot.val();
+            produkContainer.innerHTML = "";
+            
+            if (produkData) {
+                Object.keys(produkData).forEach(key => {
+                    const produk = produkData[key];
+                    const produkCard = document.createElement("div");
+                    produkCard.className = "produk-card";
+                    
+                    // Tentukan nomor WhatsApp yang akan digunakan
+                    const whatsappNumber = produk.whatsappNumber || document.getElementById("whatsappNumber").textContent.split(" / ")[0];
+                    
+                    // Buat pesan WhatsApp
+                    let whatsappMessage = produk.whatsappText || "Halo, saya ingin membeli {nama_produk} seharga {harga_produk}";
+                    whatsappMessage = whatsappMessage
+                        .replace(/{nama_produk}/g, produk.name)
+                        .replace(/{harga_produk}/g, produk.price);
+                    
+                    // Encode pesan untuk URL
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                    
+                    // Tentukan apakah produk tersedia
+                    const isAvailable = produk.status === "tersedia";
+                    
+                    // Buat badge jika ada promo
+                    const badgeHTML = produk.promo ? `<div class="produk-badge">${produk.promo}</div>` : '';
+                    
+                    // Buat fitur produk
+                    let featuresHTML = '';
+                    if (produk.features && Array.isArray(produk.features)) {
+                        featuresHTML = `<div class="produk-features">${produk.features.map(fitur => `<span class="produk-feature">${fitur}</span>`).join('')}</div>`;
+                    }
+                    
+                    // Handle gambar produk dengan fallback
+                    const imageHTML = produk.image ? 
+                        `<img src="${produk.image}" alt="${produk.name}" class="produk-image" onerror="this.src='https://via.placeholder.com/300x180/00BFFF/FFFFFF?text=Gambar+Tidak+Tersedia'">` :
+                        `<img src="https://via.placeholder.com/300x180/00BFFF/FFFFFF?text=Gambar+Tidak+Tersedia" alt="${produk.name}" class="produk-image">`;
+                    
+                    produkCard.innerHTML = `
+                        ${badgeHTML}
+                        ${imageHTML}
+                        <div class="produk-info">
+                            <div class="produk-title">${produk.name}</div>
+                            <div class="produk-price">${produk.price}</div>
+                            ${featuresHTML}
+                            <div class="produk-description">${produk.description || 'Deskripsi produk akan ditampilkan di sini'}</div>
+                            <div class="produk-status ${isAvailable ? 'status-tersedia' : 'status-tidak-tersedia'}">
+                                ${isAvailable ? 'TERSEDIA' : 'TIDAK TERSEDIA'}
+                            </div>
+                            ${isAvailable ? 
+                                `<a href="${whatsappUrl}" class="btn btn-whatsapp" target="_blank" style="margin-top: 0.5rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                    ${produk.buttonText || "Beli Sekarang"}
+                                </a>` : 
+                                `<button class="btn btn-disabled" style="margin-top: 0.5rem;" disabled>
+                                    <i class="fas fa-times-circle"></i>
+                                    Tidak Tersedia
+                                </button>`
+                            }
+                        </div>
+                    `;
+                    produkContainer.appendChild(produkCard);
+                });
+                
+                // Jika tidak ada produk, tampilkan pesan
+                if (produkContainer.children.length === 0) {
+                    produkContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-light); padding: 2rem;">Tidak ada produk yang tersedia saat ini.</p>';
+                }
+            } else {
+                produkContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-light); padding: 2rem;">Tidak ada produk yang tersedia saat ini.</p>';
+            }
+        });
+
+        // Handle daftar harga
+        const priceListContainer = document.getElementById("priceList");
+
+        onValue(hargaRef, (snapshot) => {
+            const hargaData = snapshot.val();
+            priceListContainer.innerHTML = "";
+            
+            if (hargaData) {
+                Object.keys(hargaData).forEach(key => {
+                    const item = hargaData[key];
+                    if (item.status === "tersedia") {
+                        const li = document.createElement("li");
+                        li.innerHTML = `<span>${item.icon || "💵"} ${item.name}</span> <strong>${item.value}</strong>`;
+                        priceListContainer.appendChild(li);
+                    }
+                });
+            }
+            
+            // Jika tidak ada data harga, tampilkan default
+            if (priceListContainer.children.length === 0) {
+                const defaultHarga = [
+                    { name: "70JT UB", value: "Rp5.000", icon: "💵" },
+                    { name: "200JT UB", value: "Rp10.000", icon: "💵" },
+                    { name: "250JT UB", value: "Rp20.000", icon: "💵" },
+                    { name: "300JT UB", value: "Rp25.000", icon: "💵" },
+                    { name: "500JT UB", value: "Rp30.000", icon: "💵" },
+                    { name: "700JT UB", value: "Rp35.000", icon: "💵" },
+                    { name: "900JT UB", value: "Rp40.000", icon: "💵" },
+                    { name: "1MIL UB", value: "Rp45.000", icon: "💵" },
+                    { name: "2 MIL UB", value: "Rp50.000", icon: "💵" }
+                ];
+                
+                defaultHarga.forEach(item => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<span>${item.icon} ${item.name}</span> <strong>${item.value}</strong>`;
+                    priceListContainer.appendChild(li);
+                });
+            }
+        });
+
+        // Handle FAQ
+        const faqContainer = document.getElementById("faqContainer");
+
+        onValue(faqRef, (snapshot) => {
+            const faqData = snapshot.val();
+            faqContainer.innerHTML = "";
+            
+            if (faqData) {
+                Object.keys(faqData).forEach(key => {
+                    const faq = faqData[key];
+                    if (faq.status === "tersedia") {
+                        const accordionItem = document.createElement("div");
+                        accordionItem.className = "accordion-item";
+                        accordionItem.innerHTML = `
+                            <button class="accordion-button">${faq.question}</button>
+                            <div class="accordion-content">
+                                <p>${faq.answer}</p>
+                            </div>
+                        `;
+                        faqContainer.appendChild(accordionItem);
+                    }
+                });
+                
+                // Re-initialize accordion after adding new items
+                setTimeout(initAccordion, 100);
+            }
+            
+            // Jika tidak ada data FAQ, biarkan kosong
+            if (faqContainer.children.length === 0) {
+                faqContainer.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--text-light);">FAQ akan segera tersedia.</p>';
+            }
+        });
+
+        // Muat konten website saat halaman dimuat
+        onValue(websiteContentRef, (snapshot) => {
+            const content = snapshot.val();
+            if (content) {
+                // Update konten website jika ada data
+                if (content.siteTitle) {
+                    document.getElementById("mainTitle").textContent = content.siteTitle;
+                }
+                if (content.siteDescription) {
+                    document.getElementById("mainSubtitle").textContent = content.siteDescription;
+                }
+                if (content.introText) {
+                    document.getElementById("introText").innerHTML = content.introText;
+                }
+                if (content.whatsappNumber) {
+                    const whatsappNumber = content.whatsappNumber;
+                    document.getElementById("whatsappNumber").textContent = whatsappNumber;
+                    document.getElementById("adminWhatsapp1").textContent = whatsappNumber;
+                    document.getElementById("adminWhatsapp2").textContent = whatsappNumber;
+                    
+                    // Update WhatsApp link
+                    const whatsappLink = document.getElementById("whatsappLink");
+                    const message = "Assalamu'alaikum saya mau top up bussid";
+                    whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
