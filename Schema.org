@@ -1,0 +1,7 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Revan Store",
+  "url": "https://topupbussid.web.id",
+  "description": "Top Up BUSSID murah, cepat, dan terpercaya."
+}
