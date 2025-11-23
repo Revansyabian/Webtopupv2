@@ -1,107 +1,221 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Top Up BUSSID Termurah & Terpercaya 2025</title>
-  <meta name="description" content="Cari top up BUSSID murah, cepat, dan terpercaya? Baca panduan lengkapnya di sini.">
-  <meta name="keywords" content="top up bussid murah, top up bussid terpercaya, bussid 2025, bussid termurah">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
+  <title>Top Up BUSSID Murah & Aman | Proses Cepat 5 Menit</title><!-- Tambahkan ini di dalam <head> setelah meta tags yang sudah ada -->
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Service Worker & Push Notification Script -->
+<script src="push.js" defer></script>
+
+<!-- iOS Meta Tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="TopUp BUSSID">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/GmbgBPZ9/20250827-200754.png">
+
+  <!-- Favicon -->
+    <link rel="shortcut icon" href="https://i.postimg.cc/GmbgBPZ9/20250827-200754.png" type="image/x-icon">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Top Up BUSSID murah, cepat dan terpercaya. Layanan top up game BUSSID dengan proses instan hanya 5 menit. Harga termurah se-Indonesia dengan garansi aman.">
+  <meta name="keywords" content="top up bussid, jasa top up bussid murah, top up bussid cepat, top up game bussid, top up aman terpercaya, bussid indonesia, top up bussid murah dan aman">
+  <meta name="author" content="Top Up BUSSID Team">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f2f5;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      background: #008cff;
-      color: #fff;
-      padding: 1rem;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
       text-align: center;
+      position: relative;
+      overflow-x: hidden;
     }
-    nav {
-      background: #e0e0e0;
-      padding: 0.5rem;
-      text-align: center;
+
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      z-index: -1;
     }
-    nav a {
-      color: #000;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
+    
+    body::before {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      right: -100px;
     }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    
+    body::after {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      left: -50px;
     }
+
+    .logo-top {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,0.3);
+      background-color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 10;
+    }
+
+    .logo-top:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .logo-top img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
     h1 {
-      color: #008cff;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.8s ease;
     }
-    ul {
-      background: #f9f9f9;
-      padding: 1rem;
-      border-radius: 8px;
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      padding: 0 20px;
+      line-height: 1.6;
+      opacity: 0.9;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
     }
-    ul li {
-      margin-bottom: 0.5rem;
+
+    .button {
+      background-color: white;
+      color: #0072ff;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+      opacity: 0;
     }
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-top: 1rem;
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 14px;
-      color: #555;
+
+    .button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.3), transparent);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .button:hover::after {
+      transform: translateY(0);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+      
+      .button {
+        padding: 14px 35px;
+      }
     }
   </style>
 </head>
 <body>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  <header>
-    <h1>Top Up BUSSID Termurah & Terpercaya 2025</h1>
-  </header>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+            authDomain: "paneladmin-83c8a.firebaseapp.com",
+            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+            projectId: "paneladmin-83c8a",
+            storageBucket: "paneladmin-83c8a.appspot.com",
+            messagingSenderId: "343729471216",
+            appId: "1:343729471216:web:14c357375fa83083c44c35",
+            measurementId: "G-E2G04E4KB5"
+        };
 
-  <div class="container">
-    <p>
-      Lagi cari <strong>top up BUSSID</strong> yang murah, aman, dan cepat? Tenang bro, kamu datang ke tempat yang tepat!
-    </p>
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const maintenanceRef = ref(db, "maintenance");
 
-    <h2>🔥 Kenapa Top Up di Sini?</h2>
-    <ul>
-      <li>💸 Harga mulai 5.000 aja Udah dapet ub 70jt!</li>
-      <li>⚡ Proses cepat cuma 1-5 menit</li>
-      <li>✅ Terbukti terpercaya, banyak testimoni</li>
-      <li>💳 Bisa bayar lewat Dana,Qris all payment</li>
-    </ul>
+        // Cek maintenance mode
+        onValue(maintenanceRef, (snapshot) => {
+            const maintenanceData = snapshot.val();
+            if (maintenanceData && maintenanceData.enabled) {
+                // Redirect ke halaman maintenance
+                window.location.href = "maintenance.html";
+            }
+        });
+    </script>
 
-    <h2>📌 Cara Pesan Gampang Silakan Hubungi Admin</h2>
-    <p>
-      <a href="https://wa.me/6289520418604" class="btn">Pesan Sekarang</a>
-    </p>
-
-    <h2>🌟 Testimoni Pembeli</h2>
-    <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank">
-      Lihat Testimoni Pembeli
-
-    <h2>🎯 Tips Tambahan</h2>
-    <p>
-      Gunakan akun BUSSID utama kamu saat top up biar saldo nggak nyasar. Simpan bukti pembayaran untuk jaga-jaga.
-    </p>
-
-    <p><strong>Ayo buruan top up sekarang sebelum kehabisan promo!</strong></p>
+  <div class="logo-top">
+    <img src="https://i.postimg.cc/nrfSZWmP/file-00000000d29861f895e12e2a67d02858.png" alt="Logo Top Up BUSSID">
   </div>
 
-  <footer>
-    &copy;Top Up bussid termurah 2025
-  </footer>
+  <h1>Selamat Datang di Web Top Up BUSSID!</h1>
+  <p><strong>Silakan pencet tombol di bawah untuk melihat cara pemesanan dan harga Top Up-nya</strong></p>
+  <a href="welcome.html" class="button">Masuk ke Halaman Utama
 
 </body>
 </html>
