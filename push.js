@@ -1,62 +1,66 @@
-// push.js - Logic untuk Push Notification (Auto Request)
+// push.js - FIXED Version dengan notifikasi lokal
 class PushNotificationManager {
     constructor() {
-        // VAPID Public Key - Ganti dengan key kamu
-        this.vapidPublicKey = 'BNNABHyTxkB4XT2Je9yJ_0bDtRtf1jEXiQvuWqL0Q20k0RtMZTkyk3U54wu19JHCCCd8pZE0FtK1raFGR6fo9fQ';
         this.isSubscribed = false;
         this.swRegistration = null;
         
-        console.log('PushNotificationManager initialized');
+        console.log('🔔 PushNotificationManager initialized');
         
-        // Delay 3 detik biar user lihat website dulu
-        setTimeout(() => {
-            this.init();
-        }, 3000);
+        // Coba init langsung
+        this.init();
     }
 
     async init() {
         try {
-            console.log('Initializing push notification...');
+            console.log('🔍 Checking browser support...');
             
             if (!this.checkBrowserSupport()) {
-                console.log('Browser tidak support push notification');
+                console.log('❌ Browser tidak support push notification');
+                this.showUnsupportedMessage();
                 return;
             }
 
             await this.registerServiceWorker();
             await this.checkSubscription();
             
-            // Auto request permission jika belum ada
-            if (!this.isSubscribed) {
-                await this.autoRequestPermission();
-            }
+            console.log('✅ Push notification system ready');
             
         } catch (error) {
-            console.error('Error initializing push notification:', error);
+            console.error('❌ Error initializing:', error);
         }
     }
 
     checkBrowserSupport() {
-        const isSupported = (
-            'serviceWorker' in navigator &&
-            'PushManager' in window &&
-            'Notification' in window
-        );
-        
-        console.log('Browser support check:', isSupported);
-        return isSupported;
+        const supported = 'serviceWorker' in navigator && 'Notification' in window;
+        console.log('🌐 Browser support:', supported);
+        return supported;
     }
 
     async registerServiceWorker() {
         try {
-            this.swRegistration = await navigator.serviceWorker.register('/sw.js', {
-                scope: '/'
-            });
-            console.log('Service Worker registered successfully:', this.swRegistration);
+            this.swRegistration = await navigator.serviceWorker.register('/sw.js');
+            console.log('✅ Service Worker registered:', this.swRegistration);
+            
+            // Tunggu sampai SW aktif
+            await this.waitForServiceWorkerActivation();
+            
         } catch (error) {
-            console.error('Service Worker registration failed:', error);
+            console.error('❌ SW registration failed:', error);
             throw error;
         }
+    }
+
+    async waitForServiceWorkerActivation() {
+        return new Promise((resolve) => {
+            if (this.swRegistration.active) {
+                resolve();
+            } else {
+                this.swRegistration.addEventListener('activate', () => {
+                    console.log('🎯 Service Worker now active');
+                    resolve();
+                });
+            }
+        });
     }
 
     async checkSubscription() {
@@ -64,256 +68,193 @@ class PushNotificationManager {
 
         try {
             const subscription = await this.swRegistration.pushManager.getSubscription();
-            this.isSubscribed = !(subscription === null);
-            
-            console.log('Subscription status:', this.isSubscribed);
-            
-            if (this.isSubscribed) {
-                console.log('User sudah subscribe push notification:', subscription);
-                await this.sendSubscriptionToServer(subscription);
-            }
+            console.log('📋 Current subscription:', subscription);
+            this.isSubscribed = !!subscription;
         } catch (error) {
-            console.error('Error checking subscription:', error);
+            console.error('❌ Error checking subscription:', error);
         }
     }
 
-    async autoRequestPermission() {
+    // Manual request function untuk testing
+    async requestPermissionManually() {
         try {
-            console.log('Auto requesting notification permission...');
+            console.log('🔄 Requesting notification permission...');
             
-            // Cek dulu permission status
-            if (Notification.permission === 'default') {
-                console.log('Permission is default, requesting...');
-                
-                const permission = await Notification.requestPermission();
-                console.log('Permission result:', permission);
-                
-                if (permission === 'granted') {
-                    console.log('Permission granted, subscribing user...');
-                    await this.subscribeUser();
-                } else {
-                    console.log('Permission denied:', permission);
-                }
-            } else if (Notification.permission === 'granted' && !this.isSubscribed) {
-                console.log('Permission already granted, subscribing user...');
-                await this.subscribeUser();
+            const permission = await Notification.requestPermission();
+            console.log('📝 Permission result:', permission);
+            
+            if (permission === 'granted') {
+                await this.showTestNotification();
+                this.showSuccessMessage('Izin notifikasi diberikan! 🎉');
+            } else if (permission === 'denied') {
+                this.showErrorMessage('Izin notifikasi ditolak. Silakan buka pengaturan browser untuk mengizinkan notifikasi.');
             } else {
-                console.log('Permission status:', Notification.permission);
+                this.showInfoMessage('Izin notifikasi ditunda. Klik tombol lagi untuk mencoba.');
             }
-            
         } catch (error) {
-            console.error('Error in auto request permission:', error);
+            console.error('❌ Error requesting permission:', error);
+            this.showErrorMessage('Error: ' + error.message);
         }
     }
 
-    async subscribeUser() {
-        try {
-            console.log('Subscribing user to push notifications...');
-            
-            const subscription = await this.swRegistration.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: this.urlBase64ToUint8Array(this.vapidPublicKey)
-            });
-
-            this.isSubscribed = true;
-            console.log('User berhasil subscribe:', subscription);
-            
-            await this.sendSubscriptionToServer(subscription);
-            
-            // Show subtle success message
-            this.showSubtleSuccess();
-            
-        } catch (error) {
-            console.error('Failed to subscribe user:', error);
-            
-            if (error.name === 'NotAllowedError') {
-                console.log('User denied permission');
-            }
-        }
-    }
-
-    async sendSubscriptionToServer(subscription) {
-        try {
-            // Simpan di localStorage dulu
-            const subsData = {
-                endpoint: subscription.endpoint,
-                keys: subscription.toJSON().keys,
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                platform: navigator.platform
-            };
-            
-            localStorage.setItem('pushSubscription', JSON.stringify(subsData));
-            console.log('Subscription saved locally');
-            
-            // Juga simpan di Firebase
-            await this.saveSubscriptionToFirebase(subsData);
-            
-        } catch (error) {
-            console.error('Error saving subscription:', error);
-            // Coba simpan ke localStorage saja
+    async showTestNotification() {
+        console.log('🎪 Showing test notification...');
+        
+        if (this.swRegistration && this.swRegistration.active) {
             try {
-                localStorage.setItem('pushSubscription_backup', JSON.stringify({
-                    endpoint: subscription.endpoint,
-                    timestamp: new Date().toISOString()
-                }));
-            } catch (e) {
-                console.error('Failed to backup subscription:', e);
-            }
-        }
-    }
-
-    async saveSubscriptionToFirebase(subscription) {
-        try {
-            console.log('Saving subscription to Firebase...');
-            
-            const response = await fetch('https://paneladmin-83c8a-default-rtdb.firebaseio.com/pushSubscriptions.json', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                'Accept': 'application/json'
-                },
-                body: JSON.stringify(subscription)
-            });
-            
-            console.log('Firebase response status:', response.status);
-            
-            if (response.ok) {
-                const result = await response.json();
-                console.log('Subscription saved to Firebase:', result);
-                return true;
-            } else {
-                console.error('Failed to save to Firebase:', response.status);
-                return false;
-            }
-        } catch (error) {
-            console.error('Error saving to Firebase:', error);
-            return false;
-        }
-    }
-
-    showSubtleSuccess() {
-        console.log('Showing success message...');
-        
-        // Buat subtle notification di corner
-        const successMsg = document.createElement('div');
-        successMsg.innerHTML = `
-            <div style="
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #28a745;
-                color: white;
-                padding: 12px 18px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                z-index: 10000;
-                font-size: 14px;
-                font-weight: 500;
-                animation: slideInRight 0.3s ease;
-                border-left: 4px solid #1e7e34;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                max-width: 300px;
-            ">
-                <span style="font-size: 16px;">🔔</span>
-                <span>Notifikasi diaktifkan! Anda akan mendapatkan promo terbaru.</span>
-            </div>
-        `;
-        
-        document.body.appendChild(successMsg);
-        
-        // Auto remove setelah 4 detik
-        setTimeout(() => {
-            if (successMsg.parentNode) {
-                successMsg.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => {
-                    if (successMsg.parentNode) {
-                        successMsg.remove();
-                    }
-                }, 300);
-            }
-        }, 4000);
-    }
-
-    urlBase64ToUint8Array(base64String) {
-        try {
-            // Clean the base64 string
-            const cleanedBase64 = base64String
-                .replace(/\-/g, '+')
-                .replace(/_/g, '/');
-            
-            const padding = '='.repeat((4 - cleanedBase64.length % 4) % 4);
-            const base64 = (cleanedBase64 + padding);
-            
-            const rawData = atob(base64);
-            const outputArray = new Uint8Array(rawData.length);
-
-            for (let i = 0; i < rawData.length; ++i) {
-                outputArray[i] = rawData.charCodeAt(i);
-            }
-            return outputArray;
-        } catch (error) {
-            console.error('Error converting base64 to Uint8Array:', error);
-            throw error;
-        }
-    }
-
-    // Test notification (untuk development)
-    async testLocalNotification() {
-        if (this.isSubscribed && this.swRegistration) {
-            try {
-                await this.swRegistration.showNotification('Test Notifikasi Berhasil! 🎉', {
-                    body: 'Push notification berhasil diaktifkan. Anda akan menerima promo terbaru dari Top Up BUSSID.',
+                // Method 1: Via Service Worker message (lebih reliable)
+                this.swRegistration.active.postMessage({
+                    type: 'SHOW_NOTIFICATION',
+                    title: 'Test Berhasil! 🎉',
+                    body: 'Notifikasi dari Top Up BUSSID berhasil diaktifkan. Anda akan mendapatkan promo terbaru!',
                     icon: 'https://i.postimg.cc/GmbgBPZ9/20250827-200754.png',
-                    badge: 'https://i.postimg.cc/GmbgBPZ9/20250827-200754.png',
                     image: 'https://i.postimg.cc/nrfSZWmP/file-00000000d29861f895e12e2a67d02858.png',
-                    data: { url: window.location.href },
-                    actions: [
-                        {
-                            action: 'open',
-                            title: 'Buka Website'
-                        },
-                        {
-                            action: 'close',
-                            title: 'Tutup'
-                        }
-                    ],
-                    tag: 'test-notification',
-                    requireInteraction: true,
-                    vibrate: [200, 100, 200]
+                    url: window.location.href
                 });
-                console.log('Test notification shown successfully');
+                
+                console.log('✅ Test notification sent to Service Worker');
+                
             } catch (error) {
-                console.error('Error showing test notification:', error);
+                console.error('❌ Error with SW method:', error);
+                
+                // Method 2: Fallback ke direct API
+                try {
+                    await this.showDirectNotification();
+                } catch (fallbackError) {
+                    console.error('❌ Fallback also failed:', fallbackError);
+                }
             }
         } else {
-            console.log('Cannot show test notification - not subscribed or no service worker');
+            console.log('❌ Service Worker not active, using direct method');
+            await this.showDirectNotification();
         }
     }
 
-    // Unsubscribe user (optional)
-    async unsubscribeUser() {
-        try {
-            const subscription = await this.swRegistration.pushManager.getSubscription();
-            if (subscription) {
-                await subscription.unsubscribe();
-                this.isSubscribed = false;
-                localStorage.removeItem('pushSubscription');
-                console.log('User unsubscribed successfully');
-            }
-        } catch (error) {
-            console.error('Error unsubscribing:', error);
+    async showDirectNotification() {
+        // Method langsung (tanpa Service Worker)
+        if ('Notification' in window && Notification.permission === 'granted') {
+            const notification = new Notification('Test Berhasil! 🎉', {
+                body: 'Notifikasi dari Top Up BUSSID berhasil diaktifkan!',
+                icon: 'https://i.postimg.cc/GmbgBPZ9/20250827-200754.png',
+                image: 'https://i.postimg.cc/nrfSZWmP/file-00000000d29861f895e12e2a67d02858.png',
+                badge: 'https://i.postimg.cc/GmbgBPZ9/20250827-200754.png',
+                tag: 'direct-test'
+            });
+            
+            notification.onclick = function() {
+                window.focus();
+                this.close();
+            };
+            
+            console.log('✅ Direct notification shown');
         }
+    }
+
+    showSuccessMessage(message) {
+        this.showMessage(message, 'success');
+    }
+
+    showErrorMessage(message) {
+        this.showMessage(message, 'error');
+    }
+
+    showInfoMessage(message) {
+        this.showMessage(message, 'info');
+    }
+
+    showUnsupportedMessage() {
+        this.showMessage('Browser tidak mendukung notifikasi', 'warning');
+    }
+
+    showMessage(message, type = 'info') {
+        const messageDiv = document.createElement('div');
+        const bgColor = type === 'success' ? '#28a745' : 
+                        type === 'error' ? '#dc3545' : 
+                        type === 'warning' ? '#ffc107' : '#17a2b8';
+        
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${bgColor};
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-size: 14px;
+            font-weight: 500;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+        `;
+        
+        messageDiv.textContent = message;
+        document.body.appendChild(messageDiv);
+        
+        setTimeout(() => {
+            messageDiv.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 300);
+        }, 4000);
     }
 }
 
 // Initialize ketika DOM ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing PushNotificationManager...');
+    console.log('📄 DOM loaded, initializing PushNotificationManager...');
     window.pushManager = new PushNotificationManager();
+    
+    // Tambahkan button manual untuk testing
+    setTimeout(() => {
+        addTestButton();
+    }, 1000);
 });
+
+function addTestButton() {
+    // Cek jika button sudah ada
+    if (document.getElementById('testNotifBtn')) return;
+    
+    const testBtn = document.createElement('button');
+    testBtn.id = 'testNotifBtn';
+    testBtn.innerHTML = '🔔 Test Notifikasi';
+    testBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: linear-gradient(135deg, #0072ff, #00c6ff);
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 10000;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+        transition: all 0.3s ease;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    `;
+    
+    testBtn.onmouseover = function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 20px rgba(0, 114, 255, 0.4)';
+    };
+    
+    testBtn.onmouseout = function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 15px rgba(0, 114, 255, 0.3)';
+    };
+    
+    testBtn.onclick = () => {
+        if (window.pushManager) {
+            window.pushManager.requestPermissionManually();
+        }
+    };
+    
+    document.body.appendChild(testBtn);
+}
 
 // CSS untuk animation
 const style = document.createElement('style');
@@ -339,14 +280,5 @@ style.textContent = `
             opacity: 0;
         }
     }
-    
-    .notification-success {
-        animation: slideInRight 0.3s ease !important;
-    }
 `;
 document.head.appendChild(style);
-
-// Export untuk testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = PushNotificationManager;
-}
