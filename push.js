@@ -2,7 +2,7 @@
 class PushNotificationManager {
     constructor() {
         // VAPID Public Key - Ganti dengan key kamu
-        this.vapidPublicKey = 'BLx1xJ3n7rH7eL2YQc7W6V5U4T3S2R1P0O9N8M7L6K5J4I3H2G1F0E1D2C3B4A5';
+        this.vapidPublicKey = 'BNNABHyTxkB4XT2Je9yJ_0bDtRtf1jEXiQvuWqL0Q20k0RtMZTkyk3U54wu19JHCCCd8pZE0FtK1raFGR6fo9fQ';
         this.isSubscribed = false;
         this.swRegistration = null;
         
