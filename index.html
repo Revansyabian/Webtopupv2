@@ -15,34 +15,15 @@
   <meta name="author" content="Top Up BUSSID Team">
   <meta name="robots" content="index, follow, max-image-preview:large">
 
-  <!-- OneSignal Push Notification -->
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"></script>
-  <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: "db2ca7f4-62fa-4ae1-97a3-fa3885f821c4", // App ID Anda
-        allowLocalhostAsSecureOrigin: true,
-        
-        // Auto prompt setelah 3 detik
-        promptOptions: {
-          slidedown: {
-            enabled: true,
-            autoPrompt: true,
-            pageViews: 1,
-            timeDelay: 3
-          }
-        }
-      });
-      
-      // Cek status notifikasi
-      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        if (isEnabled) {
-          console.log("User sudah subscribe notifikasi");
-        }
-      });
+ <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "db2ca7f4-62fa-4ae1-97a3-fa3885f821c4",
     });
-  </script>
+  });
+</script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
