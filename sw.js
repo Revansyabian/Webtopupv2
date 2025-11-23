@@ -1,30 +1,29 @@
-// sw.js - Service Worker untuk Push Notification
+// sw.js - Service Worker FIXED
 self.addEventListener('install', function(event) {
-    console.log('Service Worker installed');
+    console.log('🚀 Service Worker installed');
     self.skipWaiting();
 });
 
 self.addEventListener('activate', function(event) {
-    console.log('Service Worker activated');
-    return self.clients.claim();
+    console.log('✅ Service Worker activated');
+    event.waitUntil(self.clients.claim());
 });
 
-// Handle Push Notification
+// Handle Push Notification dari server
 self.addEventListener('push', function(event) {
-    console.log('Push event received', event);
+    console.log('📩 Push event received', event);
     
     if (!event.data) {
-        console.log('No data in push event');
+        console.log('❌ No data in push event');
         return;
     }
     
     let data;
     try {
         data = event.data.json();
-        console.log('Push data:', data);
+        console.log('📊 Push data:', data);
     } catch (error) {
-        console.log('Error parsing push data:', error);
-        // Fallback untuk data plain text
+        console.log('❌ Error parsing push data:', error);
         data = {
             title: 'Top Up BUSSID',
             body: event.data.text() || 'Notifikasi baru dari Top Up BUSSID'
@@ -50,84 +49,69 @@ self.addEventListener('push', function(event) {
             }
         ],
         tag: data.tag || 'bussid-notification',
-        requireInteraction: true,
-        vibrate: [200, 100, 200]
+        requireInteraction: true
     };
 
-    console.log('Showing notification with options:', options);
+    console.log('📨 Showing notification:', options);
 
     event.waitUntil(
         self.registration.showNotification(data.title || 'Top Up BUSSID', options)
-            .then(() => console.log('Notification shown successfully'))
-            .catch(error => console.error('Error showing notification:', error))
     );
+});
+
+// Handle notifikasi yang dikirim dari client (browser)
+self.addEventListener('message', function(event) {
+    console.log('💬 Message received in SW:', event.data);
+    
+    if (event.data && event.data.type === 'SHOW_NOTIFICATION') {
+        const { title, body, icon, image, url } = event.data;
+        
+        const options = {
+            body: body || 'Notifikasi dari Top Up BUSSID',
+            icon: icon || 'https://i.postimg.cc/GmbgBPZ9/20250827-200754.png',
+            badge: 'https://i.postimg.cc/GmbgBPZ9/20250827-200754.png',
+            image: image,
+            data: {
+                url: url || '/'
+            },
+            actions: [
+                {
+                    action: 'open',
+                    title: 'Buka Website'
+                },
+                {
+                    action: 'close',
+                    title: 'Tutup'
+                }
+            ],
+            tag: 'client-notification',
+            requireInteraction: true
+        };
+
+        console.log('📨 Showing client notification:', title, options);
+
+        event.waitUntil(
+            self.registration.showNotification(title || 'Top Up BUSSID', options)
+        );
+    }
 });
 
 // Handle Klik Notification
 self.addEventListener('notificationclick', function(event) {
-    console.log('Notification clicked', event);
+    console.log('🖱️ Notification clicked', event.notification);
     event.notification.close();
 
-    let url = event.notification.data.url || '/';
-    
-    // Ensure URL is absolute
-    if (!url.startsWith('http')) {
-        url = self.location.origin + url;
-    }
+    const url = event.notification.data.url || '/';
 
     if (event.action === 'open') {
         event.waitUntil(
             clients.openWindow(url)
-                .then(() => console.log('Opened URL:', url))
-                .catch(error => console.error('Error opening URL:', error))
         );
     } else if (event.action === 'close') {
         console.log('Notification closed by user');
     } else {
-        // Default action ketika notification diklik
         event.waitUntil(
             clients.openWindow(url)
-                .then(() => console.log('Opened URL (default):', url))
-                .catch(error => console.error('Error opening URL (default):', error))
         );
     }
 });
-
-// Handle Notification Close
-self.addEventListener('notificationclose', function(event) {
-    console.log('Notification closed', event);
-});
-
-// Background Sync untuk mengirim subscription ke server
-self.addEventListener('sync', function(event) {
-    console.log('Background sync:', event.tag);
-    if (event.tag === 'send-subscription') {
-        event.waitUntil(sendSubscriptionToServer());
-    }
-});
-
-async function sendSubscriptionToServer() {
-    try {
-        const subscription = await self.registration.pushManager.getSubscription();
-        if (subscription) {
-            const response = await fetch('https://paneladmin-83c8a-default-rtdb.firebaseio.com/pushSubscriptions.json', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    endpoint: subscription.endpoint,
-                    keys: subscription.toJSON().keys,
-                    userAgent: navigator.userAgent,
-                    timestamp: new Date().toISOString()
-                })
-            });
-            
-            if (response.ok) {
-                console.log('Subscription saved to Firebase via background sync');
-            }
-        }
-    } catch (error) {
-        console.error('Error in background sync:', error);
-    }
-}
