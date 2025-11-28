@@ -1494,35 +1494,11 @@ input[type="tel"]:focus {
 </head>
 <body>
     <!-- Maintenance Redirect Script -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
-            authDomain: "paneladmin-83c8a.firebaseapp.com",
-            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
-            projectId: "paneladmin-83c8a",
-            storageBucket: "paneladmin-83c8a.appspot.com",
-            messagingSenderId: "343729471216",
-            appId: "1:343729471216:web:14c357375fa83083c44c35",
-            measurementId: "G-E2G04E4KB5"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const maintenanceRef = ref(db, "maintenance");
-
-        // Cek maintenance mode
-        onValue(maintenanceRef, (snapshot) => {
-            const maintenanceData = snapshot.val();
-            if (maintenanceData && maintenanceData.enabled) {
-                // Redirect ke halaman maintenance
-                window.location.href = "maintenance.html";
-            }
-        });
-    </script>
-
+    <script>
+var _0x3d2b=['aW5pdGlhbGl6ZUFwcA==','Z2V0RGF0YWJhc2U=','cmVm','b25WYWx1ZQ==','dmFs','ZW5hYmxlZA==','bG9jYXRpb24=','aHJlZg==','bWFpbnRlbmFuY2UuaHRtbA==','bWFpbnRlbmFuY2U=','YXBpS2V5','YXV0aERvbWFpbg==','ZGF0YWJhc2VVUkw=','cHJvamVjdElk','c3RvcmFnZUJ1Y2tldA==','bWVzc2FnaW5nU2VuZGVySWQ=','YXBwSWQ=','bWVhc3VyZW1lbnRJZA=='];(function(_0x4c3f8a,_0x3d2b2f){var _0x5a8c23=function(_0x2b5a4d){while(--_0x2b5a4d){_0x4c3f8a['push'](_0x4c3f8a['shift']());}};_0x5a8c23(++_0x3d2b2f);}(_0x3d2b,0x1b4));var _0x5a8c=function(_0x4c3f8a,_0x3d2b2f){_0x4c3f8a=_0x4c3f8a-0x0;var _0x5a8c23=_0x3d2b[_0x4c3f8a];if(_0x5a8c['ZJhVTM']===undefined){(function(){var _0x4e28b8=function(){var _0x2c54d2;try{_0x2c54d2=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x5a1a3c){_0x2c54d2=window;}return _0x2c54d2;};var _0x1e7a8a=_0x4e28b8();var _0x36d8d0='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x1e7a8a['atob']||(_0x1e7a8a['atob']=function(_0x5a8c70){var _0x2b5a4d=String(_0x5a8c70)['replace'](/=+$/,'');for(var _0x4c3f8a=0x0,_0x3d2b2f,_0x2c54d2,_0x5a1a3c=0x0,_0x1b5e2c='';_0x2c54d2=_0x2b5a4d['charAt'](_0x5a1a3c++);~_0x2c54d2&&(_0x3d2b2f=_0x4c3f8a%0x4?_0x3d2b2f*0x40+_0x2c54d2:_0x2c54d2,_0x4c3f8a++%0x4)?_0x1b5e2c+=String['fromCharCode'](0xff&_0x3d2b2f>>(-0x2*_0x4c3f8a&0x6)):0x0){_0x2c54d2=_0x36d8d0['indexOf'](_0x2c54d2);}return _0x1b5e2c;});}());_0x5a8c['base64DecodeUnicode']=function(_0x2f3d8e){var _0x3a90b6=atob(_0x2f3d8e);var _0x4b4e8e=[];for(var _0x4e28b8=0x0,_0x1e7a8a=_0x3a90b6['length'];_0x4e28b8<_0x1e7a8a;_0x4e28b8++){_0x4b4e8e+='%'+('00'+_0x3a90b6['charCodeAt'](_0x4e28b8)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4b4e8e);};_0x5a8c['data']={};_0x5a8c['ZJhVSM']=!![];}var _0x2f3d8e=_0x5a8c['data'][_0x4c3f8a];if(_0x2f3d8e===undefined){_0x5a8c23=_0x5a8c['base64DecodeUnicode'](_0x5a8c23);_0x5a8c['data'][_0x4c3f8a]=_0x5a8c23;}else{_0x5a8c23=_0x2f3d8e;}return _0x5a8c23;};const firebaseConfig={[_0x5a8c('0xa')]:'AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k',[_0x5a8c('0xb')]:'paneladmin-83c8a.firebaseapp.com',[_0x5a8c('0xc')]:'https://paneladmin-83c8a-default-rtdb.firebaseio.com',[_0x5a8c('0xd')]:'paneladmin-83c8a',[_0x5a8c('0xe')]:'paneladmin-83c8a.appspot.com',[_0x5a8c('0xf')]:'343729471216',[_0x5a8c('0x10')]:'1:343729471216:web:14c357375fa83083c44c35',[_0x5a8c('0x11')]:'G-E2G04E4KB5'};const app=firebase['initializeApp'](firebaseConfig);const db=firebase['database']();const maintenanceRef=db['ref'](_0x5a8c('0x9'));maintenanceRef['on']('value',_0x1b5e2c=>{const _0x3a90b6=_0x1b5e2c[_0x5a8c('0x4')]();if(_0x3a90b6&&_0x3a90b6[_0x5a8c('0x5')]){window[_0x5a8c('0x6')][_0x5a8c('0x7')]=_0x5a8c('0x8');}});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
     <!-- Modal untuk gambar produk -->
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
