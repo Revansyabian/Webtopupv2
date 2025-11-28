@@ -1494,37 +1494,35 @@ input[type="tel"]:focus {
 </head>
 <body>
     <!-- Maintenance Redirect Script -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
-<script>
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
-    authDomain: "paneladmin-83c8a.firebaseapp.com",
-    databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
-    projectId: "paneladmin-83c8a",
-    storageBucket: "paneladmin-83c8a.appspot.com",
-    messagingSenderId: "343729471216",
-    appId: "1:343729471216:web:14c357375fa83083c44c35",
-    measurementId: "G-E2G04E4KB5"
-};
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+        const firebaseConfig = {
+            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+            authDomain: "paneladmin-83c8a.firebaseapp.com",
+            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+            projectId: "paneladmin-83c8a",
+            storageBucket: "paneladmin-83c8a.appspot.com",
+            messagingSenderId: "343729471216",
+            appId: "1:343729471216:web:14c357375fa83083c44c35",
+            measurementId: "G-E2G04E4KB5"
+        };
 
-// Check maintenance mode
-const maintenanceRef = db.ref("maintenance");
-maintenanceRef.on('value', (snapshot) => {
-    const maintenanceData = snapshot.val();
-    if (maintenanceData && maintenanceData.enabled) {
-        // Redirect to maintenance page
-        window.location.href = "maintenance.html";
-    }
-});
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const maintenanceRef = ref(db, "maintenance");
+
+        // Cek maintenance mode
+        onValue(maintenanceRef, (snapshot) => {
+            const maintenanceData = snapshot.val();
+            if (maintenanceData && maintenanceData.enabled) {
+                // Redirect ke halaman maintenance
+                window.location.href = "maintenance.html";
+            }
+        });
+    </script>
+
     <!-- Modal untuk gambar produk -->
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
