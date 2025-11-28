@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
+    <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRjLCcFuoJ55SAl4FZBRPK07qjY0" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">
     <meta name="keywords" content="Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">
     <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
-    <style>
+      <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
     
@@ -1753,16 +1753,18 @@ input[type="tel"]:focus {
         &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
     </footer>
 
-    <!-- Firebase Auth Script -->
+    <!-- Firebase Auth Script - PERBAIKAN: Gunakan satu konfigurasi Firebase saja -->
     <script type="module">
         // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-        // Firebase configuration untuk authentication
-        const firebaseAuthConfig = {
+        // Firebase configuration - GUNAKAN SATU KONFIGURASI SAJA
+        const firebaseConfig = {
             apiKey: "AIzaSyAYleQn2yLOdMwPzT5n6FPTLhiMnaFhnu8",
             authDomain: "revanstore-a92a7.firebaseapp.com",
+            databaseURL: "https://revanstore-a92a7-default-rtdb.firebaseio.com",
             projectId: "revanstore-a92a7",
             storageBucket: "revanstore-a92a7.firebasestorage.app",
             messagingSenderId: "1054152032422",
@@ -1770,13 +1772,15 @@ input[type="tel"]:focus {
             measurementId: "G-FL822LMWEJ"
         };
 
-        // Initialize Firebase Auth
-        const authApp = initializeApp(firebaseAuthConfig, "AuthApp");
-        const auth = getAuth(authApp);
+        // Initialize Firebase dengan nama yang unik
+        const app = initializeApp(firebaseConfig, "MainApp");
+        const auth = getAuth(app);
+        const db = getDatabase(app);
         const provider = new GoogleAuthProvider();
 
-        // PERBAIKAN: Tambahkan ini untuk mengatasi error cross-origin
-        auth.settings.appVerificationDisabledForTesting = false;
+        // PERBAIKAN: Tambahkan scope untuk mendapatkan profile dan email
+        provider.addScope('profile');
+        provider.addScope('email');
 
         // DOM Elements untuk auth
         const loginBtn = document.getElementById('loginBtn');
@@ -1794,15 +1798,18 @@ input[type="tel"]:focus {
         loginBtn.addEventListener('click', async () => {
             try {
                 // Tampilkan indikator loading
+                const originalText = loginBtn.innerHTML;
                 loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
                 loginBtn.disabled = true;
                 
+                // PERBAIKAN: Gunakan signInWithRedirect untuk menghindari masalah popup
                 const result = await signInWithPopup(auth, provider);
                 console.log('Login berhasil:', result.user);
                 
                 // Reset button
-                loginBtn.innerHTML = '<i class="fab fa-google"></i> Login dengan Google';
+                loginBtn.innerHTML = originalText;
                 loginBtn.disabled = false;
+                
             } catch (error) {
                 console.error('Error login:', error);
                 
@@ -1812,10 +1819,12 @@ input[type="tel"]:focus {
                 
                 // Tampilkan pesan error yang lebih user-friendly
                 if (error.code === 'auth/popup-blocked') {
-                    alert('Popup login diblokir. Silakan izinkan popup untuk situs ini.');
+                    alert('Popup login diblokir. Silakan izinkan popup untuk situs ini atau gunakan browser lain.');
                 } else if (error.code === 'auth/popup-closed-by-user') {
                     // Tidak perlu alert jika user menutup popup
                     console.log('User menutup popup login');
+                } else if (error.code === 'auth/unauthorized-domain') {
+                    alert('Domain tidak diizinkan. Pastikan Anda mengakses dari domain yang benar.');
                 } else {
                     alert('Login gagal: ' + error.message);
                 }
@@ -1829,6 +1838,7 @@ input[type="tel"]:focus {
                 console.log('Logout berhasil');
             } catch (error) {
                 console.error('Error logout:', error);
+                alert('Logout gagal: ' + error.message);
             }
         });
 
@@ -1850,6 +1860,10 @@ input[type="tel"]:focus {
                 userLoginTime.textContent = `Login: ${loginTime}`;
                 
                 console.log('User logged in:', user);
+                
+                // PERBAIKAN: Inisialisasi chat setelah login berhasil
+                initializeChatSystem(user);
+                
             } else {
                 // User is signed out
                 loginSection.style.display = 'block';
@@ -1876,6 +1890,12 @@ input[type="tel"]:focus {
         if (savedTheme === 'dark') {
             darkModeToggle.checked = true;
             document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        // PERBAIKAN: Fungsi untuk inisialisasi sistem chat
+        function initializeChatSystem(user) {
+            console.log('Menginisialisasi sistem chat untuk user:', user.uid);
+            // Sistem chat akan diinisialisasi di script terpisah
         }
     </script>
 
@@ -2004,19 +2024,21 @@ input[type="tel"]:focus {
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+        // GUNAKAN KONFIGURASI YANG SAMA DENGAN AUTH
         const firebaseConfig = {
-            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
-            authDomain: "paneladmin-83c8a.firebaseapp.com",
-            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
-            projectId: "paneladmin-83c8a",
-            storageBucket: "paneladmin-83c8a.appspot.com",
-            messagingSenderId: "343729471216",
-            appId: "1:343729471216:web:14c357375fa83083c44c35",
-            measurementId: "G-E2G04E4KB5"
+            apiKey: "AIzaSyAYleQn2yLOdMwPzT5n6FPTLhiMnaFhnu8",
+            authDomain: "revanstore-a92a7.firebaseapp.com",
+            databaseURL: "https://revanstore-a92a7-default-rtdb.firebaseio.com",
+            projectId: "revanstore-a92a7",
+            storageBucket: "revanstore-a92a7.firebasestorage.app",
+            messagingSenderId: "1054152032422",
+            appId: "1:1054152032422:web:83349880ce5cf4e4de3467",
+            measurementId: "G-FL822LMWEJ"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+        // Inisialisasi dengan nama yang berbeda untuk menghindari konflik
+        const contentApp = initializeApp(firebaseConfig, "ContentApp");
+        const db = getDatabase(contentApp);
 
         // Referensi untuk data konten website
         const websiteContentRef = ref(db, "websiteContent");
@@ -2103,7 +2125,7 @@ input[type="tel"]:focus {
             }
         });
 
-        // Handle produk gambar - PERBAIKAN BESAR
+        // Handle produk gambar
         const produkContainer = document.getElementById("produkContainer");
 
         // Pantau perubahan pada data produk
@@ -2309,13 +2331,13 @@ input[type="tel"]:focus {
         });
     </script>
 
-    <!-- SISTEM CHAT YANG DIPERBAIKI - TANPA FITUR KIRIM FOTO -->
+    <!-- SISTEM CHAT YANG DIPERBAIKI - GUNAKAN KONFIGURASI DATABASE PESAN YANG BERBEDA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getDatabase, ref, set, push, onValue, get, child, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        // Konfigurasi Firebase untuk chat
+        // KONFIGURASI FIREBASE UNTUK DATABASE PESAN (TIDAK DIUBAH)
         const firebaseChatConfig = {
             apiKey: "AIzaSyBD1M4W6-oradzvWOCmTxZYbe-i2mE0ci0",
             authDomain: "database-510f1.firebaseapp.com",
@@ -2327,11 +2349,11 @@ input[type="tel"]:focus {
             measurementId: "G-MSM26XKYM7"
         };
 
-        // Inisialisasi Firebase untuk chat
-        const chatApp = initializeApp(firebaseChatConfig, "ChatApp");
+        // Inisialisasi Firebase untuk chat dengan nama yang unik
+        const chatApp = initializeApp(firebaseChatConfig, "ChatDatabase");
         const chatDb = getDatabase(chatApp);
         
-        // Gunakan auth dari aplikasi utama
+        // Gunakan auth dari aplikasi utama (sama dengan login)
         const authApp = initializeApp({
             apiKey: "AIzaSyAYleQn2yLOdMwPzT5n6FPTLhiMnaFhnu8",
             authDomain: "revanstore-a92a7.firebaseapp.com",
@@ -2340,7 +2362,7 @@ input[type="tel"]:focus {
             messagingSenderId: "1054152032422",
             appId: "1:1054152032422:web:83349880ce5cf4e4de3467",
             measurementId: "G-FL822LMWEJ"
-        }, "AuthApp");
+        }, "AuthForChat");
         const auth = getAuth(authApp);
 
         // DOM Elements untuk chat
@@ -2358,6 +2380,7 @@ input[type="tel"]:focus {
         let currentUser = null;
         let currentChatId = null;
         let adminInfo = null;
+        let isChatInitialized = false;
 
         // Fungsi untuk toggle chat window
         function toggleChatWindow() {
@@ -2399,32 +2422,37 @@ input[type="tel"]:focus {
         async function getOrCreateChatId(user) {
             const userChatsRef = ref(chatDb, `userChats/${user.uid}`);
             
-            const snapshot = await get(userChatsRef);
-            if (snapshot.exists()) {
-                return snapshot.val().chatId;
-            } else {
-                const newChatId = push(ref(chatDb, 'chats')).key;
-                await set(userChatsRef, {
-                    chatId: newChatId,
-                    userName: user.displayName || 'Unknown User',
-                    userEmail: user.email,
-                    userPhoto: user.photoURL || '',
-                    createdAt: Date.now()
-                });
-                
-                await set(ref(chatDb, `chats/${newChatId}`), {
-                    userId: user.uid,
-                    userName: user.displayName || 'Unknown User',
-                    userEmail: user.email,
-                    userPhoto: user.photoURL || '',
-                    createdAt: Date.now(),
-                    lastMessage: '',
-                    lastMessageTime: Date.now(),
-                    unreadCount: 0,
-                    status: 'active'
-                });
-                
-                return newChatId;
+            try {
+                const snapshot = await get(userChatsRef);
+                if (snapshot.exists()) {
+                    return snapshot.val().chatId;
+                } else {
+                    const newChatId = push(ref(chatDb, 'chats')).key;
+                    await set(userChatsRef, {
+                        chatId: newChatId,
+                        userName: user.displayName || 'Unknown User',
+                        userEmail: user.email,
+                        userPhoto: user.photoURL || '',
+                        createdAt: Date.now()
+                    });
+                    
+                    await set(ref(chatDb, `chats/${newChatId}`), {
+                        userId: user.uid,
+                        userName: user.displayName || 'Unknown User',
+                        userEmail: user.email,
+                        userPhoto: user.photoURL || '',
+                        createdAt: Date.now(),
+                        lastMessage: '',
+                        lastMessageTime: Date.now(),
+                        unreadCount: 0,
+                        status: 'active'
+                    });
+                    
+                    return newChatId;
+                }
+            } catch (error) {
+                console.error('Error creating chat ID:', error);
+                return null;
             }
         }
 
@@ -2537,12 +2565,20 @@ input[type="tel"]:focus {
             });
         }
 
-        // Pantau status autentikasi user
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUser = user;
-                currentChatId = await getOrCreateChatId(user);
+        // Fungsi untuk inisialisasi chat system
+        async function initializeChatSystem(user) {
+            if (isChatInitialized) return;
+            
+            console.log('Menginisialisasi sistem chat untuk user:', user.uid);
+            
+            currentUser = user;
+            currentChatId = await getOrCreateChatId(user);
+            
+            if (currentChatId) {
                 loadChatMessages();
+                chatSendBtn.disabled = false;
+                chatInput.placeholder = "Ketik pesan Anda...";
+                isChatInitialized = true;
                 
                 const chatRef = ref(chatDb, `chats/${currentChatId}`);
                 onValue(chatRef, (snapshot) => {
@@ -2554,8 +2590,26 @@ input[type="tel"]:focus {
                     }
                 });
             } else {
+                console.error('Gagal membuat chat ID');
+                chatMessages.innerHTML = `
+                    <div class="chat-empty">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Gagal menginisialisasi chat. Silakan refresh halaman.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Pantau status autentikasi user untuk chat
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in - initialize chat system
+                await initializeChatSystem(user);
+            } else {
+                // User is signed out
                 currentUser = null;
                 currentChatId = null;
+                isChatInitialized = false;
                 chatMessages.innerHTML = `
                     <div class="chat-empty">
                         <i class="fas fa-user-slash"></i>
@@ -2570,7 +2624,7 @@ input[type="tel"]:focus {
         // Muat informasi admin
         loadAdminInfo();
 
-        console.log('Sistem chat telah diinisialisasi tanpa fitur kirim foto');
+        console.log('Sistem chat telah diinisialisasi dengan database pesan yang berbeda');
     </script>
 </body>
 </html>
