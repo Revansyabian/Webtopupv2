@@ -1209,6 +1209,339 @@ input[type="tel"]:focus {
     }
 }
 
+/* ==================== */
+/* SISTEM KOMENTAR - FORM DI BAWAH, KOMENTAR DI ATAS */
+/* ==================== */
+
+#commentSection {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bagian komentar yang sudah ada (DI ATAS) */
+.comments-container {
+    margin-bottom: 2rem;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Scrollbar khusus untuk komentar */
+.comments-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.comments-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.comments-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 191, 255, 0.3);
+    border-radius: 10px;
+}
+
+.comments-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 191, 255, 0.5);
+}
+
+/* Bagian untuk menambah komentar baru (DI BAWAH) */
+.add-comment-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid rgba(0, 191, 255, 0.2);
+}
+
+.add-comment-section h3 {
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Form untuk komentar */
+.comment-form-container {
+    background: rgba(0, 191, 255, 0.05);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0, 191, 255, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 191, 255, 0.2);
+    border-radius: 0.75rem;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.1);
+    outline: none;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 191, 255, 0.2);
+    border-radius: 0.75rem;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 0.9rem;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.chat-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.1);
+    outline: none;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--primary);
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+}
+
+.form-check-input:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-check-label {
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.comment-status {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.comment-status.success {
+    background: rgba(0, 200, 150, 0.1);
+    color: #00C896;
+    border: 1px solid rgba(0, 200, 150, 0.2);
+    display: block;
+}
+
+.comment-status.error {
+    background: rgba(255, 107, 107, 0.1);
+    color: #FF6B6B;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    display: block;
+}
+
+/* Tampilan komentar yang sudah ada */
+.comment-item {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0, 191, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animasi untuk komentar baru */
+@keyframes highlightNew {
+    0% {
+        background-color: rgba(0, 191, 255, 0.15);
+        border-color: var(--primary);
+    }
+    100% {
+        background-color: var(--card-bg);
+        border-color: rgba(0, 191, 255, 0.1);
+    }
+}
+
+.new-comment-highlight {
+    animation: highlightNew 3s ease;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+
+.comment-user-info {
+    flex: 1;
+}
+
+.comment-user-name {
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.comment-time {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.comment-content {
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.comment-reply {
+    background: rgba(0, 191, 255, 0.05);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 3px solid var(--primary);
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.reply-label {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.reply-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(0, 191, 255, 0.1);
+    color: var(--primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.reply-content {
+    color: var(--text);
+    line-height: 1.5;
+    padding-left: 0.5rem;
+}
+
+.loading-comments {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+}
+
+.no-comments {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.no-comments i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Responsive untuk komentar */
+@media (max-width: 640px) {
+    .comments-container {
+        max-height: 500px;
+    }
+    
+    .add-comment-section h3 {
+        font-size: 1.1rem;
+    }
+    
+    .comment-form-container {
+        padding: 1.25rem;
+    }
+    
+    .comment-item {
+        padding: 1rem;
+    }
+    
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .comment-avatar {
+        width: 35px;
+        height: 35px;
+    }
+}
+
 /* Micro-interactions */
 .btn:active, .nav-btn:active {
     transform: scale(0.98);
@@ -1234,9 +1567,34 @@ input[type="tel"]:focus {
     </style>
 </head>
 <body>
-    <script>
-eval(atob("ICAgIDwhLS0gTWFpbnRlbmFuY2UgUmVkaXJlY3QgU2NyaXB0IC0tPgogICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgogICAgICAgIGltcG9ydCB7IGluaXRpYWxpemVBcHAgfSBmcm9tICJodHRwczovL3d3dy5nc3RhdGljLmNvbS9maXJlYmFzZWpzLzEwLjEyLjIvZmlyZWJhc2UtYXBwLmpzIjsKICAgICAgICBpbXBvcnQgeyBnZXREYXRhYmFzZSwgcmVmLCBvblZhbHVlIH0gZnJvbSAiaHR0cHM6Ly93d3cuZ3N0YXRpYy5jb20vZmlyZWJhc2Vqcy8xMC4xMi4yL2ZpcmViYXNlLWRhdGFiYXNlLmpzIjsKCiAgICAgICAgY29uc3QgZmlyZWJhc2VDb25maWcgPSB7CiAgICAgICAgICAgIGFwaUtleTogIkFJemFTeUJkMno1cDBHOTNJbm1SQ19SRkVoVjJXZmNBcVlFOVZfayIsCiAgICAgICAgICAgIGF1dGhEb21haW46ICJwYW5lbGFkbWluLTgzYzhhLmZpcmViYXNlYXBwLmNvbSIsCiAgICAgICAgICAgIGRhdGFiYXNlVVJMOiAiaHR0cHM6Ly9wYW5lbGFkbWluLTgzYzhhLWRlZmF1bHQtcnRkYi5maXJlYmFzZWlvLmNvbSIsCiAgICAgICAgICAgIHByb2plY3RJZDogInBhbmVsYWRtaW4tODNjOGEiLAogICAgICAgICAgICBzdG9yYWdlQnVja2V0OiAicGFuZWxhZG1pbi04M2M4YS5hcHBzcG90LmNvbSIsCiAgICAgICAgICAgIG1lc3NhZ2luZ1NlbmRlcklkOiAiMzQzNzI5NDcxMjE2IiwKICAgICAgICAgICAgYXBwSWQ6ICIxOjM0MzcyOTQ3MTIxNjp3ZWI6MTRjMzU3Mzc1ZmE4MzA4M2M0NGMzNSIsCiAgICAgICAgICAgIG1lYXN1cmVtZW50SWQ6ICJHLUUyRzA0RTRLQjUiCiAgICAgICAgfTsKCiAgICAgICAgY29uc3QgYXBwID0gaW5pdGlhbGl6ZUFwcChmaXJlYmFzZUNvbmZpZyk7CiAgICAgICAgY29uc3QgZGIgPSBnZXREYXRhYmFzZShhcHApOwogICAgICAgIGNvbnN0IG1haW50ZW5hbmNlUmVmID0gcmVmKGRiLCAibWFpbnRlbmFuY2UiKTsKCiAgICAgICAgLy8gQ2VrIG1haW50ZW5hbmNlIG1vZGUKICAgICAgICBvblZhbHVlKG1haW50ZW5hbmNlUmVmLCAoc25hcHNob3QpID0+IHsKICAgICAgICAgICAgY29uc3QgbWFpbnRlbmFuY2VEYXRhID0gc25hcHNob3QudmFsKCk7CiAgICAgICAgICAgIGlmIChtYWludGVuYW5jZURhdGEgJiYgbWFpbnRlbmFuY2VEYXRhLmVuYWJsZWQpIHsKICAgICAgICAgICAgICAgIC8vIFJlZGlyZWN0IGtlIGhhbGFtYW4gbWFpbnRlbmFuY2UKICAgICAgICAgICAgICAgIHdpbmRvdy5sb2NhdGlvbi5ocmVmID0gIm1haW50ZW5hbmNlLmh0bWwiOwogICAgICAgICAgICB9CiAgICAgICAgfSk7CiAgICA8L3NjcmlwdD4="))
-</script>
+       <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
+            authDomain: "paneladmin-83c8a.firebaseapp.com",
+            databaseURL: "https://paneladmin-83c8a-default-rtdb.firebaseio.com",
+            projectId: "paneladmin-83c8a",
+            storageBucket: "paneladmin-83c8a.appspot.com",
+            messagingSenderId: "343729471216",
+            appId: "1:343729471216:web:14c357375fa83083c44c35",
+            measurementId: "G-E2G04E4KB5"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const maintenanceRef = ref(db, "maintenance");
+        
+        // Cek maintenance mode
+        onValue(maintenanceRef, (snapshot) => {
+            const maintenanceData = snapshot.val();
+            if (maintenanceData && maintenanceData.enabled) {
+                // Redirect ke halaman maintenance
+                window.location.href = "maintenance.html";
+            }
+        });
+    </script>
     <!-- Modal untuk gambar produk -->
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
@@ -1394,16 +1752,52 @@ eval(atob("ICAgIDwhLS0gTWFpbnRlbmFuY2UgUmVkaXJlY3QgU2NyaXB0IC0tPgogICAgPHNjcmlwd
                 </ul>
             </div>
         </section>
+        
+        
+        <section id="commentSection">
+            <h2><i class="fas fa-comments"></i> Komentar</h2>
+            <p>Lihat komentar dari pengguna lain dan tambahkan komentar Anda:</p>
+            
+            
+            <div id="commentsContainer" class="comments-container">
+                <div class="loading-comments">
+                    <i class="fas fa-spinner fa-spin"></i> Memuat komentar...
+                </div>
+            </div>
+            
+            <!-- FORM UNTUK MENAMBAH KOMENTAR BARU (DI BAWAH) -->
+            <div class="add-comment-section">
+                <h3><i class="fas fa-edit"></i> Tambah Komentar Baru</h3>
+                <div class="comment-form-container">
+                    <div class="form-group">
+                        <input type="text" id="commentName" placeholder="Nama Anda" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="commentText" placeholder="Tulis komentar Anda di sini..." class="chat-input" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="showAvatar" class="form-check-input" checked>
+                            <label for="showAvatar" class="form-check-label">Gunakan avatar random</label>
+                        </div>
+                    </div>
+                    <button id="submitComment" class="btn btn-whatsapp">
+                        <i class="fas fa-paper-plane"></i> Kirim Komentar
+                    </button>
+                    <div id="commentStatus" class="comment-status"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         &copy; 2025 Top Up Bussid | Layanan Aman dan Terpercaya
     </footer>
 
-    <!-- Firebase script untuk produk dan promo banner -->
+    <!-- Firebase script untuk produk, promo banner, dan komentar -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBd2z5p0G93InmRC_RFEhV2WfcAqYE9V_k",
@@ -1416,6 +1810,7 @@ eval(atob("ICAgIDwhLS0gTWFpbnRlbmFuY2UgUmVkaXJlY3QgU2NyaXB0IC0tPgogICAgPHNjcmlwd
             measurementId: "G-E2G04E4KB5"
         };
 
+
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
@@ -1426,6 +1821,267 @@ eval(atob("ICAgIDwhLS0gTWFpbnRlbmFuY2UgUmVkaXJlY3QgU2NyaXB0IC0tPgogICAgPHNjcmlwd
         const produkRef = ref(db, "produk");
         const hargaRef = ref(db, "harga");
         const faqRef = ref(db, "faq");
+        
+        // Referensi untuk komentar
+        const commentsRef = ref(db, "comments");
+
+        // ==================== //
+        // SISTEM KOMENTAR
+        // ==================== //
+
+        // Daftar avatar random (URL dari DiceBear API)
+        const randomAvatars = [
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Mia',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Oliver',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Emma',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Noah',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Ava',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Liam',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Isabella',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=James',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Sophia',
+            'https://api.dicebear.com/7.x/avataaars/svg?seed=Alexander'
+        ];
+
+        // Fungsi untuk mendapatkan avatar random
+        function getRandomAvatar() {
+            return randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
+        }
+
+        // Fungsi untuk memformat tanggal
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 60) {
+                return `${diffMins} menit yang lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam yang lalu`;
+            } else if (diffDays < 7) {
+                return `${diffDays} hari yang lalu`;
+            } else {
+                return date.toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            }
+        }
+
+        // Fungsi untuk memuat komentar
+        function loadComments() {
+            const commentsContainer = document.getElementById('commentsContainer');
+            
+            onValue(commentsRef, (snapshot) => {
+                const commentsData = snapshot.val();
+                commentsContainer.innerHTML = '';
+                
+                if (commentsData) {
+                    // Convert object to array dan urutkan berdasarkan timestamp (terbaru dulu)
+                    const commentsArray = Object.entries(commentsData)
+                        .map(([key, value]) => ({
+                            id: key,
+                            ...value
+                        }))
+                        .sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    if (commentsArray.length === 0) {
+                        commentsContainer.innerHTML = `
+                            <div class="no-comments">
+                                <i class="fas fa-comment-slash"></i>
+                                <p>Belum ada komentar. Jadilah yang pertama berkomentar!</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    commentsArray.forEach(comment => {
+                        const commentElement = createCommentElement(comment);
+                        commentsContainer.appendChild(commentElement);
+                    });
+                    
+                    // Atur tinggi maksimal scrollable area berdasarkan jumlah komentar
+                    if (commentsArray.length > 3) {
+                        commentsContainer.style.maxHeight = '500px';
+                    } else {
+                        commentsContainer.style.maxHeight = 'none';
+                    }
+                } else {
+                    commentsContainer.innerHTML = `
+                        <div class="no-comments">
+                            <i class="fas fa-comment-slash"></i>
+                            <p>Belum ada komentar. Jadilah yang pertama berkomentar!</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Fungsi untuk membuat elemen komentar
+        function createCommentElement(comment) {
+            const div = document.createElement('div');
+            div.className = 'comment-item';
+            div.id = `comment-${comment.id}`;
+            
+            const avatar = comment.avatar || getRandomAvatar();
+            const timestamp = comment.timestamp || Date.now();
+            const hasReply = comment.reply && comment.reply.content;
+            
+            div.innerHTML = `
+                <div class="comment-header">
+                    <img src="${avatar}" alt="${comment.name}" class="comment-avatar" onerror="this.src='${getRandomAvatar()}'">
+                    <div class="comment-user-info">
+                        <div class="comment-user-name">${comment.name}</div>
+                        <div class="comment-time">${formatDate(timestamp)}</div>
+                    </div>
+                </div>
+                <div class="comment-content">${comment.content}</div>
+                ${hasReply ? `
+                    <div class="comment-reply">
+                        <div class="reply-header">
+                            <span class="reply-label">Balasan Admin:</span>
+                            <span class="reply-admin">
+                                <i class="fas fa-shield-alt"></i> Admin
+                            </span>
+                        </div>
+                        <div class="reply-content">${comment.reply.content}</div>
+                        ${comment.reply.timestamp ? `
+                            <div class="comment-time" style="margin-top: 0.5rem;">
+                                ${formatDate(comment.reply.timestamp)}
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
+            `;
+            
+            return div;
+        }
+
+        // Fungsi untuk menandai komentar baru dengan animasi
+        function highlightNewComment(commentId) {
+            const commentElement = document.getElementById(`comment-${commentId}`);
+            if (commentElement) {
+                commentElement.classList.add('new-comment-highlight');
+                
+                // Hapus highlight setelah 3 detik
+                setTimeout(() => {
+                    commentElement.classList.remove('new-comment-highlight');
+                }, 3000);
+            }
+        }
+
+        // Fungsi untuk mengirim komentar
+        function submitComment() {
+            const nameInput = document.getElementById('commentName');
+            const contentInput = document.getElementById('commentText');
+            const showAvatarCheck = document.getElementById('showAvatar');
+            const statusDiv = document.getElementById('commentStatus');
+            
+            const name = nameInput.value.trim();
+            const content = contentInput.value.trim();
+            const useAvatar = showAvatarCheck.checked;
+            
+            // Validasi
+            if (!name) {
+                showStatus('error', 'Silakan isi nama Anda');
+                nameInput.focus();
+                return;
+            }
+            
+            if (!content) {
+                showStatus('error', 'Silakan isi komentar Anda');
+                contentInput.focus();
+                return;
+            }
+            
+            // Siapkan data komentar
+            const commentData = {
+                name: name,
+                content: content,
+                timestamp: Date.now(),
+                avatar: useAvatar ? getRandomAvatar() : null
+            };
+            
+            // Kirim ke Firebase
+            const newCommentRef = push(commentsRef);
+            set(newCommentRef, commentData)
+                .then(() => {
+                    // Reset form
+                    nameInput.value = '';
+                    contentInput.value = '';
+                    
+                    // Tampilkan status sukses
+                    showStatus('success', 'Komentar berhasil dikirim!');
+                    
+                    // Highlight komentar baru setelah dimuat
+                    setTimeout(() => {
+                        highlightNewComment(newCommentRef.key);
+                    }, 300);
+                    
+                    // Scroll ke komentar yang baru dikirim (yang ada di ATAS)
+                    setTimeout(() => {
+                        const commentsContainer = document.getElementById('commentsContainer');
+                        commentsContainer.scrollTop = 0; // Scroll ke atas
+                    }, 500);
+                })
+                .catch(error => {
+                    console.error('Error submitting comment:', error);
+                    showStatus('error', 'Gagal mengirim komentar. Silakan coba lagi.');
+                });
+        }
+
+        // Fungsi untuk menampilkan status
+        function showStatus(type, message) {
+            const statusDiv = document.getElementById('commentStatus');
+            statusDiv.className = `comment-status ${type}`;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            
+            // Sembunyikan status setelah 5 detik
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Inisialisasi sistem komentar ketika halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load comments
+            loadComments();
+            
+            // Event listener untuk submit button
+            const submitBtn = document.getElementById('submitComment');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', submitComment);
+            }
+            
+            // Submit dengan Enter di textarea (Ctrl + Enter)
+            const contentInput = document.getElementById('commentText');
+            if (contentInput) {
+                contentInput.addEventListener('keydown', function(e) {
+                    if (e.ctrlKey && e.key === 'Enter') {
+                        submitComment();
+                    }
+                });
+            }
+            
+            // Submit dengan Enter di nama input
+            const nameInput = document.getElementById('commentName');
+            if (nameInput) {
+                nameInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        document.getElementById('commentText').focus();
+                    }
+                });
+            }
+        });
+
+        // ==================== //
+        // SISTEM LAINNYA (TIDAK BERUBAH)
+        // ==================== //
 
         // Handle running text
         const runningTextContainer = document.getElementById("runningTextContainer");
@@ -1504,7 +2160,7 @@ eval(atob("ICAgIDwhLS0gTWFpbnRlbmFuY2UgUmVkaXJlY3QgU2NyaXB0IC0tPgogICAgPHNjcmlwd
             }
         });
 
-        // Handle produk gambar - PERBAIKAN BESAR
+        // Handle produk gambar
         const produkContainer = document.getElementById("produkContainer");
 
         // Pantau perubahan pada data produk
