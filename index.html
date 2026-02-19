@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="xCKUyVpkeRGwKlodgRLCcFuoJ55SAl4FZBRPK07qjY0" />
+    <meta name="description" content="Jasa Top Up BUSSID termurah dan terpercaya. Proses cepat dan aman. Cek harga dan cara pesan di sini.">
+    <meta name="keywords" content="Jasa top up bussid murah, top up bussid, top up bussid termurah, top up bussid cepat">   
+    <meta name="theme-color" content="#00bfff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#00bfff">
+    <link rel="manifest" href="/manifest.json?v=1">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo-192.png">
+    <title>Jasa Top up BUSSID murah Aman dan Terpercaya</title>
+    <link rel="stylesheet" href="web.css">
+</head>
+<body>
+    
+    <div id="landingPage" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #00BFFF; display: flex; justify-content: center; align-items: center; flex-direction: column; z-index: 9999; overflow: hidden;">
+        
+        <div style="position: absolute; top: 10%; left: 10%; width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1);"></div>
+        <div style="position: absolute; bottom: 20%; right: 15%; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.1);"></div>
+        <div style="position: absolute; top: 60%; left: 5%; width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.1);"></div>
+        <div style="position: absolute; bottom: 10%; left: 20%; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.1);"></div>
+        <div style="position: absolute; top: 20%; right: 5%; width: 90px; height: 90px; border-radius: 50%; background: rgba(255,255,255,0.1);"></div>
+        
+        <div style="text-align: center; color: white; padding: 20px; z-index: 2;">
+            <h1 style="font-size: 2rem; margin-bottom: 15px; font-weight: bold; font-family: Arial, sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                SELAMAT DATANG DI WEB TOP UP BUSSID
+            </h1>
+            
+            <p style="font-size: 1rem; margin-bottom: 30px; max-width: 500px; line-height: 1.5; font-weight: 500; font-family: Arial, sans-serif;">
+                Silakan tunggu sebentar untuk melihat cara pemesanan dan harga Top Up-nya
+            </p>
+            
+            <div style="margin: 25px 0;">
+                <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; margin: 0 auto 10px; animation: spin 1s linear infinite;"></div>
+                <p style="font-size: 0.9rem; color: white; font-weight: 500; font-family: Arial, sans-serif;">
+                    Sedang memuat...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <script>
+        setTimeout(() => {
+            const landingPage = document.getElementById('landingPage');
+            
+            // Animasi fade out landing page
+            landingPage.style.opacity = '0';
+            landingPage.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                landingPage.style.display = 'none';
+            }, 500);
+        }, 3000);
+    </script>
+
+    <script type="module" src="maintenance.js"></script>
+
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <button class="image-modal-close" id="imageModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" class="image-modal-img" alt="Gambar Produk">
+        </div>
+    </div>
+
+    <div id="testimoniModal" class="testimoni-modal">
+        <span class="testimoni-modal-close" onclick="tutupTestimoniModal()">&times;</span>
+        <img class="testimoni-modal-content" id="testimoniModalImage">
+    </div>
+
+    <!-- INFO BANNER - Informasi Tanpa Foto (menggantikan promo banner) -->
+    <div class="info-banner" id="infoBanner">
+        <div class="info-banner-content">
+            <button class="info-banner-close" id="infoBannerClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="info-banner-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <h3 id="infoBannerTitle">Informasi Pembaruan</h3>
+            <div class="info-banner-body">
+                <p id="infoBannerText">Teks informasi akan muncul di sini</p>
+            </div>
+            <div class="info-banner-actions">
+                <button class="btn-info btn-info-primary" id="infoBannerReadBtn">
+                    <i class="fas fa-check-circle"></i>
+                    Sudah Membaca
+                </button>
+                <button class="btn-info btn-info-secondary" id="infoBannerCloseBtn">
+                    <i class="fas fa-times"></i>
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="running-text-container" id="runningTextContainer" style="display: none;">
+        <div class="running-text" id="runningText"></div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <h1 id="mainTitle">Jasa Top Up BUSSID</h1>
+            <p id="mainSubtitle">Jasa Top Up Cepat, Murah, Aman!</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="beranda" class="content-section active">
+            <h2><i class="fas fa-bus"></i> Mau Duit Bussid Banyak, Tanpa Harus Cape cape narik?</h2>
+            <p id="introText">Top Up BUSSID solusinya dengan kalian top up bussid duit kalian bisa bertambah dengan instan, dan kalian juga ga perlu narik secara manual. <strong>Ayo Top up Ub Sekarang</strong>.</p>
+            
+            <h2><i class="fas fa-bus"></i> Apa Itu Top Up BUSSID?</h2>
+            <p>Top Up BUSSID adalah layanan pembelian uang, untuk membeli berbagai macam item di game tersebut tanpa harus ngumpulin duit secara manual di <strong>Bus Simulator Indonesia</strong>.</p>
+            
+            <h2><i class="fas fa-money-bill-wave"></i> Daftar Harga</h2>
+            <ul class="harga" id="priceList"></ul>
+            
+            <h2><i class="fas fa-shopping-cart"></i> Cara Pemesanan</h2>
+            <ol>
+                <li>Hubungi admin via WhatsApp: <strong id="whatsappNumber">6289520418604 / 6289630191806</strong>.</li>
+                <li>Pilih nominal top up sesuai daftar harga.</li>
+                <li>Lakukan pembayaran via DANA / OVO / GOPAY / Transfer Bank.</li>
+                <li>Proses dalam 1–5 menit setelah pembayaran!</li>
+            </ol>
+            <a href="https://wa.me/6289520418604?text=Assalamualaikum+mas+saya+mau+top+up+bussid" id="whatsappLink" class="btn">
+                <i class="fab fa-whatsapp"></i>
+                Pesan Sekarang
+            </a>
+            
+            <h2><i class="fas fa-comments"></i> Komentar</h2>
+            <p>Lihat komentar dari pengguna lain dan tambahkan komentar Anda:</p>
+            
+            <div id="commentsContainer" class="comments-container">
+                <div class="loading-comments">
+                    <i class="fas fa-spinner fa-spin"></i> Memuat komentar...
+                </div>
+            </div>
+            
+            <div class="add-comment-section">
+                <h3><i class="fas fa-edit"></i> Tambah Komentar Baru</h3>
+                <div class="comment-form-container">
+                    <div class="form-group">
+                        <input type="text" id="commentName" placeholder="Nama Anda" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="commentText" placeholder="Tulis komentar Anda di sini..." class="chat-input" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="showAvatar" class="form-check-input" checked>
+                            <label for="showAvatar" class="form-check-label">Gunakan avatar random</label>
+                        </div>
+                    </div>
+                    <button id="submitComment" class="btn btn-whatsapp">
+                        <i class="fas fa-paper-plane"></i> Kirim Komentar
+                    </button>
+                    <div id="commentStatus" class="comment-status"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="produk" class="content-section">
+            <h2><i class="fas fa-images"></i> Produk Kami</h2>
+            <p>Lihat berbagai macam produk kami:</p>
+            <div class="produk-container" id="produkContainer"></div>
+        </section>
+
+        <section id="testimoni" class="content-section">
+            <h2><i class="fas fa-star"></i> Testimoni Pembeli</h2>
+            <p>Lihat testimoni dari pembeli yang sudah berhasil melakukan top up:</p>
+            
+            <div id="testimoniContainer" class="testimoni-container">
+                <div class="loading-testimoni">
+                    <i class="fas fa-spinner fa-spin"></i> Memuat testimoni...
+                </div>
+            </div>
+            
+            <a href="https://whatsapp.com/channel/0029ValJCIE8KMqmgpnVTQ3o" class="btn" target="_blank" style="margin-top: 1rem;">
+                <i class="fab fa-whatsapp"></i>
+                Lihat Lebih Banyak Testimoni
+            </a>
+        </section>
+
+        <section id="faq" class="content-section">
+            <h2><i class="fas fa-question-circle"></i> FAQ Lengkap</h2>
+            <div class="accordion" id="faqContainer"></div>
+        </section>
+
+        <section id="kontak" class="content-section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Perhatian!</h2>
+            <div class="warning-box">
+                <p><strong>HINDARI CLONE/PENIPUAN:</strong></p>
+                <ul>
+                    <li>Hanya gunakan nomor WhatsApp resmi admin: <span id="adminWhatsapp1">6289630191806</span> atau <span id="adminWhatsapp2">6289520418604</span></li>
+                    <li>Jangan berikan data akun ke siapapun kecuali admin! </li>
+                    <li>Transaksi hanya melalui WhatsApp admin</li>
+                    <li>Kami tidak bertanggung jawab jika transaksi dilakukan di luar store kami</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-nav-container">
+        <div class="bottom-nav-buttons">
+            <a href="#beranda" class="bottom-nav-button home active" data-target="beranda">
+                <i class="fas fa-home"></i>
+                <span>Beranda</span>
+            </a>
+            <a href="#produk" class="bottom-nav-button products" data-target="produk">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Produk</span>
+            </a>
+            <a href="#testimoni" class="bottom-nav-button testimonials" data-target="testimoni">
+                <i class="fas fa-comments"></i>
+                <span>Testimoni</span>
+            </a>
+            <a href="#faq" class="bottom-nav-button faq" data-target="faq">
+                <i class="fas fa-question-circle"></i>
+                <span>FAQ</span>
+            </a>
+            <a href="#kontak" class="bottom-nav-button contact" data-target="kontak">
+                <i class="fas fa-phone-alt"></i>
+                <span>Kontak</span>
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>
