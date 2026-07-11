@@ -145,33 +145,35 @@ function muatProduk() {
 function muatTestimoni() {
     var container = document.getElementById("testimoniContainer");
     if (!container) return;
+    
     var defaultTestimoni = [
-        { nama: "Pembeli 1", gambar: "1.jpg" },
-        { nama: "Pembeli 2", gambar: "2.jpg" },
-        { nama: "Pembeli 3", gambar: "3.jpg" },
-        { nama: "Pembeli 4", gambar: "4.jpg" },
-        { nama: "Pembeli 5", gambar: "5.jpg" },
-        { nama: "Pembeli 6", gambar: "6.jpg" },
-        { nama: "Pembeli 7", gambar: "7.jpg" },
-        { nama: "Pembeli 8", gambar: "8.jpg" },
-        { nama: "Pembeli 9", gambar: "9.jpg" },
-        { nama: "Pembeli 10", gambar: "10.jpg" },
-        { nama: "Pembeli 11", gambar: "11.jpg" },
-        { nama: "Pembeli 12", gambar: "12.jpg" },
-        { nama: "Pembeli 13", gambar: "13.jpg" },
-        { nama: "Pembeli 14", gambar: "14.jpg" },
-        { nama: "Pembeli 15", gambar: "15.jpg" },
-        { nama: "Pembeli 16", gambar: "16.jpg" },
-        { nama: "Pembeli 17", gambar: "17.jpg" },
-        { nama: "Pembeli 18", gambar: "18.jpg" },
-        { nama: "Pembeli 19", gambar: "19.jpg" },
-        { nama: "Pembeli 20", gambar: "20.jpg" },
-        { nama: "Pembeli 21", gambar: "21.jpg" },
-        { nama: "Pembeli 22", gambar: "22.jpg" },
-        { nama: "Pembeli 23", gambar: "23.jpg" },
-        { nama: "Pembeli 24", gambar: "24.jpg" },
-        { nama: "Pembeli 25", gambar: "25.jpg" }
+        { nama: "Pembeli 1", gambar: "Img/1.jpg" },
+        { nama: "Pembeli 2", gambar: "Img/2.jpg" },
+        { nama: "Pembeli 3", gambar: "Img/3.jpg" },
+        { nama: "Pembeli 4", gambar: "Img/4.jpg" },
+        { nama: "Pembeli 5", gambar: "Img/5.jpg" },
+        { nama: "Pembeli 6", gambar: "Img/6.jpg" },
+        { nama: "Pembeli 7", gambar: "Img/7.jpg" },
+        { nama: "Pembeli 8", gambar: "Img/8.jpg" },
+        { nama: "Pembeli 9", gambar: "Img/9.jpg" },
+        { nama: "Pembeli 10", gambar: "Img/10.jpg" },
+        { nama: "Pembeli 11", gambar: "Img/11.jpg" },
+        { nama: "Pembeli 12", gambar: "Img/12.jpg" },
+        { nama: "Pembeli 13", gambar: "Img/13.jpg" },
+        { nama: "Pembeli 14", gambar: "Img/14.jpg" },
+        { nama: "Pembeli 15", gambar: "Img/15.jpg" },
+        { nama: "Pembeli 16", gambar: "Img/16.jpg" },
+        { nama: "Pembeli 17", gambar: "Img/17.jpg" },
+        { nama: "Pembeli 18", gambar: "Img/18.jpg" },
+        { nama: "Pembeli 19", gambar: "Img/19.jpg" },
+        { nama: "Pembeli 20", gambar: "Img/20.jpg" },
+        { nama: "Pembeli 21", gambar: "Img/21.jpg" },
+        { nama: "Pembeli 22", gambar: "Img/22.jpg" },
+        { nama: "Pembeli 23", gambar: "Img/23.jpg" },
+        { nama: "Pembeli 24", gambar: "Img/24.jpg" },
+        { nama: "Pembeli 25", gambar: "Img/25.jpg" }
     ];
+    
     defaultTestimoni.forEach(function(item, index) {
         var card = document.createElement("div");
         card.className = "testimoni-card";
